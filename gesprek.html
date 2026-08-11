@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan een kennismaking &middot; Landgoed De Wielsche Dreef</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+ *{box-sizing:border-box;margin:0;padding:0;}
+ body{font-family:'Inter',Arial,sans-serif;background:#f0ebe3;color:#374151;min-height:100vh;display:flex;flex-direction:column;}
+ header{background:#1f524d;padding:16px 24px;display:flex;align-items:center;justify-content:center;gap:16px;}
+ header img{width:100px;}
+ header span{color:rgba(255,255,255,.62);font-size:10px;letter-spacing:.16em;text-transform:uppercase;border-left:1px solid rgba(255,255,255,.25);padding-left:16px;line-height:1.6;}
+ .hero{height:190px;overflow:hidden;}
+ .hero img{width:100%;height:100%;object-fit:cover;object-position:center 55%;display:block;}
+ main{flex:1;display:flex;justify-content:center;padding:0 16px 40px;}
+ .card{background:#fff;border-radius:6px;box-shadow:0 4px 24px rgba(31,82,77,.10);max-width:960px;width:100%;margin-top:-46px;position:relative;display:flex;overflow:hidden;}
+ .links{flex:1 1 44%;padding:38px 34px;background:#fff;}
+ .rechts{flex:1 1 56%;padding:18px 10px 10px;border-left:1px solid #eee;min-height:520px;}
+ .kicker{color:#be5748;font-weight:700;font-size:11px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:12px;}
+ h1{font-family:'Playfair Display',Georgia,serif;font-size:27px;color:#1f524d;line-height:1.25;margin-bottom:14px;font-weight:600;}
+ .links p{font-size:15px;line-height:1.7;margin-bottom:18px;}
+ ul{list-style:none;margin-bottom:20px;}
+ ul li{font-size:14.5px;line-height:1.65;padding:5px 0 5px 26px;position:relative;}
+ ul li::before{content:"\2713";color:#be5748;font-weight:700;position:absolute;left:2px;}
+ .accent{background:#eef4f3;border-left:4px solid #1f524d;border-radius:0 4px 4px 0;padding:14px 18px;font-size:13.5px;line-height:1.65;color:#1f524d;}
+ .accent strong{display:block;font-family:'Playfair Display',Georgia,serif;font-size:16px;margin-bottom:4px;}
+ iframe{width:100%;height:100%;min-height:640px;border:none;display:block;}
+ footer{text-align:center;padding:18px 24px 26px;font-size:11.5px;color:#9aaba8;line-height:1.6;}
+ footer a{color:#9aaba8;}
+ @media (max-width:780px){
+   .card{flex-direction:column;margin-top:-30px;}
+   .rechts{border-left:none;border-top:1px solid #eee;}
+   .links{padding:28px 22px 8px;}
+   h1{font-size:23px;}
+   .hero{height:150px;}
+ }
+</style>
+</head>
+<body>
+<header>
+  <img src="https://dewielschedreef.nl/wp-content/uploads/2024/09/Logo-wit.svg" alt="Landgoed De Wielsche Dreef">
+  <span>Exclusief Vakantievastgoed<br>Betuwe &middot; Nederrijn</span>
+</header>
+<div class="hero">
+  <img src="https://dewielschedreef.nl/wp-content/uploads/2024/11/8C_EXT-dwd.jpg" alt="Recreatievilla op Landgoed De Wielsche Dreef">
+</div>
+<main>
+  <div class="card">
+    <div class="links">
+      <div class="kicker">Vrijblijvend</div>
+      <h1>Plan een kennismaking op het Landgoed</h1>
+      <p>Vul het formulier in en wij nemen contact met u op, op het moment dat u uitkomt. Telefonisch, online of op locatie. We kijken samen naar uw wensen en welke mogelijkheden daarbij passen.</p>
+      <ul>
+        <li>Persoonlijke Landgoed-adviseur</li>
+        <li>Ligging aan de Nederrijn in de Betuwe</li>
+        <li>Verhuur verzorgd door Landal</li>
+        <li>Eigen gebruik en verhuur te combineren</li>
+        <li>Professioneel VvE-beheer</li>
+      </ul>
+      <div class="accent">
+        <strong>Fase 2 is nu in beeld</strong>
+        Fase 1 is volledig verkocht. De kavels in fase 2 bieden nieuwe posities: gunstiger ligging, meer privacy of betere zonorientatie.
+      </div>
+    </div>
+    <div class="rechts">
+      <iframe id="ghl-form" src="about:blank" title="Kennismakingsaanvraag"></iframe>
+    </div>
+  </div>
+</main>
+<footer>
+  Landgoed De Wielsche Dreef &middot; verhuur verzorgd door Landal &middot; <a href="tel:+31645190444">+31 6 451 90 444</a><br>
+  Dit gesprek is vrijblijvend en verplicht u tot niets. Geen fiscaal of beleggingsadvies.
+</footer>
+<script>
+(function(){
+  var FORM_ID = 'VERVANG-DOOR-GHL-FORM-ID';
+  var base = 'https://api.leadconnectorhq.com/widget/form/' + FORM_ID;
+  var f = document.getElementById('ghl-form');
+  var q = window.location.search;
+  f.src = base + (q && q.length > 1 ? q : '');
+})();
+</script>
+</body>
+</html>
