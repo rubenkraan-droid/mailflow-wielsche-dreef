@@ -72,38 +72,42 @@ BRAND = dict(
     credit="Foto&rsquo;s: Landgoed De Wielsche Dreef &middot; Betuwe, aan de Nederrijn.",
 )
 
-_CDN = "https://dewielschedreef.nl/wp-content/uploads/"
+# Echte parkfotografie, vooraf gecropt op headerformaat door prep_images.py
+# en gehost naast de mails. Draai prep_images.py opnieuw na een wijziging daar.
+_CDN = "https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/hero-"
 IMG = {
-    "ext_8c":     (_CDN + "2024/11/8C_EXT-dwd.jpg", "Recreatievilla type C op Landgoed De Wielsche Dreef"),
-    "ext_10elw":  (_CDN + "2024/11/10ELW_EXT-dwd.jpg", "Recreatievilla type ELW met ruime tuin"),
-    "ext_12c":    (_CDN + "2024/11/12C_EXT-dwd.jpg", "Ruime recreatievilla type C"),
-    "ext_12elf":  (_CDN + "2024/11/12ELF_EXT-dwd.jpg", "Recreatievilla type ELF"),
-    "int_2p_elw": (_CDN + "2024/09/De-Wielsche-Dreef-2p-ELW-scaled.jpg", "Interieur van een 2-persoons villa"),
-    "int_4p_c":   (_CDN + "2024/09/De-Wielsche-Dreef-4p-C-scaled.jpg", "Woonkamer van een 4-persoons villa"),
-    "int_4p_l":   (_CDN + "2024/09/De-Wielsche-Dreef-4p-L-scaled.jpg", "Lichte woonruimte in een 4-persoons villa"),
-    "int_4p_elw": (_CDN + "2024/09/De-Wielsche-Dreef-4p-ELW-scaled.jpg", "4-persoons villa met extra lichte woonkamer"),
-    "int_6p_c":   (_CDN + "2024/09/De-Wielsche-Dreef-6p-C-scaled.jpg", "Interieur van een 6-persoons villa"),
-    "int_6p_l":   (_CDN + "2024/09/De-Wielsche-Dreef-6p-L-scaled.jpg", "6-persoons villa in luxe uitvoering"),
+    "villa_water":       (_CDN + "villa_water.jpg", "Recreatievilla aan het water op Landgoed De Wielsche Dreef"),
+    "wandelen":          (_CDN + "wandelen.jpg", "Wandelen door de bloemenweide bij het Landgoed"),
+    "woonkamer":         (_CDN + "woonkamer.jpg", "Woonkamer van een villa op het Landgoed"),
+    "villa_parasol":     (_CDN + "villa_parasol.jpg", "Villa met terras en parasol"),
+    "park_vanuit_lucht": (_CDN + "park_vanuit_lucht.jpg", "Luchtfoto van het Landgoed met de waterloop"),
+    "villa_riet":        (_CDN + "villa_riet.jpg", "Villa aan de waterkant met rietoevers"),
+    "fietsen":           (_CDN + "fietsen.jpg", "Fietsen over de laan bij het Landgoed"),
+    "betuwe":            (_CDN + "betuwe.jpg", "Dorp in de Betuwe vanuit de lucht"),
+    "terras":            (_CDN + "terras.jpg", "Terras met ligbedden bij een villa"),
+    "keuken":            (_CDN + "keuken.jpg", "Keuken en eethoek in een villa"),
+    "slaapkamer":        (_CDN + "slaapkamer.jpg", "Slaapkamer en badkamer in een villa"),
+    "badkamer":          (_CDN + "badkamer.jpg", "Badkamer met vrijstaand bad"),
 }
 
 # Een foto per mail, in het formaat van de Canva-header (brede liggende crop).
 # Elke mail een andere foto; met 10 beelden en 15 mails rouleert een deel.
 HERO = {
-    1:  ("ext_8c", "center 55%"),
-    2:  ("ext_10elw", "center 58%"),
-    3:  ("int_4p_elw", "center 50%"),
-    4:  ("ext_12c", "center 55%"),
-    5:  ("ext_12elf", "center 58%"),
-    6:  ("int_6p_l", "center 50%"),
-    7:  ("int_2p_elw", "center 50%"),
-    8:  ("int_6p_c", "center 52%"),
-    9:  ("int_4p_c", "center 50%"),
-    10: ("int_4p_l", "center 50%"),
-    11: ("ext_10elw", "center 52%"),
-    12: ("ext_12c", "center 60%"),
-    13: ("ext_8c", "center 62%"),
-    14: ("ext_12elf", "center 52%"),
-    15: ("int_6p_l", "center 55%"),
+    1:  "villa_water",        # signatuurbeeld: villa aan het water
+    2:  "wandelen",           # emotie: mensen in de bloemenweide
+    3:  "woonkamer",          # comfort en afwerking
+    4:  "villa_parasol",      # uitnodigend, kom langs
+    5:  "park_vanuit_lucht",  # overzicht van de kavels
+    6:  "villa_riet",         # verzorgd park
+    7:  "fietsen",            # eigen gebruik
+    8:  "betuwe",             # de streek
+    9:  "terras",             # verhaal van een eigenaar
+    10: "keuken",             # inrichting en kwaliteit
+    11: "slaapkamer",         # een dag op het Landgoed
+    12: "villa_water",
+    13: "park_vanuit_lucht",  # fase 2: de posities
+    14: "badkamer",           # wat vakantiegangers zoeken
+    15: "villa_parasol",
 }
 
 # Merkbalk onder de foto: de zeven kleuren uit het Canva-ontwerp,
@@ -139,8 +143,6 @@ TEMPLATE = """<!DOCTYPE html>
    .container{ width:100%!important; }
    .px{ padding-left:24px!important; padding-right:24px!important; }
    .h1{ font-size:23px!important; line-height:31px!important; }
-   .hero{ height:180px!important; }
-   .hero img{ height:180px!important; }
    .hpx{ padding-left:10px!important; padding-right:10px!important; }
  }
 </style>
@@ -475,12 +477,13 @@ MAILS = [
 
 def hero_html(n):
     """Een brede foto met groene marge eromheen, zoals in het Canva-ontwerp."""
-    key, pos = HERO[n]
-    url, alt = IMG[key]
+    url, alt = IMG[HERO[n]]
+    # De foto is al op 1136x496 gecropt, dus schalen volstaat: geen object-fit
+    # nodig (dat werkt toch niet in Outlook).
     return ('  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
-            '<td class="hero" style="height:248px; background-color:#dfe7e5; line-height:0; font-size:0;">'
+            '<td class="hero" style="background-color:#dfe7e5; line-height:0; font-size:0;">'
             '<img src="' + url + '" alt="' + alt + '" width="568" '
-            'style="width:100%; height:248px; object-fit:cover; object-position:' + pos + '; display:block;">'
+            'style="width:100%; max-width:568px; height:auto; display:block;">'
             '</td></tr></table>')
 
 
