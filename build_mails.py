@@ -43,10 +43,11 @@ BRAND = dict(
     short_name="De Wielsche Dreef",
     tagline="Exclusief Vakantievastgoed<br>Betuwe &middot; Nederrijn",
     logo="https://dewielschedreef.nl/wp-content/uploads/2024/09/Logo-wit.svg",
-    primary="#1f524d",
-    footer_bg="#123330",
-    accent="#be5748",
-    accent_hover="#9e4438",
+    primary="#004d46",
+    footer_bg="#003b36",
+    accent="#c45346",
+    accent_hover="#a63f34",
+    kicker_color="#d3ebe7",
     page_bg="#f0ebe3",
     text="#374151",
     phone="085 - 303 28 44",
@@ -81,24 +82,37 @@ IMG = {
     "int_6p_l":   (_CDN + "2024/09/De-Wielsche-Dreef-6p-L-scaled.jpg", "6-persoons villa in luxe uitvoering"),
 }
 
-# 1 entry = brede hero (600x220), 2 entries = gesplitste hero (2x 300x220)
+# Een foto per mail, in het formaat van de Canva-header (brede liggende crop).
+# Elke mail een andere foto; met 10 beelden en 15 mails rouleert een deel.
 HERO = {
-    1:  [("ext_8c", "center 55%"), ("int_6p_l", "center 50%")],
-    2:  [("ext_10elw", "center 58%")],
-    3:  [("int_4p_elw", "center 50%"), ("int_6p_c", "center 52%")],
-    4:  [("ext_12c", "center 55%")],
-    5:  [("ext_12elf", "center 58%"), ("int_4p_l", "center 50%")],
-    6:  [("int_6p_l", "center 50%")],
-    7:  [("ext_8c", "center 60%"), ("int_2p_elw", "center 50%")],
-    8:  [("ext_10elw", "center 55%")],
-    9:  [("int_4p_c", "center 50%"), ("ext_12c", "center 58%")],
-    10: [("ext_12elf", "center 55%")],
-    11: [("int_6p_c", "center 52%"), ("ext_10elw", "center 58%")],
-    12: [("ext_12c", "center 60%")],
-    13: [("int_4p_elw", "center 50%"), ("ext_8c", "center 55%")],
-    14: [("ext_12elf", "center 58%"), ("int_6p_l", "center 50%")],
-    15: [("ext_10elw", "center 55%"), ("int_4p_c", "center 50%")],
+    1:  ("ext_8c", "center 55%"),
+    2:  ("ext_10elw", "center 58%"),
+    3:  ("int_4p_elw", "center 50%"),
+    4:  ("ext_12c", "center 55%"),
+    5:  ("ext_12elf", "center 58%"),
+    6:  ("int_6p_l", "center 50%"),
+    7:  ("int_2p_elw", "center 50%"),
+    8:  ("int_6p_c", "center 52%"),
+    9:  ("int_4p_c", "center 50%"),
+    10: ("int_4p_l", "center 50%"),
+    11: ("ext_10elw", "center 52%"),
+    12: ("ext_12c", "center 60%"),
+    13: ("ext_8c", "center 62%"),
+    14: ("ext_12elf", "center 52%"),
+    15: ("int_6p_l", "center 55%"),
 }
+
+# Merkbalk onder de foto: de zeven kleuren uit het Canva-ontwerp,
+# met de breedteverhouding van het origineel.
+STRIPE = [
+    ("#f1dbb6", 14.6),
+    ("#d6a057", 15.7),
+    ("#c45346", 15.7),
+    ("#44afb7", 14.6),
+    ("#00534d", 15.7),
+    ("#232b6b", 14.7),
+    ("#d3ebe7", 9.0),
+]
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="nl" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -121,7 +135,9 @@ TEMPLATE = """<!DOCTYPE html>
    .container{ width:100%!important; }
    .px{ padding-left:24px!important; padding-right:24px!important; }
    .h1{ font-size:23px!important; line-height:31px!important; }
-   .hero{ height:190px!important; }
+   .hero{ height:180px!important; }
+   .hero img{ height:180px!important; }
+   .hpx{ padding-left:10px!important; padding-right:10px!important; }
  }
 </style>
 </head>
@@ -131,7 +147,7 @@ TEMPLATE = """<!DOCTYPE html>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:[[PAGE_BG]];"><tr>
 <td align="center" style="padding:24px 12px;">
 <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:600px; background-color:#ffffff; border-radius:6px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06);">
- <tr><td style="background-color:[[PRIMARY]]; padding:14px 32px; text-align:center;" class="px">
+ <tr><td style="background-color:[[PRIMARY]]; padding:18px 32px 16px 32px; text-align:center;" class="px">
    <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto;"><tr>
      <td style="vertical-align:middle; padding-right:16px;">
        <img src="[[LOGO]]" alt="[[BRAND_NAME]]" width="88" style="max-width:88px; height:auto; display:block;">
@@ -141,14 +157,17 @@ TEMPLATE = """<!DOCTYPE html>
      </td>
    </tr></table>
  </td></tr>
- <tr><td style="padding:0; line-height:0; font-size:0;">
+ <tr><td style="background-color:[[PRIMARY]]; padding:0 16px; line-height:0; font-size:0;" class="hpx">
 [[HERO_HTML]]
  </td></tr>
- <tr><td style="padding:34px 32px 6px 32px;" class="px">
-   <div style="font-family:'Inter',Arial,sans-serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:[[ACCENT]]; font-weight:bold; margin-bottom:12px;">[[KICKER]]</div>
-   <h1 class="h1" style="margin:0; font-family:'Playfair Display',Georgia,serif; font-size:27px; line-height:35px; color:[[PRIMARY]]; font-weight:600;">[[H1]]</h1>
+ <tr><td style="background-color:[[PRIMARY]]; padding:0 16px; line-height:0; font-size:0;" class="hpx">
+[[STRIPE_HTML]]
  </td></tr>
- <tr><td style="padding:18px 32px 4px 32px; font-family:'Inter',Arial,sans-serif; font-size:16px; line-height:26px; color:[[TEXT]];" class="px">
+ <tr><td style="background-color:[[PRIMARY]]; padding:30px 40px 36px 40px;" class="px">
+   <div style="font-family:'Inter',Arial,sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:[[KICKER_COLOR]]; font-weight:bold; margin-bottom:14px;">[[KICKER]]</div>
+   <h1 class="h1" style="margin:0; font-family:'Playfair Display',Georgia,serif; font-size:28px; line-height:37px; color:#ffffff; font-weight:600;">[[H1]]</h1>
+ </td></tr>
+ <tr><td style="padding:32px 32px 4px 32px; font-family:'Inter',Arial,sans-serif; font-size:16px; line-height:26px; color:[[TEXT]];" class="px">
 [[BODY]]
  </td></tr>
  <tr><td style="background-color:[[FOOTER_BG]]; padding:28px 32px; text-align:center;" class="px">
@@ -447,24 +466,24 @@ MAILS = [
 
 
 def hero_html(n):
-    entries = HERO[n]
-    if len(entries) == 1:
-        key, pos = entries[0]
-        url, alt = IMG[key]
-        return ('  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
-                '<td class="hero" style="height:220px; background-color:#dfe7e5; line-height:0;">'
-                '<img src="' + url + '" alt="' + alt + '" width="600" '
-                'style="width:100%; height:220px; object-fit:cover; object-position:' + pos + '; display:block;">'
-                '</td></tr></table>')
-    cells = []
-    for key, pos in entries:
-        url, alt = IMG[key]
-        cells.append('<td class="hero" width="50%" style="height:220px; background-color:#dfe7e5; line-height:0;">'
-                     '<img src="' + url + '" alt="' + alt + '" width="300" '
-                     'style="width:100%; height:220px; object-fit:cover; object-position:' + pos + '; display:block;">'
-                     '</td>')
+    """Een brede foto met groene marge eromheen, zoals in het Canva-ontwerp."""
+    key, pos = HERO[n]
+    url, alt = IMG[key]
     return ('  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
-            + "".join(cells) + '</tr></table>')
+            '<td class="hero" style="height:248px; background-color:#dfe7e5; line-height:0; font-size:0;">'
+            '<img src="' + url + '" alt="' + alt + '" width="568" '
+            'style="width:100%; height:248px; object-fit:cover; object-position:' + pos + '; display:block;">'
+            '</td></tr></table>')
+
+
+def stripe_html():
+    """De zevenkleurige merkbalk direct onder de foto."""
+    cells = "".join(
+        '<td width="%s%%" style="width:%s%%; background-color:%s; height:20px; '
+        'line-height:20px; font-size:0;">&nbsp;</td>' % (pct, pct, col)
+        for col, pct in STRIPE)
+    return ('  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+            'style="border-collapse:collapse;"><tr>' + cells + '</tr></table>')
 
 
 def render(mail, variant):
@@ -477,6 +496,8 @@ def render(mail, variant):
         "H1": mail["h1"],
         "BODY": mail["body"],
         "HERO_HTML": hero_html(mail["n"]),
+        "STRIPE_HTML": stripe_html(),
+        "KICKER_COLOR": BRAND["kicker_color"],
         "LOGO": BRAND["logo"],
         "BRAND_NAME": BRAND["name"],
         "TAGLINE": BRAND["tagline"],
