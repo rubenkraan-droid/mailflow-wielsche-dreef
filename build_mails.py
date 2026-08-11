@@ -76,6 +76,7 @@ BRAND = dict(
 # en gehost naast de mails. Draai prep_images.py opnieuw na een wijziging daar.
 _CDN = "https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/hero-"
 IMG = {
+    "villa_avond":       (_CDN + "villa_avond.jpg", "Recreatievilla in de avondzon met gasten op het terras"),
     "villa_water":       (_CDN + "villa_water.jpg", "Recreatievilla aan het water op Landgoed De Wielsche Dreef"),
     "wandelen":          (_CDN + "wandelen.jpg", "Wandelen door de bloemenweide bij het Landgoed"),
     "woonkamer":         (_CDN + "woonkamer.jpg", "Woonkamer van een villa op het Landgoed"),
@@ -93,7 +94,7 @@ IMG = {
 # Een foto per mail, in het formaat van de Canva-header (brede liggende crop).
 # Elke mail een andere foto; met 10 beelden en 15 mails rouleert een deel.
 HERO = {
-    1:  "villa_water",        # signatuurbeeld: villa aan het water
+    1:  "villa_avond",        # signatuurbeeld uit het Canva-ontwerp
     2:  "wandelen",           # emotie: mensen in de bloemenweide
     3:  "woonkamer",          # comfort en afwerking
     4:  "villa_parasol",      # uitnodigend, kom langs

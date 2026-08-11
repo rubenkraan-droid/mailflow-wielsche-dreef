@@ -16,10 +16,16 @@ from PIL import Image
 
 OUT = pathlib.Path(__file__).parent
 BASE = "https://dewielschedreef.nl/wp-content/uploads/"
-W, H = 1136, 496
+# 1136x560 = twee keer de weergavemaat 568x280. Deze verhouding (2,03:1) is
+# ruimer dan de oorspronkelijke 2,29:1, zodat staande elementen zoals de
+# daknok van de avondfoto niet wegvallen.
+W, H = 1136, 560
 
-# naam -> (pad op de site, verticale crop-positie 0..1, alt-tekst)
+# naam -> (bron, verticale crop-positie 0..1, alt-tekst)
+# De bron is een pad op de site, of "bron/<bestand>" voor een lokaal beeld.
 SOURCES = {
+    "villa_avond":    ("bron/villa-avond.png", 0.33,
+                       "Recreatievilla in de avondzon met gasten op het terras"),
     "villa_water":    ("2025/05/6persoonsC-DeWielscheDreef-57-scaled.jpg", 0.52,
                        "Recreatievilla aan het water op Landgoed De Wielsche Dreef"),
     "wandelen":       ("2025/07/DWD-Algemeen-Stills-44-Header.jpg", 0.45,
@@ -49,10 +55,13 @@ SOURCES = {
 
 def main():
     for name, (path, ypos, _alt) in SOURCES.items():
-        # de site geeft 403 op de standaard user-agent van urllib
-        req = urllib.request.Request(BASE + path, headers={"User-Agent": "Mozilla/5.0"})
-        raw = urllib.request.urlopen(req, timeout=60).read()
-        im = Image.open(io.BytesIO(raw)).convert("RGB")
+        if path.startswith("bron/"):
+            im = Image.open(OUT / path).convert("RGB")
+        else:
+            # de site geeft 403 op de standaard user-agent van urllib
+            req = urllib.request.Request(BASE + path, headers={"User-Agent": "Mozilla/5.0"})
+            raw = urllib.request.urlopen(req, timeout=60).read()
+            im = Image.open(io.BytesIO(raw)).convert("RGB")
         w, h = im.size
         target = W / H
         if w / h > target:
