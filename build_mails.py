@@ -56,8 +56,8 @@ BRAND = dict(
     text="#374151",
     phone="085 - 303 28 44",
     phone_href="tel:0853032844",
-    email="info@recravas.nl",
-    email_href="mailto:info@recravas.nl",
+    email="willem@recravas.nl",
+    email_href="mailto:willem@recravas.nl",
     contact_party="Recravas",
     cta_url="https://invest.recraparcs.nl/wd-mailflow-lp-page",
     cta_prefill=("email=" + M["email"] + "&first_name=" + M["first_name"]
