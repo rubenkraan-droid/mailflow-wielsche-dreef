@@ -66,7 +66,23 @@ Logo: `https://dewielschedreef.nl/wp-content/uploads/2024/09/Logo-wit.svg`
 
 ---
 
-## 3. Tracking en CTA
+## 3. Mailplatform en merge-tags
+
+Deze flow draait in **ActiveCampaign**. In `build_mails.py` staat bovenaan `PLATFORM = "activecampaign"`;
+zet die op `"ghl"` als de flow ooit naar HighLevel verhuist en draai het script opnieuw.
+
+| Veld | ActiveCampaign | HighLevel |
+|---|---|---|
+| Voornaam | `%FIRSTNAME%` | `{{contact.first_name}}` |
+| Achternaam | `%LASTNAME%` | `{{contact.last_name}}` |
+| E-mail | `%EMAIL%` | `{{contact.email}}` |
+| Telefoon | `%PHONE%` | `{{contact.phone}}` |
+| Uitschrijven | `%UNSUBSCRIBELINK%` | `{{unsubscribe_url}}` |
+
+`%UNSUBSCRIBELINK%` rendert in AC als een complete link, dus niet zelf in een `<a>` wikkelen.
+Controleer in een testverzending hoe de link eruitziet.
+
+## 4. Tracking en CTA
 
 Elke CTA-link bevat:
 
@@ -87,7 +103,7 @@ GHL-formulier `WD - Gesprek - Mail`, form-ID `gO63rpRMVuuC5mc2uFXc`, is ingebouw
 
 ---
 
-## 4. GHL-workflow
+## 5. Automation (ActiveCampaign)
 
 - Wait-stappen volgens het dagschema (1, 2, 3, 5, 7, 9, 11, 13, 14, 17, 21, 24, 28, 31, 35).
 - Time Window: werkdagen, rond 19:00.
@@ -108,7 +124,7 @@ Rekenregel: leads per dag x 15 = mails per dag structureel.
 
 ---
 
-## 5. Pipedrive-koppeling via n8n
+## 6. Pipedrive-koppeling via n8n
 
 Nieuwe webhook-tak in de bestaande workflow **"Notion CSV Ad Stats Import v3"** (n8n cloud, account mabekra), naar het voorbeeld van de bestaande mailflow-tak `ghl-vdc-lead`.
 
@@ -129,7 +145,7 @@ De WD-tak moet:
 
 ---
 
-## 6. Stijlregels
+## 7. Stijlregels
 
 - Geen emdashes in copy of onderwerpregels.
 - Ondertekening zonder persoonsnaam ("Met vriendelijke groet, De Wielsche Dreef").

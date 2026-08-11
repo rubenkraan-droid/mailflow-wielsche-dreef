@@ -14,6 +14,30 @@ import sys
 
 OUT_DIR = pathlib.Path(__file__).parent
 
+# Welk mailplatform verstuurt deze flow. Bepaalt de merge-tags in de output.
+# "activecampaign" of "ghl".
+PLATFORM = "activecampaign"
+
+MERGE_TAGS = {
+    "activecampaign": dict(
+        first_name="%FIRSTNAME%",
+        last_name="%LASTNAME%",
+        email="%EMAIL%",
+        phone="%PHONE%",
+        # AC rendert dit als een volledige <a>-link; niet zelf in een <a> wikkelen.
+        unsubscribe_block='<span style="color:rgba(255,255,255,0.45);">%UNSUBSCRIBELINK%</span>',
+    ),
+    "ghl": dict(
+        first_name="{{contact.first_name}}",
+        last_name="{{contact.last_name}}",
+        email="{{contact.email}}",
+        phone="{{contact.phone}}",
+        unsubscribe_block='<a href="{{unsubscribe_url}}" style="color:rgba(255,255,255,0.45); text-decoration:underline;">Uitschrijven</a>',
+    ),
+}
+
+M = MERGE_TAGS[PLATFORM]
+
 BRAND = dict(
     name="Landgoed De Wielsche Dreef",
     short_name="De Wielsche Dreef",
@@ -31,7 +55,8 @@ BRAND = dict(
     email_href="mailto:info@recravas.nl",
     contact_party="Recravas",
     cta_url="https://invest.recraparcs.nl/wd-mailflow-lp-page",
-    cta_prefill="email={{contact.email}}&first_name={{contact.first_name}}&last_name={{contact.last_name}}&phone={{contact.phone}}",
+    cta_prefill=("email=" + M["email"] + "&first_name=" + M["first_name"]
+                 + "&last_name=" + M["last_name"] + "&phone=" + M["phone"]),
     campaign="wielsche-dreef",
     partner_line="Recravas &middot; verhuur verzorgd door Landal",
     disclaimer=("Deze e-mail is algemene informatie en bevat geen aanbod, rendements- of "
@@ -131,7 +156,7 @@ TEMPLATE = """<!DOCTYPE html>
    <p style="margin:0 0 4px 0; font-family:'Inter',Arial,sans-serif; font-size:12px; color:rgba(255,255,255,0.55);">[[PARTNER_LINE]]</p>
    <p style="margin:0 0 16px 0; font-family:'Inter',Arial,sans-serif; font-size:13px;"><a href="[[PHONE_HREF]]" style="color:rgba(255,255,255,0.7); text-decoration:none;">[[PHONE]]</a> &nbsp;&middot;&nbsp; <a href="[[EMAIL_HREF]]" style="color:rgba(255,255,255,0.7); text-decoration:none;">[[EMAIL]]</a></p>
    <p style="margin:0 0 12px 0; font-family:'Inter',Arial,sans-serif; font-size:11px; line-height:17px; color:rgba(255,255,255,0.45); max-width:460px; margin-left:auto; margin-right:auto;">[[DISCLAIMER]]</p>
-   <p style="margin:0; font-family:'Inter',Arial,sans-serif; font-size:11px; color:rgba(255,255,255,0.45);">[[BRAND_NAME]] &nbsp;&middot;&nbsp; <a href="{{unsubscribe_url}}" style="color:rgba(255,255,255,0.45); text-decoration:underline;">Uitschrijven</a></p>
+   <p style="margin:0; font-family:'Inter',Arial,sans-serif; font-size:11px; color:rgba(255,255,255,0.45);">[[BRAND_NAME]] &nbsp;&middot;&nbsp; [[UNSUBSCRIBE]]</p>
  </td></tr>
 </table>
 <div style="font-family:'Inter',Arial,sans-serif; font-size:11px; color:#a89f92; padding:14px 8px 0 8px;">[[CREDIT]]</div>
@@ -166,7 +191,7 @@ def bullets(items):
 
 P = '   <p style="margin:0 0 18px 0;">'
 SIGN = '   <p style="margin:0;">Met vriendelijke groet,<br><strong>' + BRAND["short_name"] + '</strong></p>\n'
-HI = P + 'Beste {{contact.first_name}},</p>\n'
+HI = P + 'Beste ' + M["first_name"] + ',</p>\n'
 
 MAILS = [
  dict(n=1, day=1, phase=1,
@@ -468,6 +493,7 @@ def render(mail, variant):
         "PARTNER_LINE": BRAND["partner_line"],
         "DISCLAIMER": BRAND["disclaimer"],
         "CREDIT": BRAND["credit"],
+        "UNSUBSCRIBE": M["unsubscribe_block"],
     }
     for k, v in repl.items():
         html = html.replace("[[" + k + "]]", v)
