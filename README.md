@@ -83,7 +83,7 @@ Elke CTA-link bevat:
 
 Landingspagina: `gesprek.html` geeft de querystring door aan het ingebedde GHL-formulier.
 
-**Openstaand:** het GHL-form-ID in `gesprek.html` staat nog op `VERVANG-DOOR-GHL-FORM-ID`. Vul het echte ID in zodra het formulier is aangemaakt.
+GHL-formulier `WD - Gesprek - Mail`, form-ID `gO63rpRMVuuC5mc2uFXc`, is ingebouwd in `gesprek.html`.
 
 ---
 
