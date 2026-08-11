@@ -48,6 +48,10 @@ BRAND = dict(
     accent="#c45346",
     accent_hover="#a63f34",
     kicker_color="#d3ebe7",
+    # Getextureerde groene achtergrond uit het Canva-ontwerp. Wordt gehost op
+    # GitHub Pages; #004d46 is de terugvalkleur waar achtergrondafbeeldingen
+    # niet werken (onder meer Outlook desktop).
+    bg_img="https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/header-bg.jpg",
     page_bg="#f0ebe3",
     text="#374151",
     phone="085 - 303 28 44",
@@ -147,25 +151,29 @@ TEMPLATE = """<!DOCTYPE html>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:[[PAGE_BG]];"><tr>
 <td align="center" style="padding:24px 12px;">
 <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:600px; background-color:#ffffff; border-radius:6px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06);">
- <tr><td style="background-color:[[PRIMARY]]; padding:18px 32px 16px 32px; text-align:center;" class="px">
-   <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto;"><tr>
-     <td style="vertical-align:middle; padding-right:16px;">
-       <img src="[[LOGO]]" alt="[[BRAND_NAME]]" width="88" style="max-width:88px; height:auto; display:block;">
-     </td>
-     <td style="vertical-align:middle; padding-left:16px; border-left:1px solid rgba(255,255,255,0.25);">
-       <p style="margin:0; font-family:'Inter',Arial,sans-serif; font-size:10px; color:rgba(255,255,255,0.62); letter-spacing:0.16em; text-transform:uppercase; text-align:left; line-height:16px;">[[TAGLINE]]</p>
-     </td>
-   </tr></table>
- </td></tr>
- <tr><td style="background-color:[[PRIMARY]]; padding:0 16px; line-height:0; font-size:0;" class="hpx">
+ <tr><td background="[[BG_IMG]]" bgcolor="[[PRIMARY]]" valign="top" style="background-color:[[PRIMARY]]; background-image:url('[[BG_IMG]]'); background-position:center top; background-size:cover; background-repeat:no-repeat; padding:0;">
+   <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+     <tr><td style="padding:18px 32px 16px 32px; text-align:center;" class="px">
+       <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto;"><tr>
+         <td style="vertical-align:middle; padding-right:16px;">
+           <img src="[[LOGO]]" alt="[[BRAND_NAME]]" width="88" style="max-width:88px; height:auto; display:block;">
+         </td>
+         <td style="vertical-align:middle; padding-left:16px; border-left:1px solid rgba(255,255,255,0.25);">
+           <p style="margin:0; font-family:'Inter',Arial,sans-serif; font-size:10px; color:rgba(255,255,255,0.62); letter-spacing:0.16em; text-transform:uppercase; text-align:left; line-height:16px;">[[TAGLINE]]</p>
+         </td>
+       </tr></table>
+     </td></tr>
+     <tr><td style="padding:0 16px; line-height:0; font-size:0;" class="hpx">
 [[HERO_HTML]]
- </td></tr>
- <tr><td style="background-color:[[PRIMARY]]; padding:0 16px; line-height:0; font-size:0;" class="hpx">
+     </td></tr>
+     <tr><td style="padding:0 16px; line-height:0; font-size:0;" class="hpx">
 [[STRIPE_HTML]]
- </td></tr>
- <tr><td style="background-color:[[PRIMARY]]; padding:30px 40px 36px 40px;" class="px">
-   <div style="font-family:'Inter',Arial,sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:[[KICKER_COLOR]]; font-weight:bold; margin-bottom:14px;">[[KICKER]]</div>
-   <h1 class="h1" style="margin:0; font-family:'Playfair Display',Georgia,serif; font-size:28px; line-height:37px; color:#ffffff; font-weight:600;">[[H1]]</h1>
+     </td></tr>
+     <tr><td style="padding:30px 40px 36px 40px;" class="px">
+       <div style="font-family:'Inter',Arial,sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:[[KICKER_COLOR]]; font-weight:bold; margin-bottom:14px;">[[KICKER]]</div>
+       <h1 class="h1" style="margin:0; font-family:'Playfair Display',Georgia,serif; font-size:28px; line-height:37px; color:#ffffff; font-weight:600;">[[H1]]</h1>
+     </td></tr>
+   </table>
  </td></tr>
  <tr><td style="padding:32px 32px 4px 32px; font-family:'Inter',Arial,sans-serif; font-size:16px; line-height:26px; color:[[TEXT]];" class="px">
 [[BODY]]
@@ -498,6 +506,7 @@ def render(mail, variant):
         "HERO_HTML": hero_html(mail["n"]),
         "STRIPE_HTML": stripe_html(),
         "KICKER_COLOR": BRAND["kicker_color"],
+        "BG_IMG": BRAND["bg_img"],
         "LOGO": BRAND["logo"],
         "BRAND_NAME": BRAND["name"],
         "TAGLINE": BRAND["tagline"],
