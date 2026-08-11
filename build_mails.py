@@ -30,7 +30,7 @@ BRAND = dict(
     email="info@recravas.nl",
     email_href="mailto:info@recravas.nl",
     contact_party="Recravas",
-    cta_url="https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/gesprek.html",
+    cta_url="https://invest.recraparcs.nl/wd-mailflow-lp-page",
     cta_prefill="email={{contact.email}}&first_name={{contact.first_name}}&last_name={{contact.last_name}}&phone={{contact.phone}}",
     campaign="wielsche-dreef",
     partner_line="Recravas &middot; verhuur verzorgd door Landal",

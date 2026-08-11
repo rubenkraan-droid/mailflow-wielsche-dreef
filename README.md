@@ -81,7 +81,7 @@ Elke CTA-link bevat:
 &phone={{contact.phone}}
 ```
 
-Landingspagina: `gesprek.html` geeft de querystring door aan het ingebedde GHL-formulier.
+Landingspagina: **https://invest.recraparcs.nl/wd-mailflow-lp-page** (live, in GHL). De lokale `gesprek.html` is de bronversie/preview en geeft de querystring door aan het ingebedde GHL-formulier.
 
 GHL-formulier `WD - Gesprek - Mail`, form-ID `gO63rpRMVuuC5mc2uFXc`, is ingebouwd in `gesprek.html`.
 
