@@ -106,7 +106,7 @@ HERO = {
     10: "keuken",             # inrichting en kwaliteit
     11: "slaapkamer",         # een dag op het Landgoed
     12: "villa_water",
-    13: "park_vanuit_lucht",  # fase 2: de posities
+    13: "park_vanuit_lucht",  # verschillen tussen de posities
     14: "badkamer",           # wat vakantiegangers zoeken
     15: "villa_parasol",
 }
@@ -306,23 +306,25 @@ MAILS = [
    + SIGN),
 
  dict(n=5, day=7, phase=2,
-  title='Een eerste selectie van beschikbare mogelijkheden',
-  title_b='Een aantal kavels binnen fase 2 is nu in beeld',
-  preheader='Een aantal kavels binnen fase 2 is nu in beeld',
-  preheader_b='Fase 1 is uitverkocht, fase 2 komt in beeld',
-  kicker='Beschikbaarheid',
-  h1='Fase 2 komt nu in beeld',
+  title='Hoe verloopt zo&rsquo;n traject eigenlijk?',
+  title_b='Van eerste gesprek tot de sleutel',
+  preheader='Wat u kunt verwachten, stap voor stap',
+  preheader_b='Geen verrassingen, wel duidelijkheid vooraf',
+  kicker='Bezwaar: de onbekendheid',
+  h1='Weten waar u aan begint',
   body=HI
-   + P + 'Zoals aangekondigd werken wij met een gefaseerde benadering van het beschikbare aanbod.</p>\n'
-   + P + 'Alle vakantiewoningen uit fase 1 zijn verkocht en gaan vanaf juli 2026 in de verhuur via Landal. Op dit moment hebben wij een eerste selectie van mogelijkheden in beeld voor fase 2, voor geinteresseerden die zich tijdig orienteren.</p>\n'
-   + P + 'Juist in deze fase merken we dat het waardevol is om vroeg inzicht te krijgen in:</p>\n'
+   + P + 'Veel mensen orienteren zich maandenlang op een vakantiewoning zonder ooit te vragen hoe zo&rsquo;n aankoop nu eigenlijk verloopt. Begrijpelijk, want niemand wil ergens instappen zonder het overzicht te hebben.</p>\n'
+   + P + 'Daarom zetten we het hier gewoon op een rij:</p>\n'
    + bullets([
-       'welk type het beste aansluit,',
-       'welke ligging het meest aanspreekt,',
-       'welke keuzes op termijn relevant kunnen worden.',
+       'een kennismaking waarin we uw wensen en situatie doornemen,',
+       'een rondleiding op het Landgoed, zodat u de ligging zelf ervaart,',
+       'een keuze voor een type villa en een plek die daarbij past,',
+       'de vastlegging bij de notaris, met heldere voorwaarden,',
+       'de oplevering, waarna verhuur en beheer worden overgenomen.',
    ])
-   + P + 'Fase 2 biedt nieuwe kansen doordat er andere kavels beschikbaar komen: een gunstigere ligging, meer privacy of een betere zonorientatie. Daarmee ontstaan keuzemogelijkheden die beter aansluiten op uw persoonlijke wensen.</p>\n'
-   + cta('Bespreek beschikbaarheid', 'wd-mail-05a')
+   + P + 'Tussen die stappen zit geen druk. U bepaalt zelf het tempo, en bij elke stap weet u wat de volgende inhoudt.</p>\n'
+   + P + 'De eerste stap kost u niet meer dan een gesprek. Daarin hoort u wat er mogelijk is, en wij horen of dit uberhaupt bij u past.</p>\n'
+   + cta('Plan een kennismaking', 'wd-mail-05a')
    + SIGN),
 
  dict(n=6, day=9, phase=2,
@@ -334,7 +336,7 @@ MAILS = [
   h1='U hoeft geen tweede baan als beheerder',
   body=HI
    + P + 'Een terechte vraag bij recreatief vastgoed: wie doet het werk als u er niet bent?</p>\n'
-   + P + 'Op Landgoed De Wielsche Dreef is dat volledig geregeld. Het groenonderhoud, de gemeenschappelijke voorzieningen en de infrastructuur worden door de Vereniging van Eigenaren beheerd. De verhuur en het onderhoud van uw villa lopen via Landal.</p>\n'
+   + P + 'Op Landgoed De Wielsche Dreef is dat volledig geregeld. Het groenonderhoud, de gemeenschappelijke voorzieningen en de infrastructuur worden door de Vereniging van Eigenaren beheerd. De verhuur van uw villa loopt via Landal.</p>\n'
    + P + 'Concreet betekent dat: u ontvangt een overzicht van hoe het jaar is verlopen en u bepaalt zelf wanneer u er zelf verblijft. Verder hoeft u er niet naar om te kijken.</p>\n'
    + P + 'Dat is precies wat eigenaren van dit concept verwachten. Geen zorgen op afstand, wel de vrijheid van een eigen plek.</p>\n'
    + cta('Vraag naar het beheerconcept', 'wd-mail-06a')
@@ -349,8 +351,8 @@ MAILS = [
   h1='Uw eigen plek, wanneer u wilt',
   body=HI
    + P + 'Veel mensen denken dat verhuur en eigen gebruik elkaar uitsluiten. Dat is hier niet zo.</p>\n'
-   + P + 'U bepaalt zelf welke periodes u voor eigen gebruik reserveert. De resterende weken worden professioneel verhuurd aan vakantiegangers. Zo blijft de villa een plek waar u naartoe gaat, en niet alleen een bezit op papier.</p>\n'
-   + P + 'Eigenaren gebruiken hun villa vaak op momenten die voor hen tellen: een week met familie in de zomer, een lang weekend in het najaar, de feestdagen met vrienden. Wat past bij uw ritme, stemmen we samen af.</p>\n'
+   + P + 'U bepaalt zelf welke periodes u voor eigen gebruik reserveert, tot 90 dagen per jaar. De resterende weken worden professioneel verhuurd aan vakantiegangers. Zo blijft de villa een plek waar u naartoe gaat, en niet alleen een bezit op papier.</p>\n'
+   + P + 'Negentig dagen is in de praktijk ruim. Eigenaren gebruiken hun villa vaak op momenten die voor hen tellen: een week met familie in de zomer, een lang weekend in het najaar, de feestdagen met vrienden. Wat past bij uw ritme, stemmen we samen af.</p>\n'
    + cta('Bespreek uw gebruikswensen', 'wd-mail-07a')
    + SIGN),
 
@@ -422,7 +424,7 @@ MAILS = [
   kicker='Inzicht',
   h1='Verhuur zonder dat u iets hoeft te doen',
   body=HI
-   + P + 'Vanaf juli 2026 worden de villa&rsquo;s uit fase 1 verhuurd via Landal. Dat is een bewuste keuze.</p>\n'
+   + P + 'De villa&rsquo;s op het Landgoed worden verhuurd via Landal. Dat is een bewuste keuze.</p>\n'
    + P + 'Landal brengt bereik, een boekingsplatform en een verhuurorganisatie mee die al decennia draait. Voor u als eigenaar betekent dat: geen advertenties plaatsen, geen sleutels overdragen, geen schoonmaak inplannen.</p>\n'
    + P + 'De praktijk is eenvoudig. U geeft aan welke weken u zelf gebruikt. De rest wordt aangeboden, geboekt, schoongemaakt en onderhouden. U ontvangt periodiek een overzicht.</p>\n'
    + P + 'Wat dit voor uw specifieke situatie betekent, hangt af van het type villa, de ligging en het aantal weken eigen gebruik. Dat rekenen we in een gesprek met u door.</p>\n'
@@ -430,18 +432,24 @@ MAILS = [
    + SIGN),
 
  dict(n=13, day=28, phase=3,
-  title='Waarom fase 2 andere kansen biedt',
-  title_b='De kavels die nu vrijkomen',
-  preheader='Ligging, privacy en zonorientatie',
-  preheader_b='Wat er in fase 2 anders is dan in fase 1',
+  title='Niet elke plek op het Landgoed is hetzelfde',
+  title_b='Waarom de ene kavel anders ligt dan de andere',
+  preheader='Ligging, zonorientatie en privacy',
+  preheader_b='Wat het verschil maakt tussen twee kavels',
   kicker='Inzicht',
-  h1='Fase 2: nieuwe posities op het Landgoed',
+  h1='Waarom de plek op het Landgoed uitmaakt',
   body=HI
-   + P + 'Fase 1 is volledig verkocht. Dat betekent niet dat de beste plekken weg zijn.</p>\n'
-   + P + 'De kavels in fase 2 liggen op andere posities binnen het Landgoed. Een deel grenst direct aan het groen, een deel ligt gunstiger ten opzichte van de zon, en een deel biedt meer privacy dan wat in fase 1 beschikbaar was.</p>\n'
-   + P + 'Voor wie zich nu orienteert, is dat een voordeel. U kunt kiezen op basis van uw eigen voorkeuren in plaats van wat er toevallig nog over is.</p>\n'
-   + P + 'Welke posities op dit moment in beeld zijn en welke bij u passen, nemen we graag persoonlijk met u door.</p>\n'
-   + cta('Bekijk de posities in fase 2', 'wd-mail-13a')
+   + P + 'Twee villa&rsquo;s van hetzelfde type kunnen heel verschillend aanvoelen. Dat zit hem zelden in de woning zelf, en bijna altijd in waar die staat.</p>\n'
+   + P + 'Op het Landgoed verschillen de posities op een paar punten die u pas merkt als u er staat:</p>\n'
+   + bullets([
+       'de orientatie op de zon, en dus waar u &rsquo;s avonds zit,',
+       'de mate van privacy en het zicht vanaf uw terras,',
+       'of een kavel direct aan het groen of aan het water grenst,',
+       'de afstand tot de voorzieningen en de entree van het park.',
+   ])
+   + P + 'Die verschillen bepalen hoe u de plek zelf beleeft. Ze wegen ook mee voor vakantiegangers, want een villa met een aangenaam terras en rust eromheen spreekt bij het boeken nu eenmaal meer aan.</p>\n'
+   + P + 'Daarom kijken we in een gesprek altijd eerst naar de plek en pas daarna naar het type. Welke posities bij uw voorkeuren passen, nemen we graag persoonlijk met u door.</p>\n'
+   + cta('Bespreek de mogelijkheden', 'wd-mail-13a')
    + SIGN),
 
  dict(n=14, day=31, phase=3,
@@ -469,7 +477,7 @@ MAILS = [
   body=HI
    + P + 'De afgelopen weken hebben we u meegenomen in wat Landgoed De Wielsche Dreef is: de ligging, het concept, het beheer en de manier waarop eigenaarschap hier werkt.</p>\n'
    + P + 'Als het u aanspreekt, is de logische volgende stap een gesprek. Telefonisch, online of op locatie. Wat u prettig vindt.</p>\n'
-   + P + 'In dat gesprek kijken we naar uw wensen, de beschikbare posities in fase 2 en wat realistisch en passend is. Vrijblijvend. Als het niets voor u is, weet u dat ook snel.</p>\n'
+   + P + 'In dat gesprek kijken we naar uw wensen, de beschikbare posities op het Landgoed en wat realistisch en passend is. Vrijblijvend. Als het niets voor u is, weet u dat ook snel.</p>\n'
    + P + 'Liever even bellen of mailen? Dat kan bij Recravas op <strong>' + BRAND["phone"] + '</strong> of via <strong>' + BRAND["email"] + '</strong>.</p>\n'
    + cta('Plan uw gesprek', 'wd-mail-15a')
    + SIGN),
