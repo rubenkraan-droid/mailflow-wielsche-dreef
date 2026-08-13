@@ -82,6 +82,8 @@ _CDN = "https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/hero-"
 IMG = {
     "villa_avond":       (_CDN + "villa_avond.jpg", "Recreatievilla in de avondzon met gasten op het terras"),
     "water_villas":      (_CDN + "water_villas.jpg", "Villa&rsquo;s aan de waterloop op het Landgoed"),
+    "villa_vijver":      (_CDN + "villa_vijver.jpg", "Villa aan de vijver met rietoevers"),
+    "fietsers_najaar":   (_CDN + "fietsers_najaar.jpg", "Fietsen over de laan in het najaar"),
     "villa_water":       (_CDN + "villa_water.jpg", "Recreatievilla aan het water op Landgoed De Wielsche Dreef"),
     "wandelen":          (_CDN + "wandelen.jpg", "Wandelen door de bloemenweide bij het Landgoed"),
     "woonkamer":         (_CDN + "woonkamer.jpg", "Woonkamer van een villa op het Landgoed"),
@@ -101,18 +103,18 @@ IMG = {
 HERO = {
     1:  "villa_avond",        # signatuurbeeld uit het Canva-ontwerp
     2:  "wandelen",           # mensen in de bloemenweide, warm openingsbeeld
-    3:  "woonkamer",          # comfort en afwerking
+    3:  "slaapkamer",         # comfort en afwerking
     4:  "villa_parasol",      # uitnodigend, kom langs
-    5:  "park_vanuit_lucht",  # overzicht van de kavels
+    5:  "villa_vijver",       # rustig beeld bij het aankooptraject
     6:  "villa_riet",         # verzorgd park
     7:  "fietsen",            # eigen gebruik
     8:  "betuwe",             # de streek
     9:  "terras",             # verhaal van een eigenaar
     10: "keuken",             # inrichting en kwaliteit
-    11: "slaapkamer",         # een dag op het Landgoed
-    12: "villa_water",
-    13: "park_vanuit_lucht",  # verschillen tussen de posities
-    14: "badkamer",           # wat vakantiegangers zoeken
+    11: "woonkamer",          # een dag op het Landgoed
+    12: "fietsers_najaar",    # vakantiegangers op het Landgoed
+    13: "badkamer",           # afwerking en kwaliteit
+    14: "villa_water",        # wat vakantiegangers zoeken
     15: "villa_parasol",
 }
 
