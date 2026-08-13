@@ -102,8 +102,9 @@ IMG = {
     "wandelen":          (_CDN + "wandelen.jpg", "Wandelen door de bloemenweide bij het Landgoed"),
     "woonkamer":         (_CDN + "woonkamer.jpg", "Woonkamer van een villa op het Landgoed"),
     "villa_parasol":     (_CDN + "villa_parasol.jpg", "Villa met terras en parasol"),
-    # park_vanuit_lucht: niet gebruiken. Het bestand staat er nog, maar de foto
-    # wordt in geen enkele mail ingezet. Niet terugzetten zonder overleg.
+    # Geen overzichtsfoto's van het park in de afspraak-sequence: op dat moment
+    # komt de ontvanger juist zelf kijken. park_vanuit_lucht is daarom helemaal
+    # uit de lijst gehaald; water_villas is een luchtfoto en hoort hier ook niet.
     "villa_riet":        (_CDN + "villa_riet.jpg", "Villa aan de waterkant met rietoevers"),
     "fietsen":           (_CDN + "fietsen.jpg", "Fietsen over de laan bij het Landgoed"),
     "betuwe":            (_CDN + "betuwe.jpg", "Dorp in de Betuwe vanuit de lucht"),
@@ -584,7 +585,7 @@ MAILS = [
 # "plaats" is een lijst van (tak, moment). T-x is een wait op het datumveld
 # Afspraakdatum, D+1 een gewone wait van een dag na instap.
 AFSPRAAK_MAILS = [
- dict(n=1, hero="water_villas",
+ dict(n=1, hero="terras",
   plaats=[("A", "D+1")],
   title='Straks staat u er zelf',
   title_b='Uw bezoek aan het Landgoed nadert',
