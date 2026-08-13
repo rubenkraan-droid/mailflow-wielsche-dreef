@@ -24,11 +24,10 @@ MERGE_TAGS = {
         last_name="%LASTNAME%",
         email="%EMAIL%",
         phone="%PHONE%",
-        # Alleen voor de afspraak-sequence. Twee losse velden: zodra je het
-        # mailadres uit de naam samenstelt, breekt het bij elke naam van meer
-        # dan een woord en bij de fallback.
+        # Alleen voor de afspraak-sequence. Het mailadres in de voettekst is
+        # bewust geen merge-tag: dat zou een tweede veld vragen dat overal
+        # meegestuurd moet worden. Daar staat het vaste adres van Recravas.
         makelaar="%BETROKKEN_MAKELAAR%",
-        makelaar_email="%MAKELAAR_EMAIL%",
         afspraakdatum="%AFSPRAAKDATUM%",
         # AC vult hier de kale uitschrijf-URL in, dus zelf in een <a> wikkelen.
         unsubscribe_block='<a href="%UNSUBSCRIBELINK%" style="color:rgba(255,255,255,0.45); text-decoration:underline;">Uitschrijven</a>',
@@ -39,7 +38,6 @@ MERGE_TAGS = {
         email="{{contact.email}}",
         phone="{{contact.phone}}",
         makelaar="{{contact.betrokken_makelaar}}",
-        makelaar_email="{{contact.makelaar_email}}",
         afspraakdatum="{{contact.afspraakdatum}}",
         unsubscribe_block='<a href="{{unsubscribe_url}}" style="color:rgba(255,255,255,0.45); text-decoration:underline;">Uitschrijven</a>',
     ),
@@ -104,7 +102,8 @@ IMG = {
     "wandelen":          (_CDN + "wandelen.jpg", "Wandelen door de bloemenweide bij het Landgoed"),
     "woonkamer":         (_CDN + "woonkamer.jpg", "Woonkamer van een villa op het Landgoed"),
     "villa_parasol":     (_CDN + "villa_parasol.jpg", "Villa met terras en parasol"),
-    "park_vanuit_lucht": (_CDN + "park_vanuit_lucht.jpg", "Luchtfoto van het Landgoed met de waterloop"),
+    # park_vanuit_lucht: niet gebruiken. Het bestand staat er nog, maar de foto
+    # wordt in geen enkele mail ingezet. Niet terugzetten zonder overleg.
     "villa_riet":        (_CDN + "villa_riet.jpg", "Villa aan de waterkant met rietoevers"),
     "fietsen":           (_CDN + "fietsen.jpg", "Fietsen over de laan bij het Landgoed"),
     "betuwe":            (_CDN + "betuwe.jpg", "Dorp in de Betuwe vanuit de lucht"),
@@ -585,7 +584,7 @@ MAILS = [
 # "plaats" is een lijst van (tak, moment). T-x is een wait op het datumveld
 # Afspraakdatum, D+1 een gewone wait van een dag na instap.
 AFSPRAAK_MAILS = [
- dict(n=1, hero="park_vanuit_lucht",
+ dict(n=1, hero="water_villas",
   plaats=[("A", "D+1")],
   title='Straks staat u er zelf',
   title_b='Uw bezoek aan het Landgoed nadert',
@@ -663,14 +662,11 @@ AFSPRAAK_MAILS = [
    + P + 'Morgen bent u welkom op Landgoed De Wielsche Dreef. ' + M["makelaar"] + ' ontvangt u ter plaatse.</p>\n'
    + ADRES
    + link_button('Bekijk de route', BRAND["route_url"])
-   + P + 'Wij adviseren stevige schoenen; een deel van de kavels is nog niet ontwikkeld.</p>\n'
    + P + 'Mocht er onverwacht iets tussenkomen, dan kunt u bellen of appen naar ' + DAG_TEL + '.</p>\n'
    + SIGN_AFSPRAAK),
 ]
 
 for _m in AFSPRAAK_MAILS:
-    _m["footer_email"] = M["makelaar_email"]
-    _m["footer_email_href"] = "mailto:" + M["makelaar_email"]
     _m["utm_prefix"] = "wd-afspraak"
 
 
@@ -724,10 +720,8 @@ def render(mail, variant):
         "TEXT": BRAND["text"],
         "PHONE": BRAND["phone"],
         "PHONE_HREF": BRAND["phone_href"],
-        # De afspraak-sequence zet de betrokken adviseur in de voettekst; de
-        # nurture-flow houdt het algemene adres van Recravas aan.
-        "EMAIL": mail.get("footer_email", BRAND["email"]),
-        "EMAIL_HREF": mail.get("footer_email_href", BRAND["email_href"]),
+        "EMAIL": BRAND["email"],
+        "EMAIL_HREF": BRAND["email_href"],
         "PARTNER_LINE": BRAND["partner_line"],
         "DISCLAIMER": BRAND["disclaimer"],
         "CREDIT": BRAND["credit"],
@@ -792,11 +786,11 @@ def build_afspraak_section():
             '<code>Afspraakdatum</code>, x dagen ervoor om 19:00. <b>D+1</b> is een gewone '
             'wait van een dag na instap. Bij een afspraak binnen 2 dagen gaat er niets uit.</p>'
             '<table class="flowtab"><tr><th>Mail</th>' + head + '</tr>' + body + '</table>'
-            '<p class="uitleg">Twee losse velden in ActiveCampaign, geen samengestelde tag: '
-            '<code>BETROKKEN_MAKELAAR</code> met default <code>Uw Landgoedadviseur</code> en '
-            '<code>MAKELAAR_EMAIL</code> met default <code>willem@recravas.nl</code>. Het '
-            'mailadres afleiden uit de naam breekt zodra die uit meer dan een woord bestaat '
-            'of op de default terugvalt.</p>'
+            '<p class="uitleg">Twee velden in ActiveCampaign: '
+            '<code>BETROKKEN_MAKELAAR</code> met default <code>Uw Landgoedadviseur</code>, en '
+            '<code>Afspraakdatum</code> voor de T&minus;x waits. Het mailadres in de voettekst '
+            'staat vast op <code>willem@recravas.nl</code> en is geen merge-tag: de adviseur '
+            'ondertekent de mail, de voettekst blijft het algemene bedrijfsblok.</p>'
             '<div class="grid">' + cards + '</div></div>')
 
 

@@ -162,11 +162,11 @@ Extra merge-tags, alleen in deze sequence:
 | Veld | ActiveCampaign | Default in AC |
 |---|---|---|
 | Adviseur | `%BETROKKEN_MAKELAAR%` | `Uw Landgoedadviseur` |
-| Adviseur e-mail | `%MAKELAAR_EMAIL%` | `willem@recravas.nl` |
 | Afspraakdatum | `%AFSPRAAKDATUM%` | leeg |
 
-Twee losse velden, geen samengestelde tag: het adres afleiden uit de naam breekt
-zodra die uit meer dan een woord bestaat of op de default terugvalt.
+Het mailadres in de voettekst is geen merge-tag maar staat vast op
+`willem@recravas.nl`, net als in de nurture-flow. De adviseur ondertekent de
+mail; de voettekst blijft het algemene bedrijfsblok.
 
 ---
 

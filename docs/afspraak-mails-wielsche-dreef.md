@@ -30,38 +30,30 @@ lezen.
 
 ## 2. Velden in ActiveCampaign
 
-Twee losse velden, geen samengestelde tag. Het mailadres afleiden uit de naam
-(`%BETROKKEN_MAKELAAR%@recravas.nl`) breekt zodra het naamveld uit meer dan een
-woord bestaat of op de default terugvalt.
+Twee velden, meer niet.
 
 | Veld | Default | Vulling per adviseur |
 |---|---|---|
-| `BETROKKEN_MAKELAAR` | `Uw Landgoedadviseur` | volledige naam |
-| `MAKELAAR_EMAIL` | `willem@recravas.nl` | `voornaam@recravas.nl` |
+| `BETROKKEN_MAKELAAR` | `Uw Landgoedadviseur` | volledige naam, bijvoorbeeld `Sem de Jong` |
 | `Afspraakdatum` | leeg | datum van de afspraak, stuurt de T-x waits |
 
 Verder gebruikt de sequence `%FIRSTNAME%` en `%UNSUBSCRIBELINK%`.
-`%BETROKKEN_MAKELAAR%` staat in de ondertekening, `%MAKELAAR_EMAIL%` in de
-voettekst. `%AFSPRAAKDATUM%` staat alleen in mail 3.
+`%BETROKKEN_MAKELAAR%` staat in de ondertekening, `%AFSPRAAKDATUM%` alleen in
+mail 3.
 
-### Waarom het twee velden zijn
+### Het mailadres in de voettekst is vast
 
-Sem de Jong is het voorbeeld dat het laat zien. Met een samengestelde tag wordt
-zijn adres `Sem de Jong@recravas.nl`; met de default erin `Uw
+Daar staat `willem@recravas.nl`, hard in de template, net als in de vijftien
+mails van de nurture-flow. Bewust geen merge-tag: dat zou een tweede veld
+vragen dat bij elke lead meegestuurd en onderhouden moet worden.
+
+Het adres samenstellen uit de naam is geen alternatief. Bij `Sem de Jong` wordt
+dat `Sem de Jong@recravas.nl` en bij de default `Uw
 Landgoedadviseur@recravas.nl`. Beide zijn onverzendbaar.
 
-| Adviseur | `BETROKKEN_MAKELAAR` | `MAKELAAR_EMAIL` |
-|---|---|---|
-| Sem de Jong | `Sem de Jong` | `sem@recravas.nl` |
-| (niet ingevuld) | `Uw Landgoedadviseur` | `willem@recravas.nl` |
-
-Een tussennaam of dubbele achternaam vraagt dus geen uitzondering in de mails.
-Vul de twee velden los en het klopt vanzelf.
-
-**Let op bij het vullen:** vul ze altijd samen. Staat alleen
-`BETROKKEN_MAKELAAR` gevuld, dan ondertekent Sem de mail terwijl de voettekst op
-de default `willem@recravas.nl` blijft staan. Dat is de enige manier waarop dit
-alsnog misgaat.
+Gevolg: de mail is ondertekend door de betrokken adviseur, terwijl de voettekst
+het algemene adres van Recravas toont. Dat is de bedoelde uitruil. De voettekst
+is het bedrijfsblok, niet het visitekaartje van de adviseur.
 
 ## 3. Vaste gegevens
 
@@ -190,8 +182,6 @@ Kicker: Morgen. Kop: Tot morgen op het Landgoed.
 > 4024 BT Eck en Wiel
 >
 > [knop: Bekijk de route]
->
-> Wij adviseren stevige schoenen; een deel van de kavels is nog niet ontwikkeld.
 >
 > Mocht er onverwacht iets tussenkomen, dan kunt u bellen of appen naar 06 45657185.
 
