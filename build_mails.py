@@ -606,7 +606,9 @@ def build_index():
             + '<div class="subj"><span class="lbl">A</span>%s</div>' % m["title"]
             + '<div class="subj"><span class="lbl b">B</span>%s</div>' % m["title_b"]
             + '<div class="pre">%s</div>' % m["preheader"]
-            + '<div class="links"><a href="mail-%02d.html">Preview mail</a></div>' % m["n"]
+            + ('<div class="links"><a href="mail-%02d.html">Preview mail</a>'
+               '<button class="copy" data-file="mail-%02d.html">Kopieer HTML</button></div>'
+               % (m["n"], m["n"]))
             + '</div>'
         )
     phases = "".join(
@@ -645,6 +647,10 @@ h1{font-family:'Playfair Display',serif;font-size:34px;color:#1f524d;font-weight
 .links{display:flex;gap:8px}
 .links a{flex:1;text-align:center;font-size:12px;font-weight:600;padding:8px;border-radius:4px;text-decoration:none;background:#f2f5f4;color:#1f524d;border:1px solid #dde5e3}
 .links a:hover{background:#1f524d;color:#fff}
+.copy{flex:1;font-family:inherit;font-size:12px;font-weight:600;padding:8px;border-radius:4px;cursor:pointer;background:#1f524d;color:#fff;border:1px solid #1f524d}
+.copy:hover{background:#16403c;border-color:#16403c}
+.copy.ok{background:#8a9b6e;border-color:#8a9b6e}
+.copy.err{background:#be5748;border-color:#be5748}
 </style></head><body><div class="wrap">
 <header>
 <div class="eyebrow">Mozi Flow &middot; 3-7-30-methode</div>
@@ -658,7 +664,28 @@ h1{font-family:'Playfair Display',serif;font-size:34px;color:#1f524d;font-weight
 </div>
 </header>
 """ + phases + """
-</div></body></html>"""
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var label = btn.textContent;
+    fetch(btn.dataset.file, {cache: 'no-store'})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function(html){ return navigator.clipboard.writeText(html); })
+      .then(function(){
+        btn.textContent = 'Gekopieerd';
+        btn.classList.add('ok');
+        setTimeout(function(){ btn.textContent = label; btn.classList.remove('ok'); }, 1800);
+      })
+      .catch(function(){
+        btn.textContent = 'Mislukt';
+        btn.classList.add('err');
+        setTimeout(function(){ btn.textContent = label; btn.classList.remove('err'); }, 1800);
+      });
+  });
+});
+</script>
+</body></html>"""
 
 
 def to_ascii(s):
