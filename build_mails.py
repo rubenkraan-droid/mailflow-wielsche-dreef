@@ -426,8 +426,10 @@ MAILS = [
   body=HI
    + P + 'De villa&rsquo;s op het Landgoed worden verhuurd via Landal. Dat is een bewuste keuze.</p>\n'
    + P + 'Landal brengt bereik, een boekingsplatform en een verhuurorganisatie mee die al decennia draait. Voor u als eigenaar betekent dat: geen advertenties plaatsen, geen sleutels overdragen, geen schoonmaak inplannen.</p>\n'
-   + P + 'De praktijk is eenvoudig. U geeft aan welke weken u zelf gebruikt. De rest wordt aangeboden, geboekt, schoongemaakt en onderhouden. U ontvangt periodiek een overzicht.</p>\n'
-   + P + 'Wat dit voor uw specifieke situatie betekent, hangt af van het type villa, de ligging en het aantal weken eigen gebruik. Dat rekenen we in een gesprek met u door.</p>\n'
+   + P + 'De praktijk is eenvoudig. U geeft aan welke weken u zelf gebruikt, tot 90 dagen per jaar. De rest van het jaar is uw villa beschikbaar voor verhuur, en die wordt aangeboden, geboekt, schoongemaakt en onderhouden zonder dat u er iets voor hoeft te doen.</p>\n'
+   + P + 'Er is een punt dat veel mensen niet verwachten. De verhuur loopt via een pool: alle villa&rsquo;s van hetzelfde type vormen samen een groep, en de inkomsten uit de verhuur worden binnen die groep verdeeld.</p>\n'
+   + P + 'Dat heeft een prettig gevolg. Of nu juist uw villa geboekt wordt of een woning van hetzelfde type verderop, maakt voor u geen verschil. U bent niet afhankelijk van de boekingen van een enkele woning, maar deelt mee in het resultaat van de hele groep.</p>\n'
+   + P + 'Hoe dat precies is vastgelegd en wat het voor uw situatie betekent, nemen we in een gesprek met u door.</p>\n'
    + cta('Vraag het verhuurconcept op', 'wd-mail-12a')
    + SIGN),
 
@@ -447,8 +449,8 @@ MAILS = [
        'of een kavel direct aan het groen of aan het water grenst,',
        'de afstand tot de voorzieningen en de entree van het park.',
    ])
-   + P + 'Die verschillen bepalen hoe u de plek zelf beleeft. Ze wegen ook mee voor vakantiegangers, want een villa met een aangenaam terras en rust eromheen spreekt bij het boeken nu eenmaal meer aan.</p>\n'
-   + P + 'Daarom kijken we in een gesprek altijd eerst naar de plek en pas daarna naar het type. Welke posities bij uw voorkeuren passen, nemen we graag persoonlijk met u door.</p>\n'
+   + P + 'Die verschillen bepalen vooral hoe u de plek zelf beleeft. Voor de verhuur wegen ze minder zwaar dan u zou verwachten, want de inkomsten worden verdeeld binnen een pool van villa&rsquo;s van hetzelfde type. U kiest een plek dus in de eerste plaats voor uzelf.</p>\n'
+   + P + 'Dat maakt de keuze eenvoudiger. U hoeft niet te gokken welke kavel het beste verhuurt, maar kunt kijken waar u zelf het liefst zit. Welke posities bij uw voorkeuren passen, nemen we graag persoonlijk met u door.</p>\n'
    + cta('Bespreek de mogelijkheden', 'wd-mail-13a')
    + SIGN),
 
@@ -460,10 +462,10 @@ MAILS = [
   kicker='Inzicht',
   h1='Waarom het type villa uitmaakt',
   body=HI
-   + P + 'Niet elke villa spreekt dezelfde vakantieganger aan. Dat is relevant, ook voor u.</p>\n'
-   + P + 'Vakantiegangers kijken naar het aantal slaapkamers, de aanwezigheid van een tuin of terras, de nabijheid van water en de mate van privacy. Villa&rsquo;s die op meerdere van die punten scoren, worden vaker en langer geboekt.</p>\n'
-   + P + 'Op het Landgoed zijn verschillende typen beschikbaar, van compact tot ruim, met verschillende indelingen en liggingen. Welke combinatie het meest aansluit bij zowel uw eigen gebruik als de verhuurpraktijk, verschilt per situatie.</p>\n'
-   + P + 'Dat is een van de dingen waar we in een gesprek concreet naar kijken.</p>\n'
+   + P + 'Niet elk type villa spreekt dezelfde vakantieganger aan. Dat is relevant, ook voor u.</p>\n'
+   + P + 'Vakantiegangers kijken naar het aantal slaapkamers, de aanwezigheid van een tuin of terras, de nabijheid van water en de mate van privacy. Dat bepaalt welke typen het hele jaar door in trek zijn en welke vooral in het hoogseizoen.</p>\n'
+   + P + 'Voor u telt dat mee, omdat de verhuurinkomsten worden verdeeld binnen een pool van villa&rsquo;s van hetzelfde type. De keuze voor een type is daarmee meer dan een smaakkwestie: u kiest ook in welke groep u meedeelt.</p>\n'
+   + P + 'Op het Landgoed zijn verschillende typen beschikbaar, van compact tot ruim, met verschillende indelingen. Welk type het beste aansluit bij zowel uw eigen gebruik als de verhuurpraktijk, verschilt per situatie. Dat is een van de dingen waar we in een gesprek concreet naar kijken.</p>\n'
    + cta('Bespreek de villatypen', 'wd-mail-14a')
    + SIGN),
 
