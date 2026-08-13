@@ -100,7 +100,7 @@ IMG = {
 # Elke mail een andere foto; met 10 beelden en 15 mails rouleert een deel.
 HERO = {
     1:  "villa_avond",        # signatuurbeeld uit het Canva-ontwerp
-    2:  "water_villas",       # eigenaarsquote over uitkijken op het water
+    2:  "wandelen",           # mensen in de bloemenweide, warm openingsbeeld
     3:  "woonkamer",          # comfort en afwerking
     4:  "villa_parasol",      # uitnodigend, kom langs
     5:  "park_vanuit_lucht",  # overzicht van de kavels
@@ -150,6 +150,8 @@ TEMPLATE = """<!DOCTYPE html>
    .px{ padding-left:24px!important; padding-right:24px!important; }
    .h1{ font-size:23px!important; line-height:31px!important; }
    .hpx{ padding-left:10px!important; padding-right:10px!important; }
+   .pcol{ display:block!important; width:100%!important; }
+   .pimg{ padding:18px 18px 0 18px!important; }
  }
 </style>
 </head>
@@ -211,6 +213,24 @@ def cta(label, variant):
             + label + ' &rarr;</a></td></tr></table>\n')
 
 
+def quote_person(text, portret, alt, caption):
+    """Quote met een vierkant portret ernaast. Stapelt onder 620px."""
+    src = _CDN.replace("hero-", "portret-") + portret + ".jpg"
+    return ('   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+            'style="margin:4px 0 20px 0; background-color:#eef4f3; border-left:4px solid '
+            + BRAND["primary"] + ';"><tr>'
+            '<td class="pcol pimg" width="120" valign="top" style="padding:18px 0 18px 18px; width:120px;">'
+            '<img src="' + src + '" alt="' + alt + '" width="120" '
+            'style="width:120px; max-width:120px; height:auto; display:block; border-radius:4px;">'
+            '</td>'
+            '<td class="pcol" valign="top" style="padding:18px 22px; font-family:\'Inter\',Arial,sans-serif;">'
+            '<div style="font-style:italic; font-size:16px; line-height:26px; color:#1a1a1a;">'
+            '&ldquo;' + text + '&rdquo;</div>'
+            '<div style="font-size:13px; line-height:20px; color:#5f7a75; padding-top:10px;">'
+            + caption + '</div>'
+            '</td></tr></table>\n')
+
+
 def pdf_link(label):
     """Tekstlink naar het eigenarenverhaal als pdf, met pdf-icoon in tekstvorm."""
     return ('   <p style="margin:0 0 20px 0;"><a href="' + BRAND["quote_pdf"] + '" target="_blank" '
@@ -269,9 +289,14 @@ MAILS = [
        'de combinatie van eigen gebruik en slim eigenaarschap,',
        'unieke services passend bij het nastreven van comfort.',
    ])
-   + P + 'Een eigenaar die hier vorig jaar voor koos, verwoordde de eerste indruk zo:</p>\n'
-   + quote('Prachtig gebied. Echt heel natuurvriendelijk en vogelrijk. We zijn allebei gek op vogels, maar ook op het landschap en de manier waarop het park zich daarin ontwikkelt. Vanaf het eerste moment heeft het ons niet meer losgelaten.')
-   + P + 'Zij kozen uiteindelijk een vierpersoonswoning, centraal in het park en direct aan het water. Wat dat in de praktijk oplevert, vatten ze zelf het mooist samen:</p>\n'
+   + P + 'Eigenaren die hier vorig jaar voor kozen, verwoordden hun eerste indruk zo:</p>\n'
+   + quote_person(
+       'Prachtig gebied. Echt heel natuurvriendelijk en vogelrijk. We zijn allebei gek op vogels, '
+       'maar ook op het landschap en de manier waarop het park zich daarin ontwikkelt. Vanaf het '
+       'eerste moment heeft het ons niet meer losgelaten.',
+       'eigenaren', 'Eigenaren op Landgoed De Wielsche Dreef',
+       'Eigenaren van een vierpersoonswoning aan het water')
+   + P + 'Wat dat dagelijks oplevert, vatten ze zelf het mooist samen:</p>\n'
    + quote('We kijken zo uit over het water. Vanmorgen deden we de gordijnen open en zwom er een meerkoet met kleintjes voorbij. Dat is toch een cadeautje? Zo begin je je dag.')
    + pdf_link('Lees hun volledige verhaal')
    + P + 'Wie hier interesse in heeft, zoekt doorgaans geen villa, maar een plek die past bij wie u bent.</p>\n'

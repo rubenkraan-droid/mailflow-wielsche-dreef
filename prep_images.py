@@ -21,6 +21,11 @@ BASE = "https://dewielschedreef.nl/wp-content/uploads/"
 # daknok van de avondfoto niet wegvallen.
 W, H = 1136, 560
 
+# Portretten bij eigenaarsquotes: naam -> (bron, verticale crop-positie 0..1)
+PORTRETTEN = {
+    "eigenaren": ("bron/eigenaren.jpg", 0.0),
+}
+
 # naam -> (bron, verticale crop-positie 0..1, alt-tekst)
 # De bron is een pad op de site, of "bron/<bestand>" voor een lokaal beeld.
 SOURCES = {
@@ -79,5 +84,20 @@ def main():
         print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
 
 
+def portretten():
+    """Vierkante portretten voor de quote-blokken, 360x360 (2x weergavemaat)."""
+    for name, (path, ypos) in PORTRETTEN.items():
+        im = Image.open(OUT / path).convert("RGB")
+        w, h = im.size
+        side = min(w, h)
+        left = (w - side) // 2
+        top = int((h - side) * ypos)
+        im = im.crop((left, top, left + side, top + side)).resize((360, 360), Image.LANCZOS)
+        f = OUT / ("portret-%s.jpg" % name)
+        im.save(f, "JPEG", quality=82, optimize=True, progressive=True)
+        print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
+
+
 if __name__ == "__main__":
     main()
+    portretten()
