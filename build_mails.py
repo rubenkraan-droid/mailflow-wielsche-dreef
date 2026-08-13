@@ -409,7 +409,7 @@ MAILS = [
   h1='Van ochtendmist tot avondzon',
   body=HI
    + P + 'Een villa kopen is geen abstracte beslissing. Het gaat om hoe een dag hier voelt.</p>\n'
-   + P + 'De ochtend begint met mist boven de uiterwaarden en vogels die u wakker maken. Koffie op het terras, de dijk op met de fiets, langs de Nederrijn richting het dorp. Middags terug, de tuin in, iemand zet de barbecue aan.</p>\n'
+   + P + 'De ochtend begint met mist boven de uiterwaarden en vogels die u wakker maken. Koffie op het terras, de dijk op met de fiets, langs de Nederrijn richting het dorp. Middags terug, de tuin in, de zon schuift langzaam over het terras.</p>\n'
    + P + '&rsquo;s Avonds is het stil. Geen doorgaand verkeer, geen straatverlichting die het donker wegneemt. Alleen het geluid van het water en het park dat tot rust komt.</p>\n'
    + quote('Vogels die ons wakker maken: dit is een cadeautje.')
    + P + 'Dat is wat eigenaren bedoelen als ze zeggen dat het meer is dan een investering.</p>\n'
