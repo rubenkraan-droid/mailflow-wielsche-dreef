@@ -178,9 +178,6 @@ TEMPLATE = """<!DOCTYPE html>
      <tr><td style="padding:0 16px; line-height:0; font-size:0;" class="hpx">
 [[HERO_HTML]]
      </td></tr>
-     <tr><td style="padding:0 16px; line-height:0; font-size:0;" class="hpx">
-[[STRIPE_HTML]]
-     </td></tr>
      <tr><td style="padding:30px 40px 36px 40px;" class="px">
        <div style="font-family:'Inter',Arial,sans-serif; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:[[KICKER_COLOR]]; font-weight:bold; margin-bottom:14px;">[[KICKER]]</div>
        <h1 class="h1" style="margin:0; font-family:'Playfair Display',Georgia,serif; font-size:28px; line-height:37px; color:#ffffff; font-weight:600;">[[H1]]</h1>
