@@ -22,7 +22,7 @@ Mozi Flow / 3-7-30-methode. Zelfde opzet als de Frankrijk-mailflow van Maison Pu
 | 02 | 2 | 1 | Waarom Landgoed De Wielsche Dreef direct aanspreekt | Niet alleen een villa, maar een plek die iets met u doet |
 | 03 | 3 | 1 | Comfort, eigen gebruik en professioneel beheer | Een sterk concept begint met rust en duidelijkheid |
 | 04 | 5 | 2 | Zullen we kennismaken op het Landgoed? | Ervaar zelf de sfeer, ligging en mogelijkheden |
-| 05 | 7 | 2 | Een eerste selectie van beschikbare mogelijkheden | Een aantal kavels binnen fase 2 is nu in beeld |
+| 05 | 7 | 2 | Hoe verloopt zo'n traject eigenlijk? | Van eerste gesprek tot de sleutel |
 | 06 | 9 | 2 | Wat kost het onderhoud eigenlijk? | Wie regelt het beheer als u er niet bent? |
 | 07 | 11 | 2 | Kan ik er zelf ook gewoon verblijven? | Hoeveel weken houdt u zelf beschikbaar? |
 | 08 | 13 | 2 | Waarom de Betuwe, en niet de kust? | Wat maakt deze ligging bijzonder? |
@@ -30,7 +30,7 @@ Mozi Flow / 3-7-30-methode. Zelfde opzet als de Frankrijk-mailflow van Maison Pu
 | 10 | 17 | 3 | Wat een VvE-constructie voor u betekent | Hoe het beheer op het Landgoed is geregeld |
 | 11 | 21 | 3 | Een dag op het Landgoed | Hoe een weekend hier eruitziet |
 | 12 | 24 | 3 | Hoe de verhuur via Landal werkt | Wie zorgt er voor de vakantiegangers? |
-| 13 | 28 | 3 | Waarom fase 2 andere kansen biedt | De kavels die nu vrijkomen |
+| 13 | 28 | 3 | Niet elke plek op het Landgoed is hetzelfde | Waarom de ene kavel anders ligt dan de andere |
 | 14 | 31 | 3 | Wat vakantiegangers zoeken in een villa | Waarom het type villa uitmaakt |
 | 15 | 35 | 3 | Een laatste uitnodiging | Zullen we het gesprek plannen? |
 
