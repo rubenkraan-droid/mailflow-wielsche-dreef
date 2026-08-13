@@ -24,6 +24,12 @@ MERGE_TAGS = {
         last_name="%LASTNAME%",
         email="%EMAIL%",
         phone="%PHONE%",
+        # Alleen voor de afspraak-sequence. Twee losse velden: zodra je het
+        # mailadres uit de naam samenstelt, breekt het bij elke naam van meer
+        # dan een woord en bij de fallback.
+        makelaar="%BETROKKEN_MAKELAAR%",
+        makelaar_email="%MAKELAAR_EMAIL%",
+        afspraakdatum="%AFSPRAAKDATUM%",
         # AC vult hier de kale uitschrijf-URL in, dus zelf in een <a> wikkelen.
         unsubscribe_block='<a href="%UNSUBSCRIBELINK%" style="color:rgba(255,255,255,0.45); text-decoration:underline;">Uitschrijven</a>',
     ),
@@ -32,6 +38,9 @@ MERGE_TAGS = {
         last_name="{{contact.last_name}}",
         email="{{contact.email}}",
         phone="{{contact.phone}}",
+        makelaar="{{contact.betrokken_makelaar}}",
+        makelaar_email="{{contact.makelaar_email}}",
+        afspraakdatum="{{contact.afspraakdatum}}",
         unsubscribe_block='<a href="{{unsubscribe_url}}" style="color:rgba(255,255,255,0.45); text-decoration:underline;">Uitschrijven</a>',
     ),
 }
@@ -68,6 +77,13 @@ BRAND = dict(
     # Eigenarenverhaal als pdf, gehost in ActiveCampaign.
     quote_pdf="https://content.app-us1.com/eYRvv/2026/08/13/8a64e9dc-a480-42dc-a0b0-94e486b652d7.pdf",
     partner_line="Recravas &middot; verhuur verzorgd door Landal",
+    # Locatiegegevens, alleen gebruikt in de afspraak-sequence.
+    adres_straat="Kalverlandseweg 3",
+    adres_plaats="4024 BT Eck en Wiel",
+    route_url="https://maps.app.goo.gl/tHEn4XUbYo5wUER5A",
+    # Nummer voor de dag zelf, niet het kantoornummer in de voettekst.
+    dag_phone="06 45657185",
+    dag_phone_href="tel:+31645657185",
     disclaimer=("Deze e-mail is algemene informatie en bevat geen aanbod, rendements- of "
                 "belastingtoezegging. Aan de inhoud kunnen geen rechten worden ontleend. "
                 "Specifieke cijfers, voorwaarden en risico&rsquo;s worden uitsluitend in een "
@@ -212,6 +228,31 @@ def cta(label, variant):
             + label + ' &rarr;</a></td></tr></table>\n')
 
 
+def link_button(label, url):
+    """Zelfde knop als cta(), maar naar een vaste URL zonder utm en prefill.
+    Gebruikt voor de routelink in de afspraak-sequence."""
+    return ('   <table role="presentation" cellpadding="0" cellspacing="0" style="margin:6px 0 20px 0;">'
+            '<tr><td align="center" style="border-radius:4px; background-color:' + BRAND["accent"] + ';">'
+            '<a class="btn" href="' + url + '" target="_blank" '
+            'style="display:inline-block; padding:15px 32px; font-family:\'Inter\',Arial,sans-serif; '
+            'font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none; border-radius:4px;">'
+            + label + ' &rarr;</a></td></tr></table>\n')
+
+
+def label(text):
+    """Kopje boven een blok praktische informatie. Zelfde vorm als de kicker in
+    de header, maar in het groen omdat het hier op de lichte kaart staat."""
+    return ('   <div style="font-family:\'Inter\',Arial,sans-serif; font-size:11px; '
+            'letter-spacing:0.2em; text-transform:uppercase; color:' + BRAND["primary"] + '; '
+            'font-weight:bold; margin:22px 0 8px 0;">' + text + '</div>\n')
+
+
+def subhead(text):
+    """Tussenkopje in de bodytekst, voor een opsomming met toelichting per item."""
+    return ('   <p style="margin:0 0 4px 0; font-weight:bold; color:'
+            + BRAND["primary"] + ';">' + text + '</p>\n')
+
+
 def quote_person(text, portret, alt, caption):
     """Quote met een vierkant portret ernaast. Stapelt onder 620px."""
     src = _CDN.replace("hero-", "portret-") + portret + ".jpg"
@@ -253,6 +294,14 @@ def bullets(items):
 P = '   <p style="margin:0 0 18px 0;">'
 SIGN = '   <p style="margin:0;">Met vriendelijke groet,<br><strong>' + BRAND["short_name"] + '</strong></p>\n'
 HI = P + 'Beste ' + M["first_name"] + ',</p>\n'
+
+# De afspraak-sequence ondertekent met de betrokken adviseur in plaats van met
+# het Landgoed; die is op dat moment al bekend bij de ontvanger.
+SIGN_AFSPRAAK = ('   <p style="margin:0;">Met vriendelijke groet,<br><strong>'
+                 + M["makelaar"] + '</strong><br>' + BRAND["name"] + '</p>\n')
+ADRES = (P + BRAND["adres_straat"] + '<br>' + BRAND["adres_plaats"] + '</p>\n')
+DAG_TEL = ('<a href="' + BRAND["dag_phone_href"] + '" style="color:' + BRAND["primary"]
+           + ';">' + BRAND["dag_phone"] + '</a>')
 
 MAILS = [
  dict(n=1, day=1, phase=1,
@@ -527,9 +576,107 @@ MAILS = [
 ]
 
 
-def hero_html(n):
+# ---------------------------------------------------------------------------
+# Afspraak-sequence: vier mails die pas gaan lopen nadat er een afspraak staat.
+# Losse automation, eigen instroom, eigen nummering (afspraak-01 t/m -04).
+# De takverdeling en de wait-stappen staan in docs/afspraak-mails-wielsche-dreef.md
+# en op de indexpagina; hier staat alleen de inhoud.
+#
+# "plaats" is een lijst van (tak, moment). T-x is een wait op het datumveld
+# Afspraakdatum, D+1 een gewone wait van een dag na instap.
+AFSPRAAK_MAILS = [
+ dict(n=1, hero="park_vanuit_lucht",
+  plaats=[("A", "D+1")],
+  title='Straks staat u er zelf',
+  title_b='Uw bezoek aan het Landgoed nadert',
+  preheader='Drie vragen om vast over na te denken',
+  kicker='Uw afspraak',
+  h1='Straks staat u er zelf',
+  body=HI
+   + P + 'Uw afspraak op Landgoed De Wielsche Dreef staat gepland. Binnenkort staat u er zelf.</p>\n'
+   + P + 'De rust, de ruimte en de ligging aan de Nederrijn laten zich ter plaatse nu eenmaal beter ervaren dan in woorden of beelden. Op de plek zelf merkt u binnen een minuut of het klopt: hoe de zon staat, wat u hoort en hoeveel ruimte er werkelijk om u heen is.</p>\n'
+   + P + 'Het helpt wanneer u van tevoren weet waar u op let. Drie vragen die de meeste bezoekers pas achteraf stellen:</p>\n'
+   + bullets([
+       'hoe u er wilt zitten, met de middagzon in de tuin of juist beschut,',
+       'wie er straks komen, alleen u samen of ook kinderen en kleinkinderen die blijven slapen,',
+       'hoe vaak u er denkt te zijn, enkele weekenden per jaar of om de week.',
+   ])
+   + P + 'De eerste bepaalt welke kavels voor u afvallen, nog voordat u naar de prijs kijkt. De tweede bepaalt hoeveel ruimte u nodig heeft, buiten net zozeer als binnen.</p>\n'
+   + P + 'U hoeft hierover nog geen besluit te hebben genomen. Maar wanneer u met deze vragen in gedachten over het terrein loopt, haalt u aanzienlijk meer uit uw bezoek.</p>\n'
+   + SIGN_AFSPRAAK),
+
+ dict(n=2, hero="betuwe",
+  plaats=[("A", "T-10"), ("B", "D+1")],
+  title='Maakt u er een dag van?',
+  title_b='De Betuwe rondom het Landgoed',
+  preheader='Ervaar ook de omgeving waarin het Landgoed ligt',
+  kicker='De omgeving',
+  h1='Maakt u er een dag van?',
+  body=HI
+   + P + 'U komt binnenkort naar Eck en Wiel. Uw bezoek gaat over de kavel en de opzet van het Landgoed, maar uiteindelijk brengt u uw tijd door in de omgeving eromheen. Daarom is dit een goed moment om ook die te leren kennen.</p>\n'
+   + P + 'Een aantal suggesties die u eenvoudig aan uw bezoek verbindt:</p>\n'
+   + subhead('De veerpont naar Amerongen')
+   + P + 'Vanaf Eck en Wiel steekt u in enkele minuten de Nederrijn over. Aan de overzijde ligt Amerongen, met het kasteel en de bossen van de Utrechtse Heuvelrug. Een korte oversteek die telkens weer de moeite waard is.</p>\n'
+   + subhead('Het Eiland van Maurik')
+   + P + 'Recreatiegebied met water, op korte afstand van het Landgoed. Een goede gelegenheid om te zien wat de omgeving te bieden heeft wanneer u hier met kinderen of kleinkinderen verblijft.</p>\n'
+   + subhead('De uiterwaarden en de boomgaarden')
+   + P + 'De Betuwe is fietsland bij uitstek. De knooppuntenroutes langs de Nederrijn en door de fruitteelt lopen vlak langs het terrein. In het voorjaar staat alles in bloei, in het najaar kunt u bij de telers zelf terecht.</p>\n'
+   + subhead('Rhenen')
+   + P + 'Iets verder weg, maar met Ouwehands Dierenpark en de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.</p>\n'
+   + P + 'Valt uw afspraak in de ochtend, dan houdt u de rest van de dag over om rond te kijken.</p>\n'
+   + SIGN_AFSPRAAK),
+
+ dict(n=3, hero="wandelen",
+  plaats=[("A", "T-3"), ("B", "T-3"), ("C", "D+1")],
+  title='Praktische informatie voor uw bezoek',
+  title_b='Alles wat u vooraf wilt weten over uw bezoek',
+  preheader='Route, parkeren en wat handig is om aan te trekken',
+  kicker='Praktisch',
+  h1='Praktische informatie voor uw bezoek',
+  body=HI
+   + P + 'Uw afspraak op het Landgoed nadert. Hieronder vindt u de praktische informatie op een rij, zodat u daar verder niet over hoeft na te denken.</p>\n'
+   + label('Adres')
+   + ADRES
+   + link_button('Bekijk de route', BRAND["route_url"])
+   + P + 'U kunt op het terrein parkeren; er is voldoende parkeergelegenheid.</p>\n'
+   + label('Duur')
+   + P + 'Houdt u rekening met ongeveer twee uur.</p>\n'
+   + label('Wie u ontvangt')
+   + P + M["makelaar"] + ' is uw aanspreekpunt en beantwoordt al uw vragen. Geen standaardrondleiding, maar een persoonlijk gesprek: wij lopen samen over het terrein en u stelt onderweg uw vragen.</p>\n'
+   + label('Kleding en schoeisel')
+   + P + 'Wij adviseren stevige schoenen. Een deel van de kavels is nog niet ontwikkeld, waardoor u niet overal over verharde paden loopt.</p>\n'
+   + label('Kinderen')
+   + P + 'Kinderen zijn van harte welkom. Er is voldoende ruimte en zij mogen overal komen.</p>\n'
+   + label('Verhinderd?')
+   + P + 'Belt of appt u naar ' + DAG_TEL + '. Verzetten is snel geregeld en voorkomt dat er een plek in de agenda onbenut blijft.</p>\n'
+   + P + 'Tot ' + M["afspraakdatum"] + '.</p>\n'
+   + SIGN_AFSPRAAK),
+
+ dict(n=4, hero="villa_avond",
+  plaats=[("A", "T-1"), ("B", "T-1"), ("C", "T-1")],
+  title='Tot morgen op het Landgoed',
+  title_b='Morgen ontvangen wij u op De Wielsche Dreef',
+  preheader='Route en telefoonnummer, voor het geval dat',
+  kicker='Morgen',
+  h1='Tot morgen op het Landgoed',
+  body=HI
+   + P + 'Morgen bent u welkom op Landgoed De Wielsche Dreef. ' + M["makelaar"] + ' ontvangt u ter plaatse.</p>\n'
+   + ADRES
+   + link_button('Bekijk de route', BRAND["route_url"])
+   + P + 'Wij adviseren stevige schoenen; een deel van de kavels is nog niet ontwikkeld.</p>\n'
+   + P + 'Mocht er onverwacht iets tussenkomen, dan kunt u bellen of appen naar ' + DAG_TEL + '.</p>\n'
+   + SIGN_AFSPRAAK),
+]
+
+for _m in AFSPRAAK_MAILS:
+    _m["footer_email"] = M["makelaar_email"]
+    _m["footer_email_href"] = "mailto:" + M["makelaar_email"]
+    _m["utm_prefix"] = "wd-afspraak"
+
+
+def hero_html(key):
     """Een brede foto met groene marge eromheen, zoals in het Canva-ontwerp."""
-    url, alt = IMG[HERO[n]]
+    url, alt = IMG[key]
     # De foto is al op 1136x496 gecropt, dus schalen volstaat: geen object-fit
     # nodig (dat werkt toch niet in Outlook).
     return ('  <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>'
@@ -554,11 +701,14 @@ def render(mail, variant):
     html = TEMPLATE
     repl = {
         "TITLE": mail["title_b"] if is_b else mail["title"],
-        "PREHEADER": mail["preheader_b"] if is_b else mail["preheader"],
+        # De afspraak-mails hebben een splittest op de onderwerpregel, maar
+        # delen een preheader; die valt dan terug op de A-variant.
+        "PREHEADER": (mail.get("preheader_b", mail["preheader"]) if is_b
+                      else mail["preheader"]),
         "KICKER": mail["kicker"],
         "H1": mail["h1"],
         "BODY": mail["body"],
-        "HERO_HTML": hero_html(mail["n"]),
+        "HERO_HTML": hero_html(mail.get("hero") or HERO[mail["n"]]),
         "STRIPE_HTML": stripe_html(),
         "KICKER_COLOR": BRAND["kicker_color"],
         "BG_IMG": BRAND["bg_img"],
@@ -574,8 +724,10 @@ def render(mail, variant):
         "TEXT": BRAND["text"],
         "PHONE": BRAND["phone"],
         "PHONE_HREF": BRAND["phone_href"],
-        "EMAIL": BRAND["email"],
-        "EMAIL_HREF": BRAND["email_href"],
+        # De afspraak-sequence zet de betrokken adviseur in de voettekst; de
+        # nurture-flow houdt het algemene adres van Recravas aan.
+        "EMAIL": mail.get("footer_email", BRAND["email"]),
+        "EMAIL_HREF": mail.get("footer_email_href", BRAND["email_href"]),
         "PARTNER_LINE": BRAND["partner_line"],
         "DISCLAIMER": BRAND["disclaimer"],
         "CREDIT": BRAND["credit"],
@@ -584,13 +736,68 @@ def render(mail, variant):
     for k, v in repl.items():
         html = html.replace("[[" + k + "]]", v)
     if is_b:
-        html = html.replace("utm_content=wd-mail-%02da" % mail["n"],
-                            "utm_content=wd-mail-%02db" % mail["n"])
+        pre = mail.get("utm_prefix", "wd-mail")
+        html = html.replace("utm_content=%s-%02da" % (pre, mail["n"]),
+                            "utm_content=%s-%02db" % (pre, mail["n"]))
     return html
 
 
 PHASE_LABEL = {1: "Fase 1 &middot; Beste bewijs", 2: "Fase 2 &middot; Bezwaar wegnemen",
                 3: "Fase 3 &middot; Verhaal en inzicht"}
+
+# Takken van de afspraak-sequence, bepaald door de tijd tussen instap en de
+# afspraakdatum. Onder de 2 dagen gaat er niets uit.
+TAKKEN = [("A", "14 dagen of meer"), ("B", "7 tot 13 dagen"), ("C", "2 tot 6 dagen")]
+
+
+def moment(m, tak):
+    """Het verzendmoment van mail m in tak, of een streepje als hij daar niet loopt."""
+    for t, w in m["plaats"]:
+        if t == tak:
+            return w.replace("T-", "T&minus;")
+    return "&middot;"
+
+
+def build_afspraak_section():
+    """Tweede sectie op de indexpagina: de losse sequence na een geplande afspraak."""
+    head = "".join("<th>Tak %s<span>%s</span></th>" % (t, oms) for t, oms in TAKKEN)
+    body = "".join(
+        "<tr><td>%d. %s</td>%s</tr>" % (
+            m["n"], m["title"],
+            "".join('<td class="mom">%s</td>' % moment(m, t) for t, _ in TAKKEN))
+        for m in AFSPRAAK_MAILS)
+
+    cards = "".join(
+        '<div class="card">'
+        + '<div class="card-top"><span class="badge ba">%s</span>' % (
+            " / ".join(sorted(set(moment(m, t) for t, _ in TAKKEN if moment(m, t) != "&middot;"),
+                              key=lambda s: ("D" in s, s))))
+        + '<span class="num">Afspraak %02d</span></div>' % m["n"]
+        + '<div class="subj"><span class="lbl">A</span>%s</div>' % m["title"]
+        + '<div class="subj"><span class="lbl b">B</span>%s</div>' % m["title_b"]
+        + '<div class="pre">%s</div>' % m["preheader"]
+        + '<div class="plek">%s</div>' % ", ".join(
+            "tak %s op %s" % (t, w.replace("T-", "T&minus;")) for t, w in m["plaats"])
+        + ('<div class="links"><a href="afspraak-%02d.html">Preview mail</a>'
+           '<button class="copy" data-file="afspraak-%02d.html">Kopieer HTML</button></div>'
+           % (m["n"], m["n"]))
+        + '</div>'
+        for m in AFSPRAAK_MAILS)
+
+    return ('<div class="phase sep">'
+            '<h2>Afspraak-sequence &middot; na een geplande afspraak</h2>'
+            '<p class="uitleg">Losse automation, staat naast de nurture-flow hierboven. '
+            'Instap zodra er een afspraak is gepland; de tak volgt uit de tijd tot de '
+            'afspraakdatum. <b>T&minus;x</b> is een wait op het datumveld '
+            '<code>Afspraakdatum</code>, x dagen ervoor om 19:00. <b>D+1</b> is een gewone '
+            'wait van een dag na instap. Bij een afspraak binnen 2 dagen gaat er niets uit.</p>'
+            '<table class="flowtab"><tr><th>Mail</th>' + head + '</tr>' + body + '</table>'
+            '<p class="uitleg">Twee losse velden in ActiveCampaign, geen samengestelde tag: '
+            '<code>BETROKKEN_MAKELAAR</code> met default <code>Uw Landgoedadviseur</code> en '
+            '<code>MAKELAAR_EMAIL</code> met default <code>willem@recravas.nl</code>. Het '
+            'mailadres afleiden uit de naam breekt zodra die uit meer dan een woord bestaat '
+            'of op de default terugvalt.</p>'
+            '<div class="grid">' + cards + '</div></div>')
 
 
 def build_index():
@@ -648,6 +855,18 @@ h1{font-family:'Playfair Display',serif;font-size:34px;color:#1f524d;font-weight
 .copy:hover{background:#16403c;border-color:#16403c}
 .copy.ok{background:#8a9b6e;border-color:#8a9b6e}
 .copy.err{background:#be5748;border-color:#be5748}
+.sep{border-top:2px solid #1f524d;padding-top:32px;margin-top:8px}
+.ba{background:#5f7a75}
+.plek{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#a89f92;margin:0 0 12px}
+.uitleg{font-size:13px;line-height:1.65;color:#7a8c88;margin-bottom:18px;max-width:760px}
+.uitleg b{color:#1f524d}
+.uitleg code{background:#e8efed;color:#1f524d;padding:1px 5px;border-radius:3px;font-size:12px}
+.flowtab{width:100%;border-collapse:collapse;background:#fff;border:1px solid #e5ded3;border-radius:6px;font-size:13px;margin-bottom:22px}
+.flowtab th,.flowtab td{border-bottom:1px solid #ece5da;padding:9px 13px;text-align:left}
+.flowtab th{background:#f7f4ee;color:#1f524d;font-weight:600;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.flowtab th span{display:block;font-weight:500;letter-spacing:0;text-transform:none;font-size:11px;color:#9aaba8;margin-top:2px}
+.flowtab td.mom{color:#1f524d;font-weight:600}
+.flowtab tr:last-child td{border-bottom:0}
 </style></head><body><div class="wrap">
 <header>
 <div class="eyebrow">Mozi Flow &middot; 3-7-30-methode</div>
@@ -660,7 +879,7 @@ h1{font-family:'Playfair Display',serif;font-size:34px;color:#1f524d;font-weight
 <div class="mi"><b>19:00</b><span>Verzendtijd</span></div>
 </div>
 </header>
-""" + phases + """
+""" + phases + build_afspraak_section() + """
 </div>
 <script>
 document.querySelectorAll('.copy').forEach(function(btn){
@@ -697,11 +916,12 @@ def to_ascii(s):
 
 def main():
     written = []
-    for m in MAILS:
-        for variant in ("a", "b"):
-            name = "mail-%02d%s.html" % (m["n"], "" if variant == "a" else "b")
-            (OUT_DIR / name).write_text(to_ascii(render(m, variant)), encoding="ascii")
-            written.append(name)
+    for prefix, mails in (("mail", MAILS), ("afspraak", AFSPRAAK_MAILS)):
+        for m in mails:
+            for variant in ("a", "b"):
+                name = "%s-%02d%s.html" % (prefix, m["n"], "" if variant == "a" else "b")
+                (OUT_DIR / name).write_text(to_ascii(render(m, variant)), encoding="ascii")
+                written.append(name)
     (OUT_DIR / "index.html").write_text(to_ascii(build_index()), encoding="ascii")
     written.append("index.html")
     print("Geschreven: %d bestanden" % len(written))

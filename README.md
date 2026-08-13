@@ -145,7 +145,32 @@ De WD-tak moet:
 
 ---
 
-## 7. Stijlregels
+## 7. Afspraak-sequence
+
+Naast deze nurture-flow draait een tweede, losse sequence: vier mails nadat er een
+afspraak is gepland, verdeeld over drie takken op basis van de tijd tot de
+afspraakdatum. Zelfde template en hetzelfde build-script, eigen nummering
+(`afspraak-01.html` t/m `afspraak-04b.html`), staat als aparte sectie op de
+indexpagina.
+
+De takverdeling, de wait-stappen en de benodigde ActiveCampaign-velden staan in
+[`docs/afspraak-mails-wielsche-dreef.md`](docs/afspraak-mails-wielsche-dreef.md).
+Die logica valt niet uit de HTML af te lezen.
+
+Extra merge-tags, alleen in deze sequence:
+
+| Veld | ActiveCampaign | Default in AC |
+|---|---|---|
+| Adviseur | `%BETROKKEN_MAKELAAR%` | `Uw Landgoedadviseur` |
+| Adviseur e-mail | `%MAKELAAR_EMAIL%` | `willem@recravas.nl` |
+| Afspraakdatum | `%AFSPRAAKDATUM%` | leeg |
+
+Twee losse velden, geen samengestelde tag: het adres afleiden uit de naam breekt
+zodra die uit meer dan een woord bestaat of op de default terugvalt.
+
+---
+
+## 8. Stijlregels
 
 - Geen emdashes in copy of onderwerpregels.
 - Ondertekening zonder persoonsnaam ("Met vriendelijke groet, De Wielsche Dreef").
