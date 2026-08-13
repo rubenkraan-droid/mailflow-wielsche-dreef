@@ -44,6 +44,25 @@ Verder gebruikt de sequence `%FIRSTNAME%` en `%UNSUBSCRIBELINK%`.
 `%BETROKKEN_MAKELAAR%` staat in de ondertekening, `%MAKELAAR_EMAIL%` in de
 voettekst. `%AFSPRAAKDATUM%` staat alleen in mail 3.
 
+### Waarom het twee velden zijn
+
+Sem de Jong is het voorbeeld dat het laat zien. Met een samengestelde tag wordt
+zijn adres `Sem de Jong@recravas.nl`; met de default erin `Uw
+Landgoedadviseur@recravas.nl`. Beide zijn onverzendbaar.
+
+| Adviseur | `BETROKKEN_MAKELAAR` | `MAKELAAR_EMAIL` |
+|---|---|---|
+| Sem de Jong | `Sem de Jong` | `sem@recravas.nl` |
+| (niet ingevuld) | `Uw Landgoedadviseur` | `willem@recravas.nl` |
+
+Een tussennaam of dubbele achternaam vraagt dus geen uitzondering in de mails.
+Vul de twee velden los en het klopt vanzelf.
+
+**Let op bij het vullen:** vul ze altijd samen. Staat alleen
+`BETROKKEN_MAKELAAR` gevuld, dan ondertekent Sem de mail terwijl de voettekst op
+de default `willem@recravas.nl` blijft staan. Dat is de enige manier waarop dit
+alsnog misgaat.
+
 ## 3. Vaste gegevens
 
 | | |
