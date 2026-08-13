@@ -24,8 +24,8 @@ MERGE_TAGS = {
         last_name="%LASTNAME%",
         email="%EMAIL%",
         phone="%PHONE%",
-        # AC rendert dit als een volledige <a>-link; niet zelf in een <a> wikkelen.
-        unsubscribe_block='<span style="color:rgba(255,255,255,0.45);">%UNSUBSCRIBELINK%</span>',
+        # AC vult hier de kale uitschrijf-URL in, dus zelf in een <a> wikkelen.
+        unsubscribe_block='<a href="%UNSUBSCRIBELINK%" style="color:rgba(255,255,255,0.45); text-decoration:underline;">Uitschrijven</a>',
     ),
     "ghl": dict(
         first_name="{{contact.first_name}}",
@@ -52,7 +52,9 @@ BRAND = dict(
     # GitHub Pages; #004d46 is de terugvalkleur waar achtergrondafbeeldingen
     # niet werken (onder meer Outlook desktop).
     bg_img="https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/header-bg.jpg",
-    page_bg="#f0ebe3",
+    # Wit rondom de mail, gebroken wit onder de tekst.
+    page_bg="#ffffff",
+    card_bg="#f0ebe3",
     text="#374151",
     phone="085 - 303 28 44",
     phone_href="tel:0853032844",
@@ -63,6 +65,8 @@ BRAND = dict(
     cta_prefill=("email=" + M["email"] + "&first_name=" + M["first_name"]
                  + "&last_name=" + M["last_name"] + "&phone=" + M["phone"]),
     campaign="wielsche-dreef",
+    # Eigenarenverhaal als pdf, gehost in ActiveCampaign.
+    quote_pdf="https://content.app-us1.com/eYRvv/2026/08/13/8a64e9dc-a480-42dc-a0b0-94e486b652d7.pdf",
     partner_line="Recravas &middot; verhuur verzorgd door Landal",
     disclaimer=("Deze e-mail is algemene informatie en bevat geen aanbod, rendements- of "
                 "belastingtoezegging. Aan de inhoud kunnen geen rechten worden ontleend. "
@@ -77,6 +81,7 @@ BRAND = dict(
 _CDN = "https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/hero-"
 IMG = {
     "villa_avond":       (_CDN + "villa_avond.jpg", "Recreatievilla in de avondzon met gasten op het terras"),
+    "water_villas":      (_CDN + "water_villas.jpg", "Villa&rsquo;s aan de waterloop op het Landgoed"),
     "villa_water":       (_CDN + "villa_water.jpg", "Recreatievilla aan het water op Landgoed De Wielsche Dreef"),
     "wandelen":          (_CDN + "wandelen.jpg", "Wandelen door de bloemenweide bij het Landgoed"),
     "woonkamer":         (_CDN + "woonkamer.jpg", "Woonkamer van een villa op het Landgoed"),
@@ -95,7 +100,7 @@ IMG = {
 # Elke mail een andere foto; met 10 beelden en 15 mails rouleert een deel.
 HERO = {
     1:  "villa_avond",        # signatuurbeeld uit het Canva-ontwerp
-    2:  "wandelen",           # emotie: mensen in de bloemenweide
+    2:  "water_villas",       # eigenaarsquote over uitkijken op het water
     3:  "woonkamer",          # comfort en afwerking
     4:  "villa_parasol",      # uitnodigend, kom langs
     5:  "park_vanuit_lucht",  # overzicht van de kavels
@@ -153,7 +158,7 @@ TEMPLATE = """<!DOCTYPE html>
 <div style="display:none; max-height:0; overflow:hidden; mso-hide:all; font-size:1px; line-height:1px; color:[[PAGE_BG]];">[[PREHEADER]] &nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:[[PAGE_BG]];"><tr>
 <td align="center" style="padding:24px 12px;">
-<table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:600px; background-color:#ffffff; border-radius:6px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06);">
+<table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:600px; background-color:[[CARD_BG]]; border-radius:6px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.06);">
  <tr><td background="[[BG_IMG]]" bgcolor="[[PRIMARY]]" valign="top" style="background-color:[[PRIMARY]]; background-image:url('[[BG_IMG]]'); background-position:center top; background-size:cover; background-repeat:no-repeat; padding:0;">
    <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
      <tr><td style="padding:18px 32px 16px 32px; text-align:center;" class="px">
@@ -204,6 +209,13 @@ def cta(label, variant):
             'style="display:inline-block; padding:15px 32px; font-family:\'Inter\',Arial,sans-serif; '
             'font-size:16px; font-weight:bold; color:#ffffff; text-decoration:none; border-radius:4px;">'
             + label + ' &rarr;</a></td></tr></table>\n')
+
+
+def pdf_link(label):
+    """Tekstlink naar het eigenarenverhaal als pdf, met pdf-icoon in tekstvorm."""
+    return ('   <p style="margin:0 0 20px 0;"><a href="' + BRAND["quote_pdf"] + '" target="_blank" '
+            'style="color:' + BRAND["primary"] + '; font-weight:bold; text-decoration:underline;">'
+            + label + '</a> <span style="color:#8a9a95; font-size:14px;">(pdf)</span></p>\n')
 
 
 def quote(text):
@@ -257,7 +269,11 @@ MAILS = [
        'de combinatie van eigen gebruik en slim eigenaarschap,',
        'unieke services passend bij het nastreven van comfort.',
    ])
-   + quote('De Betuwe: een prachtig, natuurvriendelijk en vogelrijk gebied. Vanaf het eerste moment dat we het zagen, heeft het ons niet meer losgelaten. Ik vond het park eruit springen. We hebben zeker drie andere parken vergeleken, maar die spraken ons niet aan.')
+   + P + 'Een eigenaar die hier vorig jaar voor koos, verwoordde de eerste indruk zo:</p>\n'
+   + quote('Prachtig gebied. Echt heel natuurvriendelijk en vogelrijk. We zijn allebei gek op vogels, maar ook op het landschap en de manier waarop het park zich daarin ontwikkelt. Vanaf het eerste moment heeft het ons niet meer losgelaten.')
+   + P + 'Zij kozen uiteindelijk een vierpersoonswoning, centraal in het park en direct aan het water. Wat dat in de praktijk oplevert, vatten ze zelf het mooist samen:</p>\n'
+   + quote('We kijken zo uit over het water. Vanmorgen deden we de gordijnen open en zwom er een meerkoet met kleintjes voorbij. Dat is toch een cadeautje? Zo begin je je dag.')
+   + pdf_link('Lees hun volledige verhaal')
    + P + 'Wie hier interesse in heeft, zoekt doorgaans geen villa, maar een plek die past bij wie u bent.</p>\n'
    + cta('Plan uw afspraak', 'wd-mail-02a')
    + SIGN),
@@ -380,7 +396,8 @@ MAILS = [
   h1='Wat eigenaren over het Landgoed vertellen',
   body=HI
    + P + 'De meest eerlijke beoordeling van een plek komt niet van de verkoper, maar van de mensen die er zijn.</p>\n'
-   + quote('We dachten eerst: niet haalbaar, maar later bleek het toch wel haalbaar. Ik vond het park eruit springen. We hebben zeker drie andere parken vergeleken, maar die spraken ons niet aan. Dit park heeft een hele mooie uitstraling.')
+   + P + 'Een echtpaar dat hier nu een woning heeft, dacht aanvankelijk dat het er voor hen niet in zat. Ze besloten de mogelijkheden toch te onderzoeken.</p>\n'
+   + quote('We vonden dit park er echt uitspringen. We hebben ook andere parken bekeken, in Nederland en Belgie, maar die spraken ons niet aan. Hier hebben de woningen met hun schuine daken echt een mooie, warme uitstraling. Het voelt gezellig en bijzonder.')
    + P + 'Wat in vrijwel elk gesprek terugkomt, is dat de keuze niet in een keer viel. Mensen orienteren zich, vergelijken, bezoeken meerdere parken en komen dan terug. Niet vanwege een aanbieding, maar omdat de sfeer bleef hangen.</p>\n'
    + P + 'Dat is ook precies waarom wij geen haast maken. Een goede keuze heeft tijd nodig.</p>\n'
    + cta('Plan een bezoek', 'wd-mail-09a')
@@ -521,6 +538,7 @@ def render(mail, variant):
         "STRIPE_HTML": stripe_html(),
         "KICKER_COLOR": BRAND["kicker_color"],
         "BG_IMG": BRAND["bg_img"],
+        "CARD_BG": BRAND["card_bg"],
         "LOGO": BRAND["logo"],
         "BRAND_NAME": BRAND["name"],
         "TAGLINE": BRAND["tagline"],

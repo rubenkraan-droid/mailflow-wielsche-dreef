@@ -26,6 +26,8 @@ W, H = 1136, 560
 SOURCES = {
     "villa_avond":    ("bron/villa-avond.png", 0.33,
                        "Recreatievilla in de avondzon met gasten op het terras"),
+    "water_villas":   ("bron/water-villas.jpg", 0.55,
+                       "Villa&rsquo;s aan de waterloop op het Landgoed"),
     "villa_water":    ("2025/05/6persoonsC-DeWielscheDreef-57-scaled.jpg", 0.52,
                        "Recreatievilla aan het water op Landgoed De Wielsche Dreef"),
     "wandelen":       ("2025/07/DWD-Algemeen-Stills-44-Header.jpg", 0.45,
