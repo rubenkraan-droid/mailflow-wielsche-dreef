@@ -606,8 +606,7 @@ def build_index():
             + '<div class="subj"><span class="lbl">A</span>%s</div>' % m["title"]
             + '<div class="subj"><span class="lbl b">B</span>%s</div>' % m["title_b"]
             + '<div class="pre">%s</div>' % m["preheader"]
-            + '<div class="links"><a href="mail-%02d.html">Variant A</a>' % m["n"]
-            + '<a href="mail-%02db.html">Variant B</a></div>' % m["n"]
+            + '<div class="links"><a href="mail-%02d.html">Preview mail</a></div>' % m["n"]
             + '</div>'
         )
     phases = "".join(
