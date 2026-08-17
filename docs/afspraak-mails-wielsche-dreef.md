@@ -126,14 +126,14 @@ Kicker: De omgeving. Kop: Maakt u er een dag van?
 > **De veerpont naar Amerongen**
 > Vanaf Eck en Wiel steekt u in enkele minuten de Nederrijn over. Aan de overzijde ligt Amerongen, met het kasteel en de bossen van de Utrechtse Heuvelrug. Een korte oversteek die telkens weer de moeite waard is.
 >
-> **Het Eiland van Maurik**
-> Recreatiegebied met water, op korte afstand van het Landgoed. Een goede gelegenheid om te zien wat de omgeving te bieden heeft wanneer u hier met kinderen of kleinkinderen verblijft.
+> **Ouwehands Dierenpark**
+> In Rhenen, aan de overzijde van de Nederrijn. Het hele jaar door open en ruim genoeg om er een dag door te brengen. Voor veel vakantiegangers met kinderen of kleinkinderen een van de redenen om voor deze omgeving te kiezen.
 >
 > **De uiterwaarden en de boomgaarden**
 > De Betuwe is fietsland bij uitstek. De knooppuntenroutes langs de Nederrijn en door de fruitteelt lopen vlak langs het terrein. In het voorjaar staat alles in bloei, in het najaar kunt u bij de telers zelf terecht.
 >
 > **Rhenen**
-> Iets verder weg, maar met Ouwehands Dierenpark en de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.
+> Iets verder weg, maar met de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.
 >
 > Valt uw afspraak in de ochtend, dan houdt u de rest van de dag over om rond te kijken.
 
@@ -203,3 +203,7 @@ Twee dingen die bij het overnemen opvielen en bewust zijn blijven staan:
 - **Mail 2** eindigt met "wanneer u met het hele gezin komt". De stijlregel in
   `README.md` schrijft voor om over vakantiegangers te praten en niet over
   gezinnen.
+- **Mail 2, blok Ouwehands Dierenpark** is niet aangeleverd maar geschreven bij
+  het vervangen van het Eiland van Maurik. Uit het Rhenen-blok is daarbij
+  "Ouwehands Dierenpark en" geschrapt, anders stond de naam er twee keer. De rest
+  van dat blok is ongewijzigd, waardoor Rhenen nu op de Grebbeberg alleen leunt.

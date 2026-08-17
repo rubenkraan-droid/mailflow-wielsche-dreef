@@ -645,12 +645,12 @@ AFSPRAAK_MAILS = [
    # maakt dan thumb-<naam>.jpg. Zonder thumb blijft het een kopje met alinea.
    + bestemming('De veerpont naar Amerongen',
        'Vanaf Eck en Wiel steekt u in enkele minuten de Nederrijn over. Aan de overzijde ligt Amerongen, met het kasteel en de bossen van de Utrechtse Heuvelrug. Een korte oversteek die telkens weer de moeite waard is.')
-   + bestemming('Het Eiland van Maurik',
-       'Recreatiegebied met water, op korte afstand van het Landgoed. Een goede gelegenheid om te zien wat de omgeving te bieden heeft wanneer u hier met kinderen of kleinkinderen verblijft.')
+   + bestemming('Ouwehands Dierenpark',
+       'In Rhenen, aan de overzijde van de Nederrijn. Het hele jaar door open en ruim genoeg om er een dag door te brengen. Voor veel vakantiegangers met kinderen of kleinkinderen een van de redenen om voor deze omgeving te kiezen.')
    + bestemming('De uiterwaarden en de boomgaarden',
        'De Betuwe is fietsland bij uitstek. De knooppuntenroutes langs de Nederrijn en door de fruitteelt lopen vlak langs het terrein. In het voorjaar staat alles in bloei, in het najaar kunt u bij de telers zelf terecht.')
    + bestemming('Rhenen',
-       'Iets verder weg, maar met Ouwehands Dierenpark en de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.')
+       'Iets verder weg, maar met de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.')
    + P + 'Valt uw afspraak in de ochtend, dan houdt u de rest van de dag over om rond te kijken.</p>\n'
    + SIGN_AFSPRAAK),
 
