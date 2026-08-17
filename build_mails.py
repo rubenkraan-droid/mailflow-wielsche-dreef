@@ -641,16 +641,19 @@ AFSPRAAK_MAILS = [
   body=HI
    + P + 'U komt binnenkort naar Eck en Wiel. Uw bezoek gaat over de kavel en de opzet van het Landgoed, maar uiteindelijk brengt u uw tijd door in de omgeving eromheen. Daarom is dit een goed moment om ook die te leren kennen.</p>\n'
    + P + 'Een aantal suggesties die u eenvoudig aan uw bezoek verbindt:</p>\n'
-   # Zet per bestemming thumb="<naam>" zodra het beeld er is; prep_images.py
-   # maakt dan thumb-<naam>.jpg. Zonder thumb blijft het een kopje met alinea.
+   # De foto's komen uit THUMBS in prep_images.py, als thumb-<naam>.jpg.
    + bestemming('De veerpont naar Amerongen',
-       'Vanaf Eck en Wiel steekt u in enkele minuten de Nederrijn over. Aan de overzijde ligt Amerongen, met het kasteel en de bossen van de Utrechtse Heuvelrug. Een korte oversteek die telkens weer de moeite waard is.')
+       'Vanaf Eck en Wiel steekt u in enkele minuten de Nederrijn over. Aan de overzijde ligt Amerongen, met het kasteel en de bossen van de Utrechtse Heuvelrug. Een korte oversteek die telkens weer de moeite waard is.',
+       thumb='veerpont', alt='De veerpont over de Nederrijn in de ochtendmist')
    + bestemming('Ouwehands Dierenpark',
-       'In Rhenen, aan de overzijde van de Nederrijn. Het hele jaar door open en ruim genoeg om er een dag door te brengen. Voor veel vakantiegangers met kinderen of kleinkinderen een van de redenen om voor deze omgeving te kiezen.')
+       'In Rhenen, aan de overzijde van de Nederrijn. Het hele jaar door open en ruim genoeg om er een dag door te brengen. Voor veel vakantiegangers met kinderen of kleinkinderen een van de redenen om voor deze omgeving te kiezen.',
+       thumb='ouwehands', alt='Reuzenpanda in Ouwehands Dierenpark')
    + bestemming('De uiterwaarden en de boomgaarden',
-       'De Betuwe is fietsland bij uitstek. De knooppuntenroutes langs de Nederrijn en door de fruitteelt lopen vlak langs het terrein. In het voorjaar staat alles in bloei, in het najaar kunt u bij de telers zelf terecht.')
+       'De Betuwe is fietsland bij uitstek. De knooppuntenroutes langs de Nederrijn en door de fruitteelt lopen vlak langs het terrein. In het voorjaar staat alles in bloei, in het najaar kunt u bij de telers zelf terecht.',
+       thumb='boomgaarden', alt='Appelboom in een boomgaard in de Betuwe')
    + bestemming('Rhenen',
-       'Iets verder weg, maar met de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.')
+       'Iets verder weg, maar met de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.',
+       thumb='rhenen', alt='Rhenen aan de Nederrijn met de Cunerakerk')
    + P + 'Valt uw afspraak in de ochtend, dan houdt u de rest van de dag over om rond te kijken.</p>\n'
    + SIGN_AFSPRAAK),
 
@@ -668,7 +671,7 @@ AFSPRAAK_MAILS = [
    + link_button('Bekijk de route', BRAND["route_url"])
    + P + 'U kunt op het terrein parkeren; er is voldoende parkeergelegenheid.</p>\n'
    + label('Duur')
-   + P + 'Houdt u rekening met ongeveer twee uur.</p>\n'
+   + P + 'Houdt u rekening met een afspraak van ongeveer twee uur.</p>\n'
    + label('Wie u ontvangt')
    + P + M["makelaar"] + ' is uw aanspreekpunt en beantwoordt al uw vragen. Geen standaardrondleiding, maar een persoonlijk gesprek: wij lopen samen over het terrein en u stelt onderweg uw vragen.</p>\n'
    + label('Kleding en schoeisel')

@@ -28,10 +28,23 @@ PORTRETTEN = {
 
 # Kleine vierkante beelden naast de bestemmingen in de afspraak-sequence.
 # naam -> (bron, verticale crop-positie 0..1)
-# Let op: de bestemmingen liggen buiten het Landgoed, dus de parkfotografie van
-# dewielschedreef.nl volstaat hier niet. Zet er alleen beeld in waarvoor Recravas
-# de rechten heeft; Ouwehands Dierenpark is bovendien een merk van derden.
-THUMBS = {}
+# De bestemmingen liggen buiten het Landgoed, dus de parkfotografie van
+# dewielschedreef.nl volstaat hier niet. Deze vier staan publiek in de GHL-assets.
+# De bestandsnamen daar zijn hashes, dus hieronder staat per URL wat erop staat;
+# raakt er ooit een kwijt, dan weet je wat je zoekt.
+# Alle vier zijn liggend, dus de crop-positie doet hier niets; hij staat er voor
+# als er ooit een staand beeld bij komt.
+_GHL = "https://assets.cdn.filesafe.space/ogbyRxgEx1wtnWdZeDwe/media/"
+THUMBS = {
+    # vaartuig op de rivier in de ochtendmist
+    "veerpont":    (_GHL + "6a82fef71082d64877671d9a.jpg", 0.50),
+    # reuzenpanda tussen bamboe
+    "ouwehands":   (_GHL + "6a82ff8cf730bf01a082c7e0.jpeg", 0.50),
+    # appelboom vol appels in een boomgaard
+    "boomgaarden": (_GHL + "6a82ff8c38315703fb821775.jpg", 0.50),
+    # Rhenen vanaf de Nederrijn, met de Cunerakerk en een molen
+    "rhenen":      (_GHL + "6a82ff8c255b571c8e1cc68f.jpg", 0.50),
+}
 
 # naam -> (bron, verticale crop-positie 0..1, alt-tekst)
 # De bron is een pad op de site, of "bron/<bestand>" voor een lokaal beeld.
@@ -96,11 +109,13 @@ def main():
 
 
 def _vierkant(path, ypos, side_out):
-    """Middencrop op vierkant, geschaald naar side_out. Bron mag lokaal of van de site."""
+    """Middencrop op vierkant, geschaald naar side_out. Bron mag een lokaal pad
+    in bron/ zijn, een pad op dewielschedreef.nl, of een volledige URL."""
     if path.startswith("bron/"):
         im = Image.open(OUT / path).convert("RGB")
     else:
-        req = urllib.request.Request(BASE + path, headers={"User-Agent": "Mozilla/5.0"})
+        url = path if path.startswith("http") else BASE + path
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         im = Image.open(io.BytesIO(urllib.request.urlopen(req, timeout=60).read())).convert("RGB")
     w, h = im.size
     side = min(w, h)

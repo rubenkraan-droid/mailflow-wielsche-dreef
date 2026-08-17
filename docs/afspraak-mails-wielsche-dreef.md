@@ -126,7 +126,7 @@ Kicker: De omgeving. Kop: Maakt u er een dag van?
 > **De veerpont naar Amerongen**
 > Vanaf Eck en Wiel steekt u in enkele minuten de Nederrijn over. Aan de overzijde ligt Amerongen, met het kasteel en de bossen van de Utrechtse Heuvelrug. Een korte oversteek die telkens weer de moeite waard is.
 >
-> **Ouwehands Dierenpark**
+> **Ouwehands Dierenpark** [foto: reuzenpanda]
 > In Rhenen, aan de overzijde van de Nederrijn. Het hele jaar door open en ruim genoeg om er een dag door te brengen. Voor veel vakantiegangers met kinderen of kleinkinderen een van de redenen om voor deze omgeving te kiezen.
 >
 > **De uiterwaarden en de boomgaarden**
@@ -154,7 +154,7 @@ Kicker: Praktisch. Kop: Praktische informatie voor uw bezoek.
 > U kunt op het terrein parkeren; er is voldoende parkeergelegenheid.
 >
 > **DUUR**
-> Houdt u rekening met ongeveer twee uur.
+> Houdt u rekening met een afspraak van ongeveer twee uur.
 >
 > **WIE U ONTVANGT**
 > %BETROKKEN_MAKELAAR% is uw aanspreekpunt en beantwoordt al uw vragen. Geen standaardrondleiding, maar een persoonlijk gesprek: wij lopen samen over het terrein en u stelt onderweg uw vragen.
