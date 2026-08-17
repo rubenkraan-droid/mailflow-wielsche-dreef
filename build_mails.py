@@ -253,6 +253,32 @@ def subhead(text):
             + BRAND["primary"] + ';">' + text + '</p>\n')
 
 
+def bestemming(titel, tekst, thumb=None, alt=""):
+    """Een bestemming in de afspraak-sequence: kopje met tekst, optioneel met een
+    kleine vierkante foto ernaast. Stapelt onder 620px, net als quote_person().
+
+    Zonder thumb valt het terug op een kopje met alinea, zodat de mail ook klopt
+    zolang er nog geen beeld is. Zet je een thumb, dan moet thumb-<naam>.jpg naast
+    de mails staan; die maakt prep_images.py aan."""
+    if thumb is None:
+        return subhead(titel) + P + tekst + '</p>\n'
+    src = _CDN.replace("hero-", "thumb-") + thumb + ".jpg"
+    return ('   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+            'style="margin:0 0 18px 0;"><tr>'
+            # Geen .pimg hier: die is voor het quote-portret en zou de foto op
+            # mobiel 18px verder inspringen dan de tekst eronder.
+            '<td class="pcol" width="96" valign="top" style="padding:0 16px 8px 0; width:96px;">'
+            '<img src="' + src + '" alt="' + alt + '" width="96" '
+            'style="width:96px; max-width:96px; height:auto; display:block; border-radius:4px;">'
+            '</td>'
+            '<td class="pcol" valign="top" style="font-family:\'Inter\',Arial,sans-serif; '
+            'font-size:16px; line-height:26px; color:' + BRAND["text"] + ';">'
+            '<p style="margin:0 0 4px 0; font-weight:bold; color:' + BRAND["primary"] + ';">'
+            + titel + '</p>'
+            '<p style="margin:0;">' + tekst + '</p>'
+            '</td></tr></table>\n')
+
+
 def quote_person(text, portret, alt, caption):
     """Quote met een vierkant portret ernaast. Stapelt onder 620px."""
     src = _CDN.replace("hero-", "portret-") + portret + ".jpg"
@@ -615,14 +641,16 @@ AFSPRAAK_MAILS = [
   body=HI
    + P + 'U komt binnenkort naar Eck en Wiel. Uw bezoek gaat over de kavel en de opzet van het Landgoed, maar uiteindelijk brengt u uw tijd door in de omgeving eromheen. Daarom is dit een goed moment om ook die te leren kennen.</p>\n'
    + P + 'Een aantal suggesties die u eenvoudig aan uw bezoek verbindt:</p>\n'
-   + subhead('De veerpont naar Amerongen')
-   + P + 'Vanaf Eck en Wiel steekt u in enkele minuten de Nederrijn over. Aan de overzijde ligt Amerongen, met het kasteel en de bossen van de Utrechtse Heuvelrug. Een korte oversteek die telkens weer de moeite waard is.</p>\n'
-   + subhead('Het Eiland van Maurik')
-   + P + 'Recreatiegebied met water, op korte afstand van het Landgoed. Een goede gelegenheid om te zien wat de omgeving te bieden heeft wanneer u hier met kinderen of kleinkinderen verblijft.</p>\n'
-   + subhead('De uiterwaarden en de boomgaarden')
-   + P + 'De Betuwe is fietsland bij uitstek. De knooppuntenroutes langs de Nederrijn en door de fruitteelt lopen vlak langs het terrein. In het voorjaar staat alles in bloei, in het najaar kunt u bij de telers zelf terecht.</p>\n'
-   + subhead('Rhenen')
-   + P + 'Iets verder weg, maar met Ouwehands Dierenpark en de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.</p>\n'
+   # Zet per bestemming thumb="<naam>" zodra het beeld er is; prep_images.py
+   # maakt dan thumb-<naam>.jpg. Zonder thumb blijft het een kopje met alinea.
+   + bestemming('De veerpont naar Amerongen',
+       'Vanaf Eck en Wiel steekt u in enkele minuten de Nederrijn over. Aan de overzijde ligt Amerongen, met het kasteel en de bossen van de Utrechtse Heuvelrug. Een korte oversteek die telkens weer de moeite waard is.')
+   + bestemming('Het Eiland van Maurik',
+       'Recreatiegebied met water, op korte afstand van het Landgoed. Een goede gelegenheid om te zien wat de omgeving te bieden heeft wanneer u hier met kinderen of kleinkinderen verblijft.')
+   + bestemming('De uiterwaarden en de boomgaarden',
+       'De Betuwe is fietsland bij uitstek. De knooppuntenroutes langs de Nederrijn en door de fruitteelt lopen vlak langs het terrein. In het voorjaar staat alles in bloei, in het najaar kunt u bij de telers zelf terecht.')
+   + bestemming('Rhenen',
+       'Iets verder weg, maar met Ouwehands Dierenpark en de Grebbeberg een dagvullende bestemming wanneer u met het hele gezin komt.')
    + P + 'Valt uw afspraak in de ochtend, dan houdt u de rest van de dag over om rond te kijken.</p>\n'
    + SIGN_AFSPRAAK),
 

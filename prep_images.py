@@ -26,6 +26,13 @@ PORTRETTEN = {
     "eigenaren": ("bron/eigenaren.jpg", 0.0),
 }
 
+# Kleine vierkante beelden naast de bestemmingen in de afspraak-sequence.
+# naam -> (bron, verticale crop-positie 0..1)
+# Let op: de bestemmingen liggen buiten het Landgoed, dus de parkfotografie van
+# dewielschedreef.nl volstaat hier niet. Zet er alleen beeld in waarvoor Recravas
+# de rechten heeft; Ouwehands Dierenpark is bovendien een merk van derden.
+THUMBS = {}
+
 # naam -> (bron, verticale crop-positie 0..1, alt-tekst)
 # De bron is een pad op de site, of "bron/<bestand>" voor een lokaal beeld.
 SOURCES = {
@@ -88,16 +95,34 @@ def main():
         print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
 
 
+def _vierkant(path, ypos, side_out):
+    """Middencrop op vierkant, geschaald naar side_out. Bron mag lokaal of van de site."""
+    if path.startswith("bron/"):
+        im = Image.open(OUT / path).convert("RGB")
+    else:
+        req = urllib.request.Request(BASE + path, headers={"User-Agent": "Mozilla/5.0"})
+        im = Image.open(io.BytesIO(urllib.request.urlopen(req, timeout=60).read())).convert("RGB")
+    w, h = im.size
+    side = min(w, h)
+    left = (w - side) // 2
+    top = int((h - side) * ypos)
+    return im.crop((left, top, left + side, top + side)).resize((side_out, side_out), Image.LANCZOS)
+
+
 def portretten():
     """Vierkante portretten voor de quote-blokken, 360x360 (2x weergavemaat)."""
     for name, (path, ypos) in PORTRETTEN.items():
-        im = Image.open(OUT / path).convert("RGB")
-        w, h = im.size
-        side = min(w, h)
-        left = (w - side) // 2
-        top = int((h - side) * ypos)
-        im = im.crop((left, top, left + side, top + side)).resize((360, 360), Image.LANCZOS)
+        im = _vierkant(path, ypos, 360)
         f = OUT / ("portret-%s.jpg" % name)
+        im.save(f, "JPEG", quality=82, optimize=True, progressive=True)
+        print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
+
+
+def thumbs():
+    """Kleine vierkanten bij de bestemmingen, 192x192 (2x weergavemaat 96px)."""
+    for name, (path, ypos) in THUMBS.items():
+        im = _vierkant(path, ypos, 192)
+        f = OUT / ("thumb-%s.jpg" % name)
         im.save(f, "JPEG", quality=82, optimize=True, progressive=True)
         print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
 
@@ -105,3 +130,4 @@ def portretten():
 if __name__ == "__main__":
     main()
     portretten()
+    thumbs()
