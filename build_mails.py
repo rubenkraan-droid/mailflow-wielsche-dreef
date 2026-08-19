@@ -425,7 +425,7 @@ MAILS = [
   title_b='Van eerste gesprek tot de sleutel',
   preheader='Wat u kunt verwachten, stap voor stap',
   preheader_b='Geen verrassingen, wel duidelijkheid vooraf',
-  kicker='Bezwaar: de onbekendheid',
+  kicker='Het traject',
   h1='Weten waar u aan begint',
   body=HI
    + P + 'Veel mensen orienteren zich maandenlang op een vakantiewoning zonder ooit te vragen hoe zo&rsquo;n aankoop nu eigenlijk verloopt. Begrijpelijk, want niemand wil ergens instappen zonder het overzicht te hebben.</p>\n'
@@ -447,7 +447,7 @@ MAILS = [
   title_b='Wie regelt het beheer als u er niet bent?',
   preheader='Wie regelt wat, en wat betekent dat voor u',
   preheader_b='Onderhoud, VvE en verhuur op een rij',
-  kicker='Bezwaar: het onderhoud',
+  kicker='Beheer en onderhoud',
   h1='U hoeft geen tweede baan als beheerder',
   body=HI
    + P + 'Een terechte vraag bij recreatief vastgoed: wie doet het werk als u er niet bent?</p>\n'
@@ -462,7 +462,7 @@ MAILS = [
   title_b='Hoeveel weken houdt u zelf beschikbaar?',
   preheader='Eigen gebruik en verhuur naast elkaar',
   preheader_b='U bepaalt zelf wanneer u er bent',
-  kicker='Bezwaar: eigen gebruik',
+  kicker='Eigen gebruik',
   h1='Uw eigen plek, wanneer u wilt',
   body=HI
    + P + 'Veel mensen denken dat verhuur en eigen gebruik elkaar uitsluiten. Dat is hier niet zo.</p>\n'
@@ -476,7 +476,7 @@ MAILS = [
   title_b='Wat maakt deze ligging bijzonder?',
   preheader='Over de ligging aan de Nederrijn',
   preheader_b='Rust, natuur en bereikbaarheid in een',
-  kicker='Bezwaar: de ligging',
+  kicker='De ligging',
   h1='Rust en bereikbaarheid tegelijk',
   body=HI
    + P + 'De kust is populair, maar ook druk, duur en seizoensgebonden. De Betuwe biedt iets anders.</p>\n'
