@@ -435,6 +435,7 @@ MAILS = [
        'een rondleiding op het Landgoed, zodat u de ligging zelf ervaart,',
        'een keuze voor een type villa en een plek die daarbij past,',
        'de vastlegging bij de notaris, met heldere voorwaarden,',
+       'de keuze voor een meubelpakket of andere opties, zodat de villa verhuurklaar wordt opgeleverd,',
        'de oplevering, waarna verhuur en beheer worden overgenomen.',
    ])
    + P + 'Tussen die stappen zit geen druk. U bepaalt zelf het tempo, en bij elke stap weet u wat de volgende inhoudt.</p>\n'
