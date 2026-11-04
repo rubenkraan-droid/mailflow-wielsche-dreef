@@ -8,25 +8,28 @@ Mozi Flow / 3-7-30-methode. Zelfde opzet als de Frankrijk-mailflow van Maison Pu
 
 ## 1. Structuur
 
-15 mails over 35 dagen, elk met een A- en een B-variant (splittest uitsluitend op onderwerpregel).
+14 mails over 35 dagen, elk met een A- en een B-variant (splittest uitsluitend op onderwerpregel).
+
+Mail 09 is vervallen: die was een geschreven getuigenis van hetzelfde echtpaar dat nu in de
+video van mail 03 aan het woord komt. De nummering van de overige mails blijft staan, omdat
+`utm_content` in ActiveCampaign aan die nummers hangt. Er is dus geen mail 09 meer.
 
 | Fase | Dagen | Ritme | Inhoud |
 |---|---|---|---|
 | Fase 1 | 1, 2, 3 | dagelijks | beste bewijs |
 | Fase 2 | 5, 7, 9, 11, 13 | om de dag | een bezwaar per mail |
-| Fase 3 | 14, 17, 21, 24, 28, 31, 35 | 2x per week | afwisselend verhaal en inzicht |
+| Fase 3 | 17, 21, 24, 28, 31, 35 | 2x per week | afwisselend verhaal en inzicht |
 
 | # | Dag | Fase | Onderwerp A | Onderwerp B |
 |---|---|---|---|---|
 | 01 | 1 | 1 | Welkom bij Landgoed De Wielsche Dreef | Uw kennismaking met Landgoed De Wielsche Dreef |
 | 02 | 2 | 1 | Waarom Landgoed De Wielsche Dreef direct aanspreekt | Niet alleen een villa, maar een plek die iets met u doet |
-| 03 | 3 | 1 | Comfort, eigen gebruik en professioneel beheer | Een sterk concept begint met rust en duidelijkheid |
+| 03 | 3 | 1 | Waarom zij drie parken vergeleken en hier bleven | Hoenderloo, Twente of de Betuwe? |
 | 04 | 5 | 2 | Zullen we kennismaken op het Landgoed? | Ervaar zelf de sfeer, ligging en mogelijkheden |
 | 05 | 7 | 2 | Hoe verloopt zo'n traject eigenlijk? | Van eerste gesprek tot de sleutel |
 | 06 | 9 | 2 | Wat kost het onderhoud eigenlijk? | Wie regelt het beheer als u er niet bent? |
 | 07 | 11 | 2 | Kan ik er zelf ook gewoon verblijven? | Hoeveel weken houdt u zelf beschikbaar? |
 | 08 | 13 | 2 | Waarom de Betuwe, en niet de kust? | Wat maakt deze ligging bijzonder? |
-| 09 | 14 | 3 | Het verhaal van een eigenaar van het eerste uur | Waarom zij drie parken vergeleken en hier bleven |
 | 10 | 17 | 3 | Wat een VvE-constructie voor u betekent | Hoe het beheer op het Landgoed is geregeld |
 | 11 | 21 | 3 | Een dag op het Landgoed | Hoe een weekend hier eruitziet |
 | 12 | 24 | 3 | Hoe de verhuur via Landal werkt | Wie zorgt er voor de vakantiegangers? |
@@ -90,14 +93,20 @@ Elke CTA-link bevat:
 ?utm_source=email
 &utm_medium=mailflow
 &utm_campaign=wielsche-dreef
-&utm_content=wd-mail-01a          (t/m wd-mail-15b)
+&utm_content=wd-mail-01a          (t/m wd-mail-15b, zonder 09)
 &email={{contact.email}}
 &first_name={{contact.first_name}}
 &last_name={{contact.last_name}}
 &phone={{contact.phone}}
 ```
 
-Landingspagina: **https://invest.recraparcs.nl/wd-mailflow-lp-page** (live, in GHL). De lokale `gesprek.html` is de bronversie/preview en geeft de querystring door aan het ingebedde GHL-formulier.
+Landingspagina: **https://invest.recraparcs.nl/wd-mailflow-lp-page** (live, in GHL).
+
+Uitzondering: mail 03 wijst naar de videopagina **https://invest.recraparcs.nl/videopagina-page**.
+Zowel de videoafbeelding als de knop linken daarheen, met dezelfde utm-opzet en prefill.
+De still met afspeelknop (`video-eigenaren.jpg`) wordt gemaakt door `prep_images.py` en via
+GitHub Pages gehost; e-mailclients spelen geen video af, dus het is een afbeelding met een link.
+ De lokale `gesprek.html` is de bronversie/preview en geeft de querystring door aan het ingebedde GHL-formulier.
 
 GHL-formulier `WD - Gesprek - Mail`, form-ID `gO63rpRMVuuC5mc2uFXc`, is ingebouwd in `gesprek.html`.
 

@@ -69,6 +69,8 @@ BRAND = dict(
     email_href="mailto:willem@recravas.nl",
     contact_party="Recravas",
     cta_url="https://invest.recraparcs.nl/wd-mailflow-lp-page",
+    # Aparte landingspagina met de video van de eigenaren (mail 03).
+    video_url="https://invest.recraparcs.nl/videopagina-page",
     cta_prefill=("email=" + M["email"] + "&first_name=" + M["first_name"]
                  + "&last_name=" + M["last_name"] + "&phone=" + M["phone"]),
     campaign="wielsche-dreef",
@@ -117,15 +119,15 @@ IMG = {
 # Een foto per mail, in het formaat van de Canva-header (brede liggende crop).
 # Elke mail een andere foto; met 10 beelden en 15 mails rouleert een deel.
 HERO = {
+    # Mail 03 staat er bewust niet in: die heeft geen hero, de
+    # videoafbeelding in de body is daar het beeld.
     1:  "villa_avond",        # signatuurbeeld uit het Canva-ontwerp
     2:  "wandelen",           # mensen in de bloemenweide, warm openingsbeeld
-    3:  "slaapkamer",         # comfort en afwerking
     4:  "villa_parasol",      # uitnodigend, kom langs
     5:  "villa_vijver",       # rustig beeld bij het aankooptraject
     6:  "villa_riet",         # verzorgd park
     7:  "fietsen",            # eigen gebruik
     8:  "betuwe",             # de streek
-    9:  "terras",             # verhaal van een eigenaar
     10: "keuken",             # inrichting en kwaliteit
     11: "woonkamer",          # een dag op het Landgoed
     12: "fietsers_najaar",    # vakantiegangers op het Landgoed
@@ -216,10 +218,19 @@ TEMPLATE = """<!DOCTYPE html>
 </body></html>"""
 
 
-def cta(label, variant):
-    url = (BRAND["cta_url"] + "?utm_source=email&utm_medium=mailflow"
-           + "&utm_campaign=" + BRAND["campaign"]
-           + "&utm_content=" + variant + "&" + BRAND["cta_prefill"])
+def tracked(url, variant):
+    """Plakt de utm-parameters en de prefill achter een bestemmings-URL.
+    render() vervangt de -a aan het eind van utm_content door -b voor de
+    B-variant, dus elke link die hier langskomt splitst vanzelf mee."""
+    return (url + "?utm_source=email&utm_medium=mailflow"
+            + "&utm_campaign=" + BRAND["campaign"]
+            + "&utm_content=" + variant + "&" + BRAND["cta_prefill"])
+
+
+def cta(label, variant, url=None):
+    """De knop. Zonder url gaat hij naar de standaard landingspagina; met url
+    naar een andere pagina, met dezelfde tracking en prefill."""
+    url = tracked(url or BRAND["cta_url"], variant)
     return ('   <table role="presentation" cellpadding="0" cellspacing="0" style="margin:6px 0 20px 0;">'
             '<tr><td align="center" style="border-radius:4px; background-color:' + BRAND["accent"] + ';">'
             '<a class="btn" href="' + url + '" target="_blank" '
@@ -277,6 +288,19 @@ def bestemming(titel, tekst, thumb=None, alt=""):
             + titel + '</p>'
             '<p style="margin:0;">' + tekst + '</p>'
             '</td></tr></table>\n')
+
+
+def video_thumb(name, alt, variant, url):
+    """Klikbare videoafbeelding. De still met afspeelknop wordt gemaakt door
+    prep_images.py; e-mailclients spelen zelf geen video af, dus dit is een
+    gewone afbeelding met een link eromheen naar dezelfde pagina als de knop."""
+    src = _CDN.replace("hero-", "video-") + name + ".jpg"
+    return ('   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" '
+            'style="margin:4px 0 20px 0;"><tr><td style="line-height:0; font-size:0;">'
+            '<a href="' + tracked(url, variant) + '" target="_blank">'
+            '<img src="' + src + '" alt="' + alt + '" width="568" '
+            'style="width:100%; max-width:568px; height:auto; display:block; border-radius:4px;">'
+            '</a></td></tr></table>\n')
 
 
 def quote_person(text, portret, alt, caption):
@@ -377,26 +401,22 @@ MAILS = [
    + cta('Plan uw afspraak', 'wd-mail-02a')
    + SIGN),
 
+ # Geen hero: de videoafbeelding is hier het beeld dat de klik moet krijgen.
+ # Een hero erboven zou ermee concurreren en de mail onnodig lang maken.
  dict(n=3, day=3, phase=1,
-  title='Comfort, eigen gebruik en professioneel beheer',
-  title_b='Een sterk concept begint met rust en duidelijkheid',
-  preheader='Een sterk concept begint met rust, kwaliteit en duidelijkheid',
-  preheader_b='De privileges die alleen eigenaren krijgen',
-  kicker='Vertrouwen',
-  h1='Gevoel en overzicht gaan hier samen',
+  title='Waarom zij drie parken vergeleken en hier bleven',
+  title_b='Hoenderloo, Twente of de Betuwe?',
+  preheader='Een eigenaar vertelt in een minuut wat de doorslag gaf',
+  preheader_b='Bekijk hun verhaal in een minuut',
+  kicker='Eigenaren aan het woord',
+  h1='Waarom zij drie parken vergeleken en hier bleven',
   body=HI
-   + P + 'Bij interesse in recreatief vastgoed gaan gevoel en overzicht vrijwel altijd samen.</p>\n'
-   + P + 'Aan de ene kant is er de aantrekkingskracht van een plek: rust, natuur, comfort en de gedachte aan een eigen vakantievilla waar u graag verblijft. Aan de andere kant wilt u weten of het geheel goed georganiseerd is. Juist daarin onderscheidt Landgoed De Wielsche Dreef zich.</p>\n'
-   + P + 'Binnen het concept wordt veel aandacht besteed aan privileges die alleen gelden voor u als eigenaar:</p>\n'
-   + bullets([
-       'een persoonlijke Landgoed-adviseur en ontzorgservice,',
-       'kwaliteit en luxe op maat,',
-       'tijd voor uzelf, familie, vrienden en relaties,',
-       'comfort in persoonlijk gebruik,',
-       'een professioneel georganiseerd verhuurconcept.',
-   ])
-   + P + 'Daarmee is het Landgoed niet alleen interessant voor later, maar juist ook voor het leven van nu.</p>\n'
-   + cta('Plan een persoonlijke kennismaking', 'wd-mail-03a')
+   + P + 'Voordat dit echtpaar hier een villa kocht, bekeken zij parken bij Hoenderloo, in Twente en in Belgie. Het werd de Betuwe. In deze video van een minuut vertellen zij zelf waarom.</p>\n'
+   + video_thumb('eigenaren', 'Eigenaren vertellen waarom zij voor het Landgoed kozen',
+                 'wd-mail-03a', BRAND["video_url"])
+   + quote('Ik vond het park er eigenlijk heel erg uitspringen.')
+   + P + 'De doorslag gaf de uitstraling. De bouwstijl van de andere parken sprak hen niet aan, die van de villa&rsquo;s hier wel.</p>\n'
+   + cta('Bekijk hun verhaal', 'wd-mail-03a', BRAND["video_url"])
    + SIGN),
 
  dict(n=4, day=5, phase=2,
@@ -485,22 +505,6 @@ MAILS = [
    + P + 'Tegelijk bent u vanuit de Randstad, Brabant en Gelderland binnen een uur ter plaatse. Dat maakt het verschil tussen een villa waar u twee keer per jaar komt, en een plek waar u ook een doordeweeks moment naartoe rijdt.</p>\n'
    + quote('We fietsen regelmatig, lekker de omgeving verkennen. Het voelt als een stukje thuiskomen met familie en vrienden.')
    + cta('Ontdek de omgeving', 'wd-mail-08a')
-   + SIGN),
-
- dict(n=9, day=14, phase=3,
-  title='Het verhaal van een eigenaar van het eerste uur',
-  title_b='Waarom zij drie parken vergeleken en hier bleven',
-  preheader='Hoe eigenaren tot hun keuze kwamen',
-  preheader_b='Van twijfel naar zekerheid, in hun eigen woorden',
-  kicker='Verhaal',
-  h1='Wat eigenaren over het Landgoed vertellen',
-  body=HI
-   + P + 'De meest eerlijke beoordeling van een plek komt niet van de verkoper, maar van de mensen die er zijn.</p>\n'
-   + P + 'Een echtpaar dat hier nu een woning heeft, dacht aanvankelijk dat het er voor hen niet in zat. Ze besloten de mogelijkheden toch te onderzoeken.</p>\n'
-   + quote('We vonden dit park er echt uitspringen. We hebben ook andere parken bekeken, in Nederland en Belgie, maar die spraken ons niet aan. Hier hebben de woningen met hun schuine daken echt een mooie, warme uitstraling. Het voelt gezellig en bijzonder.')
-   + P + 'Wat in vrijwel elk gesprek terugkomt, is dat de keuze niet in een keer viel. Mensen orienteren zich, vergelijken, bezoeken meerdere parken en komen dan terug. Niet vanwege een aanbieding, maar omdat de sfeer bleef hangen.</p>\n'
-   + P + 'Dat is ook precies waarom wij geen haast maken. Een goede keuze heeft tijd nodig.</p>\n'
-   + cta('Plan een bezoek', 'wd-mail-09a')
    + SIGN),
 
  dict(n=10, day=17, phase=3,
@@ -737,7 +741,10 @@ def render(mail, variant):
         "KICKER": mail["kicker"],
         "H1": mail["h1"],
         "BODY": mail["body"],
-        "HERO_HTML": hero_html(mail.get("hero") or HERO[mail["n"]]),
+        # Een mail zonder entry in HERO en zonder eigen hero krijgt geen foto
+        # tussen de logoregel en de kop. Mail 03 gebruikt dat.
+        "HERO_HTML": (lambda k: hero_html(k) if k else "")(
+            mail.get("hero") or HERO.get(mail["n"])),
         "STRIPE_HTML": stripe_html(),
         "KICKER_COLOR": BRAND["kicker_color"],
         "BG_IMG": BRAND["bg_img"],

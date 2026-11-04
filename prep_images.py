@@ -12,7 +12,7 @@ import io
 import pathlib
 import urllib.request
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageEnhance, ImageFont
 
 OUT = pathlib.Path(__file__).parent
 BASE = "https://dewielschedreef.nl/wp-content/uploads/"
@@ -20,6 +20,20 @@ BASE = "https://dewielschedreef.nl/wp-content/uploads/"
 # ruimer dan de oorspronkelijke 2,29:1, zodat staande elementen zoals de
 # daknok van de avondfoto niet wegvallen.
 W, H = 1136, 560
+
+# Videostills: 1136x639 is twee keer de weergavemaat 568x320 (16:9).
+VW, VH = 1136, 639
+ACCENT_RGB = (196, 83, 70)          # #c45346, dezelfde accentkleur als de knop
+LABEL_FONT = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
+
+# naam -> (bron, verticale crop-positie 0..1, label linksonder of "")
+VIDEO_STILLS = {
+    "eigenaren": (
+        "https://assets.cdn.filesafe.space/ogbyRxgEx1wtnWdZeDwe/media/6aeb0cc9dfd4785f0849b0b0.jpg",
+        0.5,
+        "Bekijk de video, 1 minuut",
+    ),
+}
 
 # Portretten bij eigenaarsquotes: naam -> (bron, verticale crop-positie 0..1)
 PORTRETTEN = {
@@ -108,6 +122,77 @@ def main():
         print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
 
 
+def _laad(path):
+    """Bron mag een lokaal pad in bron/ zijn, een pad op dewielschedreef.nl,
+    of een volledige URL."""
+    if path.startswith("bron/"):
+        return Image.open(OUT / path).convert("RGB")
+    url = path if path.startswith("http") else BASE + path
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    return Image.open(io.BytesIO(urllib.request.urlopen(req, timeout=60).read())).convert("RGB")
+
+
+def videostills():
+    """Stills met een afspeelknop erop, voor een klikbare videoafbeelding in
+    de mail. 1136x639 is twee keer de weergavemaat 568x320 (16:9).
+
+    E-mailclients spelen geen video af, dus dit is een gewone afbeelding met
+    een link eronder. De knop moet er daarom uitzien als een afspeelknop
+    zonder er een te zijn.
+    """
+    for name, (bron, ypos, label) in VIDEO_STILLS.items():
+        im = _laad(bron)
+        w, h = im.size
+        doel = VW / VH
+        if w / h > doel:
+            nw = int(h * doel)
+            im = im.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))
+        else:
+            nh = int(w / doel)
+            top = int((h - nh) * ypos)
+            im = im.crop((0, top, w, top + nh))
+        im = im.resize((VW, VH), Image.LANCZOS)
+        # Iets temperen zodat het wit van de knop en het label blijft staan.
+        im = ImageEnhance.Brightness(im).enhance(0.88)
+
+        # Donkere verloop onderaan, alleen voor de leesbaarheid van het label.
+        if label:
+            verloop = Image.new("L", (1, VH), 0)
+            for y in range(VH):
+                start = int(VH * 0.55)
+                verloop.putpixel((0, y), 0 if y < start
+                                 else int(165 * (y - start) / (VH - start)))
+            im.paste(Image.new("RGB", (VW, VH), (0, 0, 0)),
+                     (0, 0), verloop.resize((VW, VH)))
+
+        # De knop op vier keer de maat tekenen en terugschalen, anders zijn de
+        # randen van de cirkel en de driehoek getrapt.
+        s = 4
+        laag = Image.new("RGBA", (VW * s, VH * s), (0, 0, 0, 0))
+        d = ImageDraw.Draw(laag)
+        cx, cy, r = VW * s // 2, VH * s // 2, 64 * s
+        d.ellipse((cx - r - 5 * s, cy - r - 5 * s, cx + r + 5 * s, cy + r + 5 * s),
+                  fill=(255, 255, 255, 60))
+        d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=ACCENT_RGB + (255,))
+        d.polygon([(cx - int(0.26 * r), cy - int(0.42 * r)),
+                   (cx - int(0.26 * r), cy + int(0.42 * r)),
+                   (cx + int(0.48 * r), cy)], fill=(255, 255, 255, 255))
+        laag = laag.resize((VW, VH), Image.LANCZOS)
+        im = Image.alpha_composite(im.convert("RGBA"), laag).convert("RGB")
+
+        if label:
+            d2 = ImageDraw.Draw(im)
+            try:
+                font = ImageFont.truetype(LABEL_FONT, 30)
+            except OSError:
+                font = ImageFont.load_default()
+            d2.text((40, VH - 62), label, font=font, fill=(255, 255, 255))
+
+        f = OUT / ("video-%s.jpg" % name)
+        im.save(f, "JPEG", quality=82, optimize=True, progressive=True)
+        print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
+
+
 def _vierkant(path, ypos, side_out):
     """Middencrop op vierkant, geschaald naar side_out. Bron mag een lokaal pad
     in bron/ zijn, een pad op dewielschedreef.nl, of een volledige URL."""
@@ -146,3 +231,4 @@ if __name__ == "__main__":
     main()
     portretten()
     thumbs()
+    videostills()
