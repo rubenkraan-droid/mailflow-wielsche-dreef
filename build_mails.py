@@ -916,22 +916,59 @@ h1{font-family:'Playfair Display',serif;font-size:34px;color:#1f524d;font-weight
 """ + phases + build_afspraak_section() + """
 </div>
 <script>
+// De HTML wordt vooraf opgehaald, zodat het schrijven naar het klembord
+// binnen het klikmoment zelf gebeurt. Doe je dat pas na een fetch, dan is de
+// toestemming die de klik geeft alweer verlopen (Safari weigert dan).
+// execCommand is de terugval voor browsers zonder clipboard-API.
 document.querySelectorAll('.copy').forEach(function(btn){
+  var cache = null;
+  var bezig = fetch(btn.dataset.file, {cache: 'no-store'})
+    .then(function(r){ return r.ok ? r.text() : null; })
+    .then(function(t){ cache = t; return t; })
+    .catch(function(){ return null; });
+
+  function melding(gelukt){
+    var label = btn.dataset.label || btn.textContent;
+    btn.dataset.label = label;
+    btn.textContent = gelukt ? 'Gekopieerd' : 'Mislukt';
+    btn.classList.add(gelukt ? 'ok' : 'err');
+    setTimeout(function(){
+      btn.textContent = label;
+      btn.classList.remove('ok', 'err');
+    }, 1800);
+  }
+
+  function viaTextarea(tekst){
+    var ta = document.createElement('textarea');
+    ta.value = tekst;
+    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;width:1px;height:1px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, tekst.length);
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+
+  function schrijf(tekst){
+    if (!tekst) { melding(false); return; }
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(tekst).then(
+        function(){ melding(true); },
+        function(){ melding(viaTextarea(tekst)); }
+      );
+    } else {
+      melding(viaTextarea(tekst));
+    }
+  }
+
   btn.addEventListener('click', function(){
-    var label = btn.textContent;
-    fetch(btn.dataset.file, {cache: 'no-store'})
-      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
-      .then(function(html){ return navigator.clipboard.writeText(html); })
-      .then(function(){
-        btn.textContent = 'Gekopieerd';
-        btn.classList.add('ok');
-        setTimeout(function(){ btn.textContent = label; btn.classList.remove('ok'); }, 1800);
-      })
-      .catch(function(){
-        btn.textContent = 'Mislukt';
-        btn.classList.add('err');
-        setTimeout(function(){ btn.textContent = label; btn.classList.remove('err'); }, 1800);
-      });
+    if (cache) { schrijf(cache); return; }
+    // Nog niet binnen: alsnog ophalen. Lukt het klembord dan niet, dan vangt
+    // de textarea het op.
+    bezig.then(function(t){ schrijf(t || cache); });
   });
 });
 </script>
