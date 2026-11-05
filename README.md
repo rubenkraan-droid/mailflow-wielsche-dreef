@@ -12,8 +12,14 @@ Mozi Flow / 3-7-30-methode. Zelfde opzet als de Frankrijk-mailflow van Maison Pu
 
 Mail 09 is herschreven. De oude mail 09 was een geschreven getuigenis van hetzelfde echtpaar
 dat nu in de video van mail 03 aan het woord komt. Op dag 14 staat nu een nieuwe mail over de
-aanname dat een eigen villa er niet in zit. In ActiveCampaign draait op dat moment nog de oude
-mail 09; die moet door deze versie vervangen worden.
+aanname dat een eigen villa er niet in zit. Deze versie staat sinds 5 november 2026 ook in
+ActiveCampaign.
+
+Mails 01 tot en met 09 staan in ActiveCampaign, mails 10 tot en met 15 nog niet. Bij de mails
+02, 04, 07 en 09 draagt elke variant zijn eigen HTML, dus ook zijn eigen `utm_content` (`...a`
+respectievelijk `...b`). Bij 01, 03, 05, 06 en 08 bevat de B-variant nog de HTML van de
+A-variant; daar is de splittest alleen in ActiveCampaign zelf meetbaar en niet verderop in de
+attributie.
 
 | Fase | Dagen | Ritme | Inhoud |
 |---|---|---|---|
