@@ -16,8 +16,8 @@ aanname dat een eigen villa er niet in zit. Deze versie staat sinds 5 november 2
 ActiveCampaign.
 
 Mails 01 tot en met 09 staan in ActiveCampaign, mails 10 tot en met 15 nog niet. Bij de mails
-02, 04, 07 en 09 draagt elke variant zijn eigen HTML, dus ook zijn eigen `utm_content` (`...a`
-respectievelijk `...b`). Bij 01, 03, 05, 06 en 08 bevat de B-variant nog de HTML van de
+02, 04, 06, 07 en 09 draagt elke variant zijn eigen HTML, dus ook zijn eigen `utm_content`
+(`...a` respectievelijk `...b`). Bij 01, 03, 05 en 08 bevat de B-variant nog de HTML van de
 A-variant; daar is de splittest alleen in ActiveCampaign zelf meetbaar en niet verderop in de
 attributie.
 
