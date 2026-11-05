@@ -128,6 +128,7 @@ HERO = {
     6:  "villa_riet",         # verzorgd park
     7:  "fietsen",            # eigen gebruik
     8:  "betuwe",             # de streek
+    9:  "water_villas",       # hun woning ligt direct aan het water
     10: "keuken",             # inrichting en kwaliteit
     11: "woonkamer",          # een dag op het Landgoed
     12: "fietsers_najaar",    # vakantiegangers op het Landgoed
@@ -505,6 +506,23 @@ MAILS = [
    + P + 'Tegelijk bent u vanuit de Randstad, Brabant en Gelderland binnen een uur ter plaatse. Dat maakt het verschil tussen een villa waar u twee keer per jaar komt, en een plek waar u ook een doordeweeks moment naartoe rijdt.</p>\n'
    + quote('We fietsen regelmatig, lekker de omgeving verkennen. Het voelt als een stukje thuiskomen met familie en vrienden.')
    + cta('Ontdek de omgeving', 'wd-mail-08a')
+   + SIGN),
+
+ dict(n=9, day=14, phase=3,
+  title='Zij dachten eerst dat het niets voor hen was',
+  title_b='Wat als u denkt dat het er voor u niet in zit?',
+  preheader='Een vraag stellen is nog geen beslissing nemen',
+  preheader_b='Hoe de meeste eigenaren hier begonnen',
+  kicker='Verhaal',
+  h1='Eerst dachten zij dat het niet kon',
+  body=HI
+   + P + 'Er is iets dat wij regelmatig horen van mensen die hier nu een villa hebben. Toen zij het Landgoed voor het eerst zagen, raakte de plek hen meteen. En tegelijk gingen zij ervan uit dat een eigen recreatievilla er voor hen niet in zat.</p>\n'
+   + P + 'Een van die eigenaren besloot het toch uit te zoeken. Eerst een gesprek, daarna een rondleiding, en de vragen die zij eigenlijk niet durfden te stellen. Inmiddels hebben zij een vierpersoonswoning, centraal op het Landgoed en direct aan het water.</p>\n'
+   + quote('Vanaf het eerste moment heeft het ons niet meer losgelaten. En ook de zonsopgang is hier prachtig.')
+   + P + 'Wat dat verhaal volgens ons vooral laat zien: vooraf weet bijna niemand wat er in zijn eigen situatie mogelijk is. Dat is ook niet iets om zelf uit te zoeken. Het verschilt per type villa, per positie op het Landgoed en per manier waarop u het wilt gebruiken.</p>\n'
+   + P + 'Daarom nodigen wij u uit om het gewoon te vragen. Een vraag stellen is nog geen beslissing nemen. U krijgt antwoord op wat u wilt weten, en daarna bepaalt u zelf of een vervolg u aanspreekt.</p>\n'
+   + P + 'Liever eerst even bellen? U bereikt ons op <strong>' + BRAND["phone"] + '</strong>, of mail naar <strong>' + BRAND["email"] + '</strong>.</p>\n'
+   + cta('Stel uw vraag', 'wd-mail-09a')
    + SIGN),
 
  dict(n=10, day=17, phase=3,

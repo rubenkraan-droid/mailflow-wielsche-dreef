@@ -8,17 +8,18 @@ Mozi Flow / 3-7-30-methode. Zelfde opzet als de Frankrijk-mailflow van Maison Pu
 
 ## 1. Structuur
 
-14 mails over 35 dagen, elk met een A- en een B-variant (splittest uitsluitend op onderwerpregel).
+15 mails over 35 dagen, elk met een A- en een B-variant (splittest uitsluitend op onderwerpregel).
 
-Mail 09 is vervallen: die was een geschreven getuigenis van hetzelfde echtpaar dat nu in de
-video van mail 03 aan het woord komt. De nummering van de overige mails blijft staan, omdat
-`utm_content` in ActiveCampaign aan die nummers hangt. Er is dus geen mail 09 meer.
+Mail 09 is herschreven. De oude mail 09 was een geschreven getuigenis van hetzelfde echtpaar
+dat nu in de video van mail 03 aan het woord komt. Op dag 14 staat nu een nieuwe mail over de
+aanname dat een eigen villa er niet in zit. In ActiveCampaign draait op dat moment nog de oude
+mail 09; die moet door deze versie vervangen worden.
 
 | Fase | Dagen | Ritme | Inhoud |
 |---|---|---|---|
 | Fase 1 | 1, 2, 3 | dagelijks | beste bewijs |
 | Fase 2 | 5, 7, 9, 11, 13 | om de dag | een bezwaar per mail |
-| Fase 3 | 17, 21, 24, 28, 31, 35 | 2x per week | afwisselend verhaal en inzicht |
+| Fase 3 | 14, 17, 21, 24, 28, 31, 35 | 2x per week | afwisselend verhaal en inzicht |
 
 | # | Dag | Fase | Onderwerp A | Onderwerp B |
 |---|---|---|---|---|
@@ -30,6 +31,7 @@ video van mail 03 aan het woord komt. De nummering van de overige mails blijft s
 | 06 | 9 | 2 | Wat kost het onderhoud eigenlijk? | Wie regelt het beheer als u er niet bent? |
 | 07 | 11 | 2 | Kan ik er zelf ook gewoon verblijven? | Hoeveel weken houdt u zelf beschikbaar? |
 | 08 | 13 | 2 | Waarom de Betuwe, en niet de kust? | Wat maakt deze ligging bijzonder? |
+| 09 | 14 | 3 | Zij dachten eerst dat het niets voor hen was | Wat als u denkt dat het er voor u niet in zit? |
 | 10 | 17 | 3 | Wat een VvE-constructie voor u betekent | Hoe het beheer op het Landgoed is geregeld |
 | 11 | 21 | 3 | Een dag op het Landgoed | Hoe een weekend hier eruitziet |
 | 12 | 24 | 3 | Hoe de verhuur via Landal werkt | Wie zorgt er voor de vakantiegangers? |
@@ -42,7 +44,7 @@ video van mail 03 aan het woord komt. De nummering van de overige mails blijft s
 ## 2. Build-script
 
 ```bash
-cd ~/Documents/Recraparcs/Wielsche\ Dreef/Mailflow-WD-HTML/
+cd ~/Documents/Recraparcs/02\ Parken\ Nederland/Wielsche\ Dreef/Mailflows/Mailflow-WD-HTML/
 python3 build_mails.py
 ```
 
