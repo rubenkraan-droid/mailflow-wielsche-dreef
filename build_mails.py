@@ -406,17 +406,17 @@ MAILS = [
  # Een hero erboven zou ermee concurreren en de mail onnodig lang maken.
  dict(n=3, day=3, phase=1,
   title='Waarom zij drie parken vergeleken en hier bleven',
-  title_b='Nederland, Belgi&euml; en toch de Betuwe',
+  title_b='Hoenderloo, Twente of de Betuwe?',
   preheader='Een eigenaar vertelt in een minuut wat de doorslag gaf',
   preheader_b='Bekijk hun verhaal in een minuut',
   kicker='Eigenaren aan het woord',
   h1='Waarom zij drie parken vergeleken en hier bleven',
   body=HI
-   + P + 'Misschien vergelijkt u op dit moment zelf nog parken. Dat deed dit echtpaar ook. Zij bekeken andere parken in Nederland en in Belgi&euml; voordat het de Betuwe werd. In deze video van een minuut vertellen zij zelf wat de doorslag gaf.</p>\n'
+   + P + 'Misschien vergelijkt u op dit moment zelf nog parken. Dat deed dit echtpaar ook. Zij bekeken parken bij Hoenderloo, in Twente en in Belgi&euml; voordat het de Betuwe werd. In deze video van een minuut vertellen zij zelf wat de doorslag gaf.</p>\n'
    + video_thumb('eigenaren', 'Eigenaren vertellen waarom zij voor het Landgoed kozen',
                  'wd-mail-03a', BRAND["video_url"])
-   + quote('Vanaf het eerste moment heeft het ons niet meer losgelaten.')
-   + P + 'Wat hen over de streep trok was de uitstraling. De woningen hier hebben met hun schuine daken een warme uitstraling, en dat voelt volgens hen gezellig en bijzonder.</p>\n'
+   + quote('Vanaf het eerste moment dat jij het zag, heeft het ons niet meer losgelaten.')
+   + P + 'Wat hen over de streep trok was de uitstraling van de woningen. &ldquo;Die schuine daken zijn echt heel mooi&rdquo;, zeggen zij er zelf over.</p>\n'
    + P + 'Liever eerst even bellen? U bereikt ons op <strong>' + BRAND["phone"] + '</strong>, of mail naar <strong>' + BRAND["email"] + '</strong>.</p>\n'
    + cta('Bekijk hun verhaal', 'wd-mail-03a', BRAND["video_url"])
    + SIGN),

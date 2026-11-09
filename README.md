@@ -31,7 +31,7 @@ attributie.
 |---|---|---|---|---|
 | 01 | 1 | 1 | Welkom bij Landgoed De Wielsche Dreef | Uw kennismaking met Landgoed De Wielsche Dreef |
 | 02 | 2 | 1 | Waarom Landgoed De Wielsche Dreef direct aanspreekt | Niet alleen een villa, maar een plek die iets met u doet |
-| 03 | 3 | 1 | Waarom zij drie parken vergeleken en hier bleven | Nederland, België en toch de Betuwe |
+| 03 | 3 | 1 | Waarom zij drie parken vergeleken en hier bleven | Hoenderloo, Twente of de Betuwe? |
 | 04 | 5 | 2 | Zullen we kennismaken op het Landgoed? | Ervaar zelf de sfeer, ligging en mogelijkheden |
 | 05 | 7 | 2 | Hoe verloopt zo'n traject eigenlijk? | Van eerste gesprek tot de sleutel |
 | 06 | 9 | 2 | Wat kost het onderhoud eigenlijk? | Wie regelt het beheer als u er niet bent? |
