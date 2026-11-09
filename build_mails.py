@@ -406,17 +406,18 @@ MAILS = [
  # Een hero erboven zou ermee concurreren en de mail onnodig lang maken.
  dict(n=3, day=3, phase=1,
   title='Waarom zij drie parken vergeleken en hier bleven',
-  title_b='Hoenderloo, Twente of de Betuwe?',
+  title_b='Nederland, Belgi&euml; en toch de Betuwe',
   preheader='Een eigenaar vertelt in een minuut wat de doorslag gaf',
   preheader_b='Bekijk hun verhaal in een minuut',
   kicker='Eigenaren aan het woord',
   h1='Waarom zij drie parken vergeleken en hier bleven',
   body=HI
-   + P + 'Voordat dit echtpaar hier een villa kocht, bekeken zij parken bij Hoenderloo, in Twente en in Belgie. Het werd de Betuwe. In deze video van een minuut vertellen zij zelf waarom.</p>\n'
+   + P + 'Misschien vergelijkt u op dit moment zelf nog parken. Dat deed dit echtpaar ook. Zij bekeken andere parken in Nederland en in Belgi&euml; voordat het de Betuwe werd. In deze video van een minuut vertellen zij zelf wat de doorslag gaf.</p>\n'
    + video_thumb('eigenaren', 'Eigenaren vertellen waarom zij voor het Landgoed kozen',
                  'wd-mail-03a', BRAND["video_url"])
-   + quote('Ik vond het park er eigenlijk heel erg uitspringen.')
-   + P + 'De doorslag gaf de uitstraling. De bouwstijl van de andere parken sprak hen niet aan, die van de villa&rsquo;s hier wel.</p>\n'
+   + quote('Vanaf het eerste moment heeft het ons niet meer losgelaten.')
+   + P + 'Wat hen over de streep trok was de uitstraling. De woningen hier hebben met hun schuine daken een warme uitstraling, en dat voelt volgens hen gezellig en bijzonder.</p>\n'
+   + P + 'Liever eerst even bellen? U bereikt ons op <strong>' + BRAND["phone"] + '</strong>, of mail naar <strong>' + BRAND["email"] + '</strong>.</p>\n'
    + cta('Bekijk hun verhaal', 'wd-mail-03a', BRAND["video_url"])
    + SIGN),
 
@@ -520,7 +521,7 @@ MAILS = [
   body=HI
    + P + 'Er is iets dat wij regelmatig horen van mensen die hier nu een villa hebben. Toen zij het Landgoed voor het eerst zagen, raakte de plek hen meteen. En tegelijk gingen zij ervan uit dat een eigen recreatievilla er voor hen niet in zat.</p>\n'
    + P + 'Een van die eigenaren besloot het toch uit te zoeken. Eerst een gesprek, daarna een rondleiding, en de vragen die zij eigenlijk niet durfden te stellen. Inmiddels hebben zij een vierpersoonswoning, centraal op het Landgoed en direct aan het water.</p>\n'
-   + quote('Vanaf het eerste moment heeft het ons niet meer losgelaten. En ook de zonsopgang is hier prachtig.')
+   + quote('Vanmorgen deden we de gordijnen open en zwom er een meerkoet met kleintjes voorbij. Dat is toch een cadeautje? Zo begin je je dag.')
    + P + 'Wat dat verhaal volgens ons vooral laat zien: vooraf weet bijna niemand wat er in zijn eigen situatie mogelijk is. Dat is ook niet iets om zelf uit te zoeken. Het verschilt per type villa, per positie op het Landgoed en per manier waarop u het wilt gebruiken.</p>\n'
    + P + 'Daarom nodigen wij u uit om het gewoon te vragen. Een vraag stellen is nog geen beslissing nemen. U krijgt antwoord op wat u wilt weten, en daarna bepaalt u zelf of een vervolg u aanspreekt.</p>\n'
    + P + 'Liever eerst even bellen? U bereikt ons op <strong>' + BRAND["phone"] + '</strong>, of mail naar <strong>' + BRAND["email"] + '</strong>.</p>\n'
