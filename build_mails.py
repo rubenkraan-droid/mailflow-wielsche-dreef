@@ -460,8 +460,10 @@ MAILS = [
        'de oplevering, waarna verhuur en beheer worden overgenomen.',
    ])
    + P + 'Tussen die stappen zit geen druk. U bepaalt zelf het tempo, en bij elke stap weet u wat de volgende inhoudt.</p>\n'
-   + P + 'De eerste stap kost u niet meer dan een gesprek. Daarin hoort u wat er mogelijk is, en wij horen of dit uberhaupt bij u past.</p>\n'
-   + cta('Plan een kennismaking', 'wd-mail-05a')
+   + P + 'De eerste stap is kleiner dan hij klinkt. U hoeft niet meteen naar het Landgoed te komen. Het eerste contact kan ook telefonisch of online, net wat u prettig vindt, en gaat over uw situatie en uw vragen.</p>\n'
+   + P + 'U legt daarmee niets vast. U geeft alleen door wanneer het u uitkomt, dan nemen wij contact met u op.</p>\n'
+   + P + 'Liever meteen iemand spreken? Bel <strong>' + BRAND["phone"] + '</strong> of mail naar <strong>' + BRAND["email"] + '</strong>.</p>\n'
+   + cta('Laat weten wanneer het u uitkomt', 'wd-mail-05a')
    + SIGN),
 
  dict(n=6, day=9, phase=2,
