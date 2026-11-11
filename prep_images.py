@@ -39,7 +39,7 @@ VIDEO_STILLS = {
 PORTRETTEN = {
     "eigenaren": ("bron/eigenaren.jpg", 0.0),
     # Willem staat onder de ondertekening van elke mail in de tweede flow.
-    "willem": ("bron/willem.jpg", 0.0),
+    "willem": ("bron/Willem.png", 0.0),
 }
 
 # Kleine vierkante beelden naast de bestemmingen in de afspraak-sequence.
@@ -211,10 +211,28 @@ def _vierkant(path, ypos, side_out):
     return im.crop((left, top, left + side, top + side)).resize((side_out, side_out), Image.LANCZOS)
 
 
+# Portretten waarop de persoon klein in beeld staat: een strakkere uitsnede op
+# hoofd en schouders, als deel van de breedte en met het midden van het gezicht.
+# naam -> (breedte van de uitsnede 0..1, midden horizontaal, midden verticaal)
+PORTRET_UITSNEDE = {
+    "willem": (0.58, 0.50, 0.46),
+}
+
+
 def portretten():
-    """Vierkante portretten voor de quote-blokken, 360x360 (2x weergavemaat)."""
+    """Vierkante portretten, 360x360 (2x de weergavemaat van 180, ruim genoeg
+    voor de 92px-avatar bij de ondertekening en het 120px-quoteblok)."""
     for name, (path, ypos) in PORTRETTEN.items():
-        im = _vierkant(path, ypos, 360)
+        if name in PORTRET_UITSNEDE:
+            deel, cx, cy = PORTRET_UITSNEDE[name]
+            im = _laad(path)
+            w, h = im.size
+            zij = int(min(w, h) * deel)
+            left = max(0, min(w - zij, int(w * cx - zij / 2)))
+            top = max(0, min(h - zij, int(h * cy - zij / 2)))
+            im = im.crop((left, top, left + zij, top + zij)).resize((360, 360), Image.LANCZOS)
+        else:
+            im = _vierkant(path, ypos, 360)
         f = OUT / ("portret-%s.jpg" % name)
         im.save(f, "JPEG", quality=82, optimize=True, progressive=True)
         print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
