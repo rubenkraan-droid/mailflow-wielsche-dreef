@@ -666,7 +666,7 @@ PAGE = """<!DOCTYPE html>
   <p>Hieronder staan de onderwerpen die bij een eigen villa op De Wielsche Dreef het vaakst terugkomen. Kies wat voor u nu speelt en laat weten wat u wilt bespreken. U legt daarmee niets vast.</p>
  </div>
 </header>
-<div class="banner"><img src="[[CDN_BANNER]]water_villas.jpg" alt="Villa&rsquo;s aan het water op Landgoed De Wielsche Dreef" width="2400" height="1000"></div>
+<div class="banner"><img src="[[CDN_BANNER]]park_overzicht.jpg" alt="Recreatievilla&rsquo;s aan het water op Landgoed De Wielsche Dreef" width="1600" height="667"></div>
 <div class="stripe">[[STRIPE_CELLS]]</div>
 
 <nav class="themes" aria-label="Onderwerpen">

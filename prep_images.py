@@ -69,6 +69,11 @@ SOURCES = {
                        "Recreatievilla in de avondzon met gasten op het terras"),
     "water_villas":   ("bron/water-villas.jpg", 0.55,
                        "Villa&rsquo;s aan de waterloop op het Landgoed"),
+    # Openingsbeeld van de conversiepagina. Dit is een still uit de
+    # testweekendvideo, 3840x2160, uit Beeldmateriaal/Stills testweekend.
+    # De oude water_villas was maar 1173x662 en werd dus opgeblazen.
+    "park_overzicht": ("bron/park-overzicht.jpg", 0.50,
+                       "Recreatievilla&rsquo;s aan het water op Landgoed De Wielsche Dreef"),
     "villa_vijver":   ("2025/05/6persoonsL-DeWielscheDreef-79-scaled.jpg", 0.42,
                        "Villa aan de vijver met rietoevers"),
     "fietsers_najaar": ("2025/11/verkoopdag.jpg", 0.40,
@@ -254,13 +259,13 @@ def thumbs():
 # themafoto's op ongeveer 720 pixels en het openingsbeeld over de volle breedte
 # van het scherm, dus daar horen grotere bestanden bij.
 WEB_W, WEB_H = 1600, 788          # themafoto's, ruim 2x de weergavemaat
-BANNER_W, BANNER_H = 2400, 1000   # openingsbeeld, over de volle schermbreedte
+BANNER_W, BANNER_H = 1600, 667    # openingsbeeld, ruim 2x de weergavemaat van 720px
 
 # Welke beelden de conversiepagina gebruikt, en in welke maat.
 WEB_BEELDEN = ["villa_avond", "terras", "keuken", "betuwe", "villa_parasol",
                "woonkamer", "villa_riet", "slaapkamer", "villa_water",
                "park_vanuit_lucht"]
-BANNER_BEELDEN = ["water_villas"]
+BANNER_BEELDEN = ["park_overzicht"]
 
 
 def _crop(im, bw, bh, ypos):
