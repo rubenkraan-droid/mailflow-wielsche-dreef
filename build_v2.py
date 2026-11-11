@@ -563,7 +563,8 @@ PAGE = """<!DOCTYPE html>
  section.theme p{ margin:0 0 16px 0; }
  .shot{ margin:0 0 24px 0; }
  .shot img{ width:100%; height:auto; display:block; border-radius:6px; }
- .banner img{ width:100%; height:auto; display:block; }
+ .banner img{ width:100%; height:auto; display:block;
+   max-height:46vh; object-fit:cover; object-position:center; }
  .met-portret{ display:flex; gap:18px; align-items:flex-start; margin:4px 0 18px 0;
    padding:18px 22px; background:var(--quote-bg); border-left:4px solid var(--green); }
  .met-portret img{ width:108px; height:auto; border-radius:4px; display:block; flex:0 0 auto; }
@@ -634,7 +635,7 @@ PAGE = """<!DOCTYPE html>
   <p>Hieronder staan de onderwerpen die bij een eigen villa op De Wielsche Dreef het vaakst terugkomen. Kies wat voor u nu speelt en laat weten wat u wilt bespreken. U legt daarmee niets vast.</p>
  </div>
 </header>
-<div class="banner"><img src="[[CDN]]water_villas.jpg" alt="Villa&rsquo;s aan het water op Landgoed De Wielsche Dreef" width="1136" height="496"></div>
+<div class="banner"><img src="[[CDN_BANNER]]water_villas.jpg" alt="Villa&rsquo;s aan het water op Landgoed De Wielsche Dreef" width="2400" height="1000"></div>
 <div class="stripe">[[STRIPE_CELLS]]</div>
 
 <nav class="themes">
@@ -792,8 +793,9 @@ def section_html(t):
            '  <h2>' + t["lead"] + '</h2>\n']
     if t.get("foto"):
         naam, alt = t["foto"]
-        out.append('  <div class="shot"><img src="' + bm._CDN + naam + '.jpg" '
-                   'alt="' + alt + '" width="1136" height="496" loading="lazy"></div>\n')
+        out.append('  <div class="shot"><img src="'
+                   + bm._CDN.replace("hero-", "web-") + naam + '.jpg" '
+                   'alt="' + alt + '" width="1600" height="788" loading="lazy"></div>\n')
     for kind, val in t["blocks"]:
         if kind == 'p':
             out.append('  <p>' + val + '</p>\n')
@@ -806,7 +808,7 @@ def section_html(t):
         elif kind == 'quote-portret':
             out.append('  <div class="met-portret">'
                        '<img src="' + bm._CDN.replace("hero-", "portret-") + 'eigenaren.jpg" '
-                       'alt="Eigenaren op Landgoed De Wielsche Dreef" width="400" height="400" loading="lazy">'
+                       'alt="Eigenaren op Landgoed De Wielsche Dreef" width="360" height="360" loading="lazy">'
                        '<span class="tekst">&ldquo;' + val + '&rdquo;</span></div>\n')
     out.append(form_html(t))
     out.append('</section>\n')
@@ -834,7 +836,7 @@ def build_page():
         "DISCLAIMER": BRAND["disclaimer"].replace(
             "Deze e-mail is algemene informatie", "Deze informatie is algemeen van aard"),
         "FORM_ENDPOINT": FORM_ENDPOINT,
-        "CDN": bm._CDN,
+        "CDN_BANNER": bm._CDN.replace("hero-", "banner-"),
     }
     for k, v in repl.items():
         html = html.replace("[[" + k + "]]", v)

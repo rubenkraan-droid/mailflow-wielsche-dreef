@@ -227,8 +227,57 @@ def thumbs():
         print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
 
 
+# --- beelden voor de conversiepagina ------------------------------------
+#
+# De hero's hierboven zijn gemaakt voor de mail: 1136 breed is twee keer de
+# weergavemaat van 568. Op een webpagina is dat te weinig. De pagina toont de
+# themafoto's op ongeveer 720 pixels en het openingsbeeld over de volle breedte
+# van het scherm, dus daar horen grotere bestanden bij.
+WEB_W, WEB_H = 1600, 788          # themafoto's, ruim 2x de weergavemaat
+BANNER_W, BANNER_H = 2400, 1000   # openingsbeeld, over de volle schermbreedte
+
+# Welke beelden de conversiepagina gebruikt, en in welke maat.
+WEB_BEELDEN = ["villa_avond", "terras", "keuken", "betuwe", "villa_parasol",
+               "woonkamer", "villa_riet", "slaapkamer", "villa_water",
+               "park_vanuit_lucht"]
+BANNER_BEELDEN = ["water_villas"]
+
+
+def _crop(im, bw, bh, ypos):
+    """Middencrop op de gevraagde verhouding, daarna schalen."""
+    w, h = im.size
+    doel = bw / bh
+    if w / h > doel:
+        nw = int(h * doel)
+        im = im.crop(((w - nw) // 2, 0, (w - nw) // 2 + nw, h))
+    else:
+        nh = int(w / doel)
+        top = int((h - nh) * ypos)
+        im = im.crop((0, top, w, top + nh))
+    return im.resize((bw, bh), Image.LANCZOS)
+
+
+def webbeelden():
+    """Grotere versies voor de conversiepagina: web-<naam>.jpg en
+    banner-<naam>.jpg. De mails blijven de kleinere hero-bestanden gebruiken,
+    want daar telt het gewicht zwaarder dan de scherpte."""
+    for naam in WEB_BEELDEN:
+        pad, ypos, _alt = SOURCES[naam]
+        f = OUT / ("web-%s.jpg" % naam)
+        _crop(_laad(pad), WEB_W, WEB_H, ypos).save(
+            f, "JPEG", quality=78, optimize=True, progressive=True)
+        print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
+    for naam in BANNER_BEELDEN:
+        pad, ypos, _alt = SOURCES[naam]
+        f = OUT / ("banner-%s.jpg" % naam)
+        _crop(_laad(pad), BANNER_W, BANNER_H, ypos).save(
+            f, "JPEG", quality=76, optimize=True, progressive=True)
+        print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
+
+
 if __name__ == "__main__":
     main()
     portretten()
     thumbs()
     videostills()
+    webbeelden()
