@@ -391,12 +391,9 @@ MAILS = [
    + P + 'Eigenaren die hier vorig jaar voor kozen, verwoordden hun eerste indruk zo:</p>\n'
    + quote_person(
        'Prachtig gebied. Echt heel natuurvriendelijk en vogelrijk. We zijn allebei gek op vogels, '
-       'maar ook op het landschap en de manier waarop het park zich daarin ontwikkelt. Vanaf het '
-       'eerste moment heeft het ons niet meer losgelaten.',
+       'maar ook op het landschap en de manier waarop het park zich daarin ontwikkelt.',
        'eigenaren', 'Eigenaren op Landgoed De Wielsche Dreef',
        'Eigenaren van een vierpersoonswoning aan het water')
-   + P + 'Wat dat dagelijks oplevert, vatten ze zelf het mooist samen:</p>\n'
-   + quote('We kijken zo uit over het water. Vanmorgen deden we de gordijnen open en zwom er een meerkoet met kleintjes voorbij. Dat is toch een cadeautje? Zo begin je je dag.')
    + pdf_link('Lees hun volledige verhaal')
    + P + 'Wie hier interesse in heeft, zoekt doorgaans geen villa, maar een plek die past bij wie u bent.</p>\n'
    + cta('Plan uw afspraak', 'wd-mail-02a')
