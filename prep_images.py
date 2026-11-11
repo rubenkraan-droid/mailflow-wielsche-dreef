@@ -38,6 +38,8 @@ VIDEO_STILLS = {
 # Portretten bij eigenaarsquotes: naam -> (bron, verticale crop-positie 0..1)
 PORTRETTEN = {
     "eigenaren": ("bron/eigenaren.jpg", 0.0),
+    # Willem staat onder de ondertekening van elke mail in de tweede flow.
+    "willem": ("bron/willem.jpg", 0.0),
 }
 
 # Kleine vierkante beelden naast de bestemmingen in de afspraak-sequence.

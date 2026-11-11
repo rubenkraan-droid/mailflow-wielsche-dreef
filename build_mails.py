@@ -49,7 +49,7 @@ BRAND = dict(
     name="Landgoed De Wielsche Dreef",
     short_name="De Wielsche Dreef",
     tagline="Exclusief Vakantievastgoed<br>Betuwe &middot; Nederrijn",
-    logo="https://dewielschedreef.nl/wp-content/uploads/2024/09/Logo-wit.svg",
+    logo="https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/logo-wit.png",
     primary="#004d46",
     footer_bg="#003b36",
     accent="#c45346",
@@ -187,7 +187,7 @@ TEMPLATE = """<!DOCTYPE html>
      <tr><td style="padding:18px 32px 16px 32px; text-align:center;" class="px">
        <table role="presentation" cellpadding="0" cellspacing="0" align="center" style="margin:0 auto;"><tr>
          <td style="vertical-align:middle; padding-right:16px;">
-           <img src="[[LOGO]]" alt="[[BRAND_NAME]]" width="88" style="max-width:88px; height:auto; display:block;">
+           <img src="[[LOGO]]" alt="[[BRAND_NAME]]" width="88" style="max-width:88px; height:auto; display:block; color:#ffffff; font-family:'Inter',Arial,sans-serif; font-size:13px;">
          </td>
          <td style="vertical-align:middle; padding-left:16px; border-left:1px solid rgba(255,255,255,0.25);">
            <p style="margin:0; font-family:'Inter',Arial,sans-serif; font-size:10px; color:rgba(255,255,255,0.62); letter-spacing:0.16em; text-transform:uppercase; text-align:left; line-height:16px;">[[TAGLINE]]</p>
@@ -207,7 +207,7 @@ TEMPLATE = """<!DOCTYPE html>
 [[BODY]]
  </td></tr>
  <tr><td style="background-color:[[FOOTER_BG]]; padding:28px 32px; text-align:center;" class="px">
-   <img src="[[LOGO]]" alt="[[BRAND_NAME]]" width="100" style="max-width:100px; height:auto; display:inline-block; opacity:0.7; margin-bottom:14px;">
+   <img src="[[LOGO]]" alt="[[BRAND_NAME]]" width="100" style="max-width:100px; height:auto; display:inline-block; opacity:0.7; margin-bottom:14px; color:#ffffff; font-family:'Inter',Arial,sans-serif; font-size:13px;">
    <p style="margin:0 0 4px 0; font-family:'Inter',Arial,sans-serif; font-size:12px; color:rgba(255,255,255,0.55);">[[PARTNER_LINE]]</p>
    <p style="margin:0 0 16px 0; font-family:'Inter',Arial,sans-serif; font-size:13px;"><a href="[[PHONE_HREF]]" style="color:rgba(255,255,255,0.7); text-decoration:none;">[[PHONE]]</a> &nbsp;&middot;&nbsp; <a href="[[EMAIL_HREF]]" style="color:rgba(255,255,255,0.7); text-decoration:none;">[[EMAIL]]</a></p>
    <p style="margin:0 0 12px 0; font-family:'Inter',Arial,sans-serif; font-size:11px; line-height:17px; color:rgba(255,255,255,0.45); max-width:460px; margin-left:auto; margin-right:auto;">[[DISCLAIMER]]</p>

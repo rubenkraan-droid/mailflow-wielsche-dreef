@@ -67,13 +67,28 @@ def bezoekregel(variant):
             + '; font-weight:bold; text-decoration:underline;">Ik laat u graag het landgoed zien</a>.</p>\n')
 
 
-SIGN = ('   <p style="margin:0;">Met vriendelijke groet,<br>'
+# De ondertekening met het portret van Willem ernaast. Twee cellen in een
+# tabel, want dat is het enige wat in alle mailclients hetzelfde uitpakt;
+# onder 620px zet .pcol ze onder elkaar. De foto krijgt een achtergrondkleur
+# en een tekstkleur mee, zodat de alt-tekst leesbaar is als beelden uitstaan.
+SIGN = ('   <table role="presentation" cellpadding="0" cellspacing="0" '
+        'style="margin:4px 0 0 0;"><tr>'
+        '<td class="pcol" width="92" valign="top" style="width:92px; padding:0 18px 10px 0;">'
+        '<img src="' + bm._CDN.replace("hero-", "portret-") + 'willem.jpg" '
+        'alt="Willem van de Griend" width="92" height="92" '
+        'style="width:92px; max-width:92px; height:auto; display:block; '
+        'border-radius:46px; background-color:#dfe7e5; color:' + BRAND["text"] + '; '
+        "font-family:'Inter',Arial,sans-serif; font-size:12px;\"></td>"
+        '<td class="pcol" valign="top" style="font-family:\'Inter\',Arial,sans-serif; '
+        'font-size:16px; line-height:26px; color:' + BRAND["text"] + ';">'
+        'Met vriendelijke groet,<br>'
         '<strong>Willem van de Griend</strong><br>'
         + BRAND["name"] + ' | ' + BRAND["contact_party"] + '<br>'
         '<a href="' + BRAND["phone_href"] + '" style="color:' + BRAND["primary"] + ';">'
         + BRAND["phone"] + '</a> | '
         '<a href="' + BRAND["email_href"] + '" style="color:' + BRAND["primary"] + ';">'
-        + BRAND["email"] + '</a></p>\n')
+        + BRAND["email"] + '</a>'
+        '</td></tr></table>\n')
 
 quote = bm.quote
 quote_person = bm.quote_person
@@ -547,24 +562,31 @@ PAGE = """<!DOCTYPE html>
    padding-left:16px; line-height:16px; }
  .stripe{ display:flex; height:10px; }
 
- nav.themes{ background:#f7f4ef; border-bottom:1px solid var(--line); padding:18px 0; }
+ nav.themes{ background:#f7f4ef; border-bottom:1px solid var(--line); padding:14px 0;
+   position:sticky; top:0; z-index:20; }
  nav.themes ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
  nav.themes a{ display:block; text-decoration:none; font-size:14px; line-height:20px;
    padding:7px 14px; border:1px solid var(--line); border-radius:999px;
    background:#fff; color:var(--green); }
  nav.themes a:hover{ border-color:var(--green); }
 
- section.theme{ border-bottom:1px solid var(--line); padding:44px 0 38px 0; scroll-margin-top:16px; }
+ section.theme{ border-bottom:1px solid var(--line); padding:44px 0 38px 0;
+   /* ruimte voor de meegaande navigatiebalk */
+   scroll-margin-top:84px; }
  section.theme:last-of-type{ border-bottom:0; }
  .nr{ font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
-   color:#8a9a95; font-weight:700; margin-bottom:10px; }
+   color:#566b67; font-weight:700; margin-bottom:10px; }
  section.theme h2{ font-size:27px; line-height:36px; margin:0 0 16px 0; }
  section.theme h3{ font-size:18px; line-height:26px; margin:26px 0 6px 0; }
- section.theme p{ margin:0 0 16px 0; }
+ section.theme p{ margin:0 0 16px 0; max-width:62ch; }
+ section.theme ul{ max-width:62ch; }
+ .wijzer{ margin:0 0 18px 0; }
+ .wijzer a{ font-weight:600; }
  .shot{ margin:0 0 24px 0; }
  .shot img{ width:100%; height:auto; display:block; border-radius:6px; }
+ /* Beperkt in hoogte, anders staat de onderwerplijst onder de vouw. */
  .banner img{ width:100%; height:auto; display:block;
-   max-height:46vh; object-fit:cover; object-position:center; }
+   max-height:340px; object-fit:cover; object-position:center; }
  .met-portret{ display:flex; gap:18px; align-items:flex-start; margin:4px 0 18px 0;
    padding:18px 22px; background:var(--quote-bg); border-left:4px solid var(--green); }
  .met-portret img{ width:108px; height:auto; border-radius:4px; display:block; flex:0 0 auto; }
@@ -575,14 +597,16 @@ PAGE = """<!DOCTYPE html>
  blockquote{ margin:4px 0 18px 0; padding:18px 22px; background:var(--quote-bg);
    border-left:4px solid var(--green); font-style:italic; color:#1a1a1a; }
 
- .toggle{ display:inline-block; margin-top:12px; border:0; cursor:pointer;
+ .toggle{ display:block; width:100%; max-width:430px; margin-top:12px; border:0; cursor:pointer;
    background:var(--accent); color:#fff; font-family:'Inter',Arial,sans-serif;
    font-size:16px; font-weight:700; line-height:24px; padding:15px 28px;
    border-radius:4px; text-align:left; }
  .toggle:hover{ background:var(--accent-hover); }
- .panel{ display:none; margin-top:20px; background:var(--card);
+ .panel{ display:block; margin-top:20px; background:var(--card);
    border-radius:6px; padding:24px; }
- .panel.open{ display:block; }
+ /* Zonder JavaScript blijven alle panelen open staan. */
+ .js .panel{ display:none; }
+ .js .panel.open{ display:block; }
  .panel p.intro{ margin:0 0 18px 0; font-size:16px; line-height:25px; }
  .row{ display:flex; gap:14px; flex-wrap:wrap; }
  .row > div{ flex:1 1 220px; }
@@ -597,7 +621,11 @@ PAGE = """<!DOCTYPE html>
    font-family:'Inter',Arial,sans-serif; font-size:16px; font-weight:700;
    padding:14px 30px; border-radius:4px; }
  button.send:hover{ background:var(--green-dark); }
- .small{ font-size:13px; line-height:20px; color:#6d7b78; margin:12px 0 0 0; }
+ .small{ font-size:13px; line-height:20px; color:#53625f; margin:12px 0 0 0; }
+ .optioneel{ font-weight:400; color:#53625f; }
+ .toggle:focus-visible, button.send:focus-visible, nav.themes a:focus-visible,
+ .wijzer a:focus-visible{ outline:3px solid var(--green); outline-offset:3px; }
+ .done:focus{ outline:none; }
  .done{ display:none; background:#eef4f3; border-left:4px solid var(--green);
    padding:18px 22px; margin-top:16px; }
  .done.open{ display:block; }
@@ -619,7 +647,10 @@ PAGE = """<!DOCTYPE html>
    body{ font-size:16px; line-height:26px; }
    header.hero h1{ font-size:27px; line-height:36px; }
    section.theme h2{ font-size:23px; line-height:31px; }
-   .toggle{ width:100%; }
+   .toggle{ max-width:none; }
+   .banner img{ max-height:210px; }
+   nav.themes{ position:static; }
+   section.theme{ scroll-margin-top:16px; }
  }
 </style>
 </head>
@@ -638,7 +669,7 @@ PAGE = """<!DOCTYPE html>
 <div class="banner"><img src="[[CDN_BANNER]]water_villas.jpg" alt="Villa&rsquo;s aan het water op Landgoed De Wielsche Dreef" width="2400" height="1000"></div>
 <div class="stripe">[[STRIPE_CELLS]]</div>
 
-<nav class="themes">
+<nav class="themes" aria-label="Onderwerpen">
  <div class="wrap"><ul>[[NAV]]</ul></div>
 </nav>
 
@@ -666,37 +697,59 @@ PAGE = """<!DOCTYPE html>
 (function(){
   var ENDPOINT = "[[FORM_ENDPOINT]]";
 
+  // Zonder JavaScript staan alle panelen open. Deze klasse klapt ze dicht,
+  // zodat de pagina ook werkt als het script niet draait.
+  document.documentElement.className += " js";
+
   function qs(){
-    var o = {}, s = window.location.search.replace(/^\\?/, "");
+    var o = {}, s = window.location.search.replace(/^\?/, "");
     s.split("&").forEach(function(p){
       if(!p) return;
       var i = p.indexOf("="), k = i < 0 ? p : p.slice(0, i);
-      var v = i < 0 ? "" : decodeURIComponent(p.slice(i + 1).replace(/\\+/g, " "));
+      var ruw = i < 0 ? "" : p.slice(i + 1);
+      // Een merge-tag die ActiveCampaign niet invult blijft als %FIRSTNAME%
+      // in de URL staan. decodeURIComponent gooit daar een URIError op; zonder
+      // deze vangnet zou het hele script stoppen en geen formulier meer opengaan.
+      var v;
+      try { v = decodeURIComponent(ruw); } catch(e) { v = ruw; }
       o[k] = v;
     });
     return o;
   }
   var q = qs();
 
-  // De mails geven naam, e-mail en telefoon mee. Lege of niet-ingevulde
-  // merge-tags (%FIRSTNAME% blijft staan als het veld leeg is) negeren we.
-  function clean(v){
+  // Een plus in een e-mailadres (jan+wd@...) is een echte plus, geen spatie.
+  // Alleen in naamvelden staat een plus voor een spatie.
+  function clean(v, plusIsSpatie){
     if(!v) return "";
     if(v.charAt(0) === "%" || v.indexOf("{{") === 0) return "";
-    return v;
+    return plusIsSpatie ? v.replace(/\+/g, " ") : v;
   }
-  var pre = {
-    voornaam: clean(q.first_name),
-    achternaam: clean(q.last_name),
-    email: clean(q.email),
-    telefoon: clean(q.phone)
-  };
-  Object.keys(pre).forEach(function(k){
-    if(!pre[k]) return;
-    document.querySelectorAll('[data-field="' + k + '"]').forEach(function(el){
-      el.value = pre[k];
+
+  try {
+    var pre = {
+      voornaam: clean(q.first_name, true),
+      achternaam: clean(q.last_name, true),
+      email: clean(q.email, false),
+      telefoon: clean(q.phone, false)
+    };
+    Object.keys(pre).forEach(function(k){
+      if(!pre[k]) return;
+      document.querySelectorAll('[data-field="' + k + '"]').forEach(function(el){
+        el.value = pre[k];
+      });
     });
-  });
+
+    // Naam, e-mailadres en telefoonnummer horen niet in de adresbalk, de
+    // browsergeschiedenis of een doorgestuurde link. Het thema en de
+    // utm-parameters blijven staan, die zijn nodig voor de meting.
+    var url = new URL(window.location.href);
+    var prive = ["first_name", "last_name", "email", "phone"];
+    if(prive.some(function(k){ return url.searchParams.has(k); })){
+      prive.forEach(function(k){ url.searchParams.delete(k); });
+      history.replaceState(null, "", url.pathname + url.search + url.hash);
+    }
+  } catch(e){ }
 
   document.querySelectorAll(".toggle").forEach(function(btn){
     btn.addEventListener("click", function(){
@@ -715,13 +768,22 @@ PAGE = """<!DOCTYPE html>
       ev.preventDefault();
       var data = {};
       new FormData(form).forEach(function(v, k){ data[k] = v; });
-      data.pagina = window.location.href;
+      // Alleen het pad en de meetparameters, niet de persoonsgegevens die
+      // eventueel nog in de URL staan.
+      data.pagina = window.location.pathname + window.location.hash;
       var done = form.parentNode.querySelector(".done");
-      if(!ENDPOINT){
-        done.innerHTML = "<strong>Voorbeeldversie.</strong> Het formulier is nog niet " +
-          "gekoppeld, dus er is niets verstuurd. Zodra de koppeling staat, komt deze " +
-          "aanvraag binnen bij Willem.";
+      function toon(html, verbergFormulier){
+        done.innerHTML = html;
         done.classList.add("open");
+        if(verbergFormulier) form.style.display = "none";
+        done.setAttribute("tabindex", "-1");
+        done.focus({ preventScroll: true });
+        done.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      if(!ENDPOINT){
+        toon("<strong>Voorbeeldversie.</strong> Het formulier is nog niet " +
+             "gekoppeld, dus er is niets verstuurd. Zodra de koppeling staat, " +
+             "komt deze aanvraag binnen bij Willem.", false);
         return;
       }
       fetch(ENDPOINT, {
@@ -729,26 +791,40 @@ PAGE = """<!DOCTYPE html>
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
       }).then(function(){
-        form.style.display = "none";
-        done.innerHTML = "<strong>Dank u wel.</strong> Uw bericht staat genoteerd. " +
-          "Willem neemt binnen een werkdag contact met u op.";
-        done.classList.add("open");
+        toon("<strong>Dank u wel.</strong> Uw bericht staat genoteerd. " +
+             "Willem neemt binnen een werkdag contact met u op.", true);
       }).catch(function(){
-        done.innerHTML = "Het versturen lukte niet. Belt u gerust naar [[PHONE]] " +
-          "of mail naar [[EMAIL]].";
-        done.classList.add("open");
+        toon("Het versturen lukte niet. Belt u gerust naar [[PHONE]] " +
+             "of mail naar [[EMAIL]].", false);
       });
     });
   });
 
-  // Komt iemand uit een mail, dan staat het thema al open.
-  var doel = q.thema || window.location.hash.replace(/^#/, "");
-  if(doel){
-    var btn = document.querySelector('.toggle[data-thema="' + doel + '"]');
-    if(btn) btn.click();
-    var sec = document.getElementById(doel);
-    if(sec) setTimeout(function(){ sec.scrollIntoView({ behavior: "smooth", block: "start" }); }, 80);
-  }
+  // Komt iemand uit een mail, dan staat het thema al open. Een onderwerp is
+  // lang, dus een regel onder de kop vertelt dat het formulier klaarstaat.
+  try {
+    var doel = q.thema || window.location.hash.replace(/^#/, "");
+    if(doel){
+      var btn = document.querySelector('.toggle[data-thema="' + doel + '"]');
+      var sec = document.getElementById(doel);
+      if(btn && btn.getAttribute("aria-expanded") !== "true") btn.click();
+      if(sec && btn){
+        var kop = sec.querySelector("h2");
+        if(kop){
+          var wijzer = document.createElement("p");
+          wijzer.className = "wijzer";
+          var a = document.createElement("a");
+          a.href = "#" + btn.getAttribute("aria-controls");
+          a.textContent = "Uw formulier staat klaar onderaan dit onderwerp";
+          wijzer.appendChild(a);
+          kop.parentNode.insertBefore(wijzer, kop.nextSibling);
+        }
+      }
+      if(sec) setTimeout(function(){
+        sec.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 80);
+    }
+  } catch(e){ }
 })();
 </script>
 </body></html>"""
