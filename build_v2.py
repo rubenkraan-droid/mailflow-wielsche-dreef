@@ -86,7 +86,7 @@ subhead = bm.subhead
 MAILS = [
  dict(n=1, hero="villa_avond", kicker="Beschikbare woningen",
   anchor="#beschikbare-woningen", link="Vraag de actuele beschikbaarheid aan",
-  title='Welke villa past bij uw plannen samen?',
+  title='Welke villa past bij uw plannen?',
   preheader='Welkom op De Wielsche Dreef. Ontdek de woningtypen en de beschikbare plekken.',
   h1='Een eigen plek die bij u beiden past',
   body=(P + 'Hartelijk dank voor uw interesse in Landgoed De Wielsche Dreef. Misschien zag u in de brochure al een villa waarin u zichzelf ziet thuiskomen. Samen een paar dagen weg, de kinderen of vrienden erbij, en de ruimte om even niet met het werk bezig te zijn.</p>\n'
@@ -97,13 +97,13 @@ MAILS = [
  dict(n=2, hero="terras", kicker="Eigen gebruik",
   anchor="#eigen-gebruik-verhuur", link="Bespreek uw wensen voor eigen gebruik",
   title='Een eigen villa: wanneer zou u er samen naartoe gaan?',
-  preheader='Van een paar dagen met zijn tweeen tot tijd met familie en vrienden.',
+  preheader='Van een paar dagen met z&rsquo;n twee&euml;n tot tijd met familie en vrienden.',
   h1='Vrije tijd die echt van u is',
   body=(P + 'Als u veel verantwoordelijkheid draagt, is vrije tijd niet altijd vanzelfsprekend. Juist dan kan een vaste plek prettig zijn: u hoeft niet steeds opnieuw een verblijf te zoeken en weet waar u samen naartoe kunt.</p>\n'
    + P + 'Misschien denkt u aan een lang weekend na een drukke periode. Of aan een week met familie, met genoeg ruimte voor iedereen. Hoe u de villa wilt gebruiken, is een goed vertrekpunt voor uw keuze.</p>\n'
    + P + 'Op De Wielsche Dreef kunt u kiezen voor uitsluitend recreatief eigen gebruik, of voor een combinatie met verhuur via Landal. Bij die combinatie kunt u maximaal 90 dagen per jaar voor eigen gebruik blokkeren, volgens de reserveringsvoorwaarden. Tijdig plannen is daarbij belangrijk: bestaande boekingen en reserveringsafspraken tellen mee.</p>\n'
    + bullets([
-       'Welke periodes wilt u graag zelf kunnen komen?',
+       'In welke periodes wilt u graag zelf kunnen komen?',
        'Met wie wilt u de villa delen?',
        'Wilt u daarnaast verhuren, of juist niet?',
    ])
@@ -125,7 +125,7 @@ MAILS = [
   title='Wat kost een eigen villa, ook na de aankoop?',
   preheader='Een overzicht van de investering, de terugkerende kosten en eventuele verhuur.',
   h1='Het hele plaatje op tafel',
-  body=(P + 'Een villa kan u direct aanspreken. Toch wilt u pas verder kijken als ook het kostenplaatje klopt. Zeker als u samen beslist, is het prettig om dezelfde informatie voor u te hebben.</p>\n'
+  body=(P + 'Een villa kan u direct aanspreken. Toch wilt u pas verder kijken als ook het kostenplaatje klopt. Zeker als u samen beslist, is het prettig om allebei dezelfde informatie te hebben.</p>\n'
    + P + 'De tuin, het terras en de parkeerplaats worden aangelegd en zijn inbegrepen in de koopsom. De koopsommen zijn exclusief btw en vrij op naam. Voor verhuur is daarnaast een compleet inventarispakket nodig dat voldoet aan de eisen van Landal.</p>\n'
    + P + 'Bij een zorgvuldige afweging kijkt u naar:</p>\n'
    + bullets([
@@ -135,7 +135,7 @@ MAILS = [
        'energie, verzekeringen en lokale lasten,',
        'bij verhuur: de kosten van verhuur en dienstverlening.',
    ])
-   + P + 'We nemen dit graag voor de villa van uw voorkeur met u door. Niet alleen de losse bedragen, maar ook wat uw manier van gebruiken betekent voor het totaal. Financi&euml;le en fiscale vragen kunt u vervolgens met uw eigen adviseur beoordelen.</p>\n')),
+   + P + 'We nemen dit graag voor de villa van uw voorkeur met u door. Niet alleen de losse bedragen, maar ook wat uw manier van gebruik betekent voor het totaal. Financi&euml;le en fiscale vragen kunt u vervolgens met uw eigen adviseur beoordelen.</p>\n')),
 
  dict(n=5, hero="betuwe", kicker="Park en omgeving",
   anchor="#park-omgeving", link="Meer weten over de fasen van het park",
@@ -146,13 +146,13 @@ MAILS = [
    + P + 'De Wielsche Dreef ligt bij Eck en Wiel, achter de dijk van de Nederrijn. Boomgaarden, uiterwaarden en water geven de omgeving haar karakter. U kunt er wandelen en fietsen, of juist bij uw villa blijven. Aan de overkant van de rivier liggen onder meer Amerongen en de Utrechtse Heuvelrug.</p>\n'
    + P + 'Een eigenaar beschreef het zo:</p>\n'
    + quote('We fietsen regelmatig, lekker de omgeving verkennen. Het voelt als een stukje thuiskomen met familie en vrienden.')
-   + P + 'Juist die afwisseling maakt de plek interessant: tijd met zijn twee&euml;n, een verblijf met familie en ruimte om uw eigen ritme te volgen.</p>\n'
+   + P + 'Juist die afwisseling maakt de plek interessant: tijd met z&rsquo;n twee&euml;n, een verblijf met familie en ruimte om uw eigen ritme te volgen.</p>\n'
    + P + 'Het landgoed wordt in fasen ontwikkeld. We laten u daarom niet alleen zien hoe het is bedoeld, maar bespreken ook wat er op dit moment is en wat nog volgt. Dan weet u wat u tijdens een bezoek of verblijf kunt verwachten.</p>\n')),
 
  dict(n=6, hero="water_villas", kicker="Eigenaren aan het woord",
   anchor="#park-omgeving", link="Meer lezen over hun verhaal",
   title='Waarom deze eigenaren voor een villa aan het water kozen',
-  preheader='Hun ervaring met de natuur, het uitzicht en het dagelijks verblijf.',
+  preheader='Hun ervaring met de natuur, het uitzicht en het verblijf zelf.',
   h1='Hoe een plek een eigen plek wordt',
   body=(P + 'Een brochure laat u zien hoe een villa eruitziet. Eigenaren kunnen vertellen wat een verblijf er voor hen bijzonder maakt. De eigenaren van een vierpersoonswoning aan het water verwoorden hun eerste indruk zo:</p>\n'
    + quote_person(
@@ -173,7 +173,7 @@ MAILS = [
   body=(P + 'Een eigen vakantievilla koopt u niet tussen twee afspraken door. U wilt de plek ervaren, de mogelijkheden begrijpen en samen kunnen afwegen of de aankoop bij uw plannen past.</p>\n'
    + P + 'Daarom maken we het traject graag overzichtelijk:</p>\n'
    + bullets([
-       'Kennismaken: uw wensen, vragen en manier van gebruiken bespreken.',
+       'Kennismaken: uw wensen, vragen en manier van gebruik bespreken.',
        'Het landgoed bezoeken en de ligging van de beschikbare villa&rsquo;s bekijken.',
        'Een voorstel doornemen, met prijs, uitvoering, keuzes en kosten.',
        'Uw financi&euml;le mogelijkheden beoordelen, zo nodig met uw eigen adviseur.',
@@ -224,7 +224,7 @@ MAILS = [
   title='U hoeft nog niet te weten of het kan',
   preheader='Een eerste gesprek is er juist voor de vragen die nog openstaan.',
   h1='Eerst uitzoeken, dan samen beslissen',
-  body=(P + 'Soms spreekt een plek u meteen aan, terwijl u nog niet weet of een aankoop past. Qua gebruik, qua moment of financieel. Dat is geen reden om uw vragen voor u te houden.</p>\n'
+  body=(P + 'Soms spreekt een plek u meteen aan, terwijl u nog niet weet of een aankoop past: qua gebruik, qua moment of financieel. Dat is geen reden om uw vragen voor u te houden.</p>\n'
    + P + 'In het verhaal van de eigenaren van een vierpersoonswoning aan het water begon het ook met belangstelling &eacute;n twijfel over de mogelijkheden. Zij gingen in gesprek en bekeken het landgoed. Over de plek zeggen zij:</p>\n'
    + quote('Vanaf het eerste moment heeft het ons niet meer losgelaten. En ook de zonsopgang is hier prachtig.')
    + P + 'Hun ervaring zegt natuurlijk niet wat voor u haalbaar of passend is. Dat hangt af van uw eigen situatie, de villa en de manier waarop u die wilt gebruiken. Maar u hoeft ook niet alles al te weten voordat u contact opneemt.</p>\n'
@@ -261,17 +261,17 @@ MAILS = [
  dict(n=13, hero="badkamer", kicker="Eigendom",
   anchor="#waarde-kwaliteit", link="Meer over eigendom en kwaliteit",
   title='Wat koopt u precies, en wat regelt u samen?',
-  preheader='Meer over het appartementsrecht, uw privegedeelte en de VvE.',
+  preheader='Meer over het appartementsrecht, uw priv&eacute;gedeelte en de VvE.',
   h1='Een eigen plek, met duidelijke eigendomsafspraken',
   body=(P + 'De sfeer en de ligging kunnen u overtuigen om verder te kijken. Maar voordat u koopt, wilt u ook begrijpen wat u juridisch in bezit krijgt en hoe het landgoed op langere termijn wordt onderhouden.</p>\n'
-   + P + 'De Wielsche Dreef wordt gesplitst in zogenaamde appartementsrechten. Daarbij hoort het exclusieve gebruik van uw priv&eacute;gedeelte: de recreatiewoning met bijbehorende tuin, terras en parkeerplaats(en). Daarnaast deelt u volgens de splitsingsstukken in de gemeenschappelijke delen.</p>\n'
+   + P + 'De Wielsche Dreef wordt gesplitst in appartementsrechten. Daarbij hoort het exclusieve gebruik van uw priv&eacute;gedeelte: de recreatiewoning met bijbehorende tuin, terras en parkeerplaats(en). Daarnaast deelt u volgens de splitsingsstukken in de gemeenschappelijke delen.</p>\n'
    + P + 'Als eigenaar wordt u automatisch lid van de Vereniging van Eigenaars. Via de VvE worden gezamenlijke belangen, bijdragen en onderhoud georganiseerd. Denk aan het groen, de wegen, de waterpartijen en de gemeenschappelijke voorzieningen.</p>\n'
    + P + 'Dat is niet alleen een juridisch onderwerp. Het gaat ook over hoe de plek waar u graag komt verzorgd blijft, en welke afspraken en reserveringen daarvoor nodig zijn.</p>\n'
    + P + 'Een goede ligging en verzorgd onderhoud zijn relevante aandachtspunten, maar garanderen geen toekomstige verkoopprijs. Ik neem de eigendomsstructuur en de beschikbare stukken graag met u door, zodat u weet wat u koopt en welke verplichtingen erbij horen.</p>\n')),
 
  dict(n=14, hero="fietsen", kicker="Vergelijken",
   anchor="#waarde-kwaliteit", link="Bekijk wat u koopt en hoe kwaliteit wordt beheerd",
-  title='Waarom zij meerdere parken vergeleken en hier kozen',
+  title='Waarom zij meerdere parken vergeleken en voor deze plek kozen',
   preheader='Een eigenaar over de uitstraling die voor hen het verschil maakte.',
   h1='Vergelijken helpt om te weten wat u belangrijk vindt',
   body=(P + 'Als u samen een vakantievilla overweegt, is vergelijken logisch. Niet alleen op prijs of aantal slaapkamers, maar ook op uitstraling, ligging en het gevoel dat u bij een plek krijgt.</p>\n'
@@ -313,7 +313,7 @@ THEMES = [
   lead="Een villa &eacute;n een plek die bij u passen.",
   knop="Ik wil graag meer weten over de actuele beschikbaarheid",
   blocks=[
-   ('p', 'Misschien ziet u uzelf al op De Wielsche Dreef verblijven. Om samen te ontspannen, met familie samen te komen of vrije dagen af te wisselen met verhuur. Uw plannen helpen om gericht naar een woningtype en ligging te kijken.'),
+   ('p', 'Misschien ziet u uzelf al op De Wielsche Dreef verblijven. Om samen te ontspannen, met familie bij elkaar te komen of vrije dagen af te wisselen met verhuur. Uw plannen helpen om gericht naar een woningtype en ligging te kijken.'),
    ('h3', 'Van samen weg tot ruimte voor de hele familie'),
    ('p', 'In fase 1 zijn verschillende woningtypen voorzien voor 2 tot 12 personen, met de uitrustingsniveaus comfort, luxe en extra luxe. Er zijn ook bijzondere wellnessvarianten. De woningen liggen op royale percelen aan of nabij de aangelegde natuurvennen. Elk woningtype is vooraf aan een perceel gekoppeld.'),
    ('h3', 'Wat we met u bekijken'),
@@ -333,7 +333,7 @@ THEMES = [
    ('h3', 'Verhuur via Landal'),
    ('p', 'U sluit een verhuurbemiddelingsovereenkomst met Landal, dat het exclusieve verhuurrecht op het park heeft. Landal verzorgt onder meer de verhuurbemiddeling en promotie en ontvangt daarvoor een provisie. Woningen van hetzelfde type worden in een verhuurpool ondergebracht. De opbrengsten worden na aftrek van kosten over de deelnemende woningen verdeeld.'),
    ('h3', 'Wat betekent participatierendement?'),
-   ('p', 'Het verwachte rendement uit deelname aan het verhuurconcept, in verhouding tot uw investering en op basis van de toepasselijke opbrengsten en kosten. Een prognose is geen garantie. Zij ziet op de volledige operationele verhuur over meerdere jaren, niet automatisch op het eerste jaar.'),
+   ('p', 'Het verwachte rendement uit deelname aan het verhuurconcept, in verhouding tot uw investering en op basis van de toepasselijke opbrengsten en kosten. Een prognose is geen garantie. Zo&rsquo;n prognose gaat over de volledige operationele verhuur over meerdere jaren, niet automatisch over het eerste jaar.'),
    ('p', 'Liever alleen zelf gebruiken? Ook dat kan recreatief, zonder verhuur. Permanente bewoning is niet toegestaan. Willem bespreekt graag uw gewenste periodes, gebruik en financi&euml;le aandachtspunten.'),
   ]),
 
@@ -350,7 +350,7 @@ THEMES = [
            'Energie, verzekeringen en gemeentelijke en waterschapslasten.',
            'Bij verhuur: onder meer schoonmaak en dienstverlening.']),
    ('h3', 'Kosten en gebruik horen bij elkaar'),
-   ('p', 'Uw manier van gebruiken be&iuml;nvloedt de kosten en de eventuele verhuuropbrengsten. Een verwacht participatierendement is geen gegarandeerde opbrengst. Willem licht het kostenoverzicht van de villa die u overweegt graag toe. Uw eigen adviseur kan beoordelen hoe de aankoop financieel en fiscaal in uw situatie past.'),
+   ('p', 'Uw manier van gebruik be&iuml;nvloedt de kosten en de eventuele verhuuropbrengsten. Een verwacht participatierendement is geen gegarandeerde opbrengst. Willem licht het kostenoverzicht van de villa die u overweegt graag toe. Uw eigen adviseur kan beoordelen hoe de aankoop financieel en fiscaal in uw situatie past.'),
   ]),
 
  dict(nr=4, anchor="park-omgeving", foto=("betuwe", "De Betuwe aan de Nederrijn vanuit de lucht"), naam="Park &amp; omgeving",
@@ -376,7 +376,7 @@ THEMES = [
    ('p', 'U vertelt wat u zoekt en stelt uw vragen. Tijdens een bezoek bekijkt u het landgoed en, waar mogelijk, een villa. Neem gerust uw partner mee. U hoeft nog geen aankoopbeslissing te nemen.'),
    ('h3', '2. Een voorstel en kostenspecificatie bekijken'),
    ('p', 'U bespreekt de prijs, de inbegrepen onderdelen, keuzemogelijkheden, bijkomende kosten en voorwaarden. Mogelijkheden in uitvoering of inrichting hangen af van de villa en de gemaakte afspraken.'),
-   ('h3', '3. Uw financiele mogelijkheden beoordelen'),
+   ('h3', '3. Uw financi&euml;le mogelijkheden beoordelen'),
    ('p', 'U bekijkt hoe de aankoop bij uw situatie past en welke financiering eventueel nodig is. Financi&euml;le en fiscale vragen bespreekt u met uw eigen adviseur.'),
    ('h3', '4. De afspraken en overdracht voorbereiden'),
    ('p', 'De koopafspraken worden schriftelijk vastgelegd. Daarna wordt de juridische levering met de notaris voorbereid volgens de gemaakte afspraken.'),
@@ -431,7 +431,7 @@ THEMES = [
            'Inzicht in de technische uitvoering en de installaties.',
            'Onderhoud en energiegebruik passend bij uw gebruik.']),
    ('h3', 'De groene omgeving hoort erbij'),
-   ('p', 'Bestaande bomen en karakteristieke watergangen blijven waar mogelijk behouden, aangevuld met waterpartijen. Ook het beheer en onderhoud van het groen maken deel uit van de organisatie van het landgoed.'),
+   ('p', 'Bestaande bomen en karakteristieke watergangen blijven waar mogelijk behouden, aangevuld met waterpartijen. Ook het beheer en het onderhoud van het groen maken deel uit van de organisatie van het landgoed.'),
    ('p', 'Wilt u weten wat dit betekent voor de villa die u overweegt? Willem bespreekt graag de uitvoering en de beschikbare specificaties. Zo kunt u uw keuze baseren op concrete kenmerken, niet alleen op de uitstraling.'),
   ]),
 
@@ -445,8 +445,9 @@ THEMES = [
    ('h3', 'Samen verantwoordelijk voor het landgoed'),
    ('p', 'Iedere eigenaar wordt automatisch lid van de VvE. Via die vereniging worden gezamenlijke belangen, bijdragen en onderhoud georganiseerd, zoals voor de wegen, het groen, de waterpartijen en de gemeenschappelijke voorzieningen. Ook reserveringen voor toekomstig onderhoud zijn belangrijk.'),
    ('h3', 'Wat maakt voor u het verschil?'),
+   ('p', 'Een echtpaar dat eerst andere parken bekeek, koos hier vanwege de uitstraling van de villa&rsquo;s. Een van hen zei:'),
    ('quote', 'Ik vond het park er eigenlijk heel erg uitspringen.'),
-   ('p', 'Een echtpaar dat eerst andere parken bekeek, koos hier vanwege de uitstraling van de villa&rsquo;s. Dat is hun persoonlijke ervaring, geen uitspraak over toekomstige waarde. Een aantrekkelijke ligging, bouwkwaliteit of verzorgd onderhoud garandeert geen latere verkoopprijs. Willem licht de eigendomsstructuur en de onderhoudsafspraken graag toe, zodat u ook die kant van uw aankoop kunt beoordelen.'),
+   ('p', 'Dat is hun persoonlijke ervaring, geen uitspraak over toekomstige waarde. Een aantrekkelijke ligging, bouwkwaliteit of verzorgd onderhoud garandeert geen latere verkoopprijs. Willem licht de eigendomsstructuur en de onderhoudsafspraken graag toe, zodat u ook die kant van uw aankoop kunt beoordelen.'),
   ]),
 
  dict(nr=10, anchor="fase-2", foto=("park_vanuit_lucht", "Het Landgoed vanuit de lucht"), naam="Fase 2",
@@ -830,7 +831,8 @@ def build_page():
         "PHONE": BRAND["phone"], "PHONE_HREF": BRAND["phone_href"],
         "EMAIL": BRAND["email"], "EMAIL_HREF": BRAND["email_href"],
         "PARTNER_LINE": BRAND["partner_line"],
-        "DISCLAIMER": BRAND["disclaimer"],
+        "DISCLAIMER": BRAND["disclaimer"].replace(
+            "Deze e-mail is algemene informatie", "Deze informatie is algemeen van aard"),
         "FORM_ENDPOINT": FORM_ENDPOINT,
         "CDN": bm._CDN,
     }
