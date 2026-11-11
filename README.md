@@ -195,3 +195,21 @@ mail; de voettekst blijft het algemene bedrijfsblok.
 - Geen kwantitatieve rendementsbeloftes.
 - Disclaimer-footer in elke mail.
 - Na elke wijziging: `python3 build_mails.py` en preview controleren.
+
+## Tweede flow (v2)
+
+`build_v2.py` genereert een losse tweede reeks in `v2/`: vijftien mails rond
+tien onderwerpen plus een conversiepagina. Bron is het document
+"De Wielsche Dreef - themas en mails final". Deze flow staat los van
+`build_mails.py`, die de huidige, in ActiveCampaign draaiende reeks blijft
+genereren; alleen de template en de opmaakhelpers worden gedeeld.
+
+Elke mail heeft een knop naar het bijbehorende thema op de conversiepagina
+(`conversiepagina.html#anker`) en daaronder een tekstlink naar het thema
+Aankoopproces, waar het bezoek wordt ingepland. De pagina opent het juiste
+uitklapformulier zodra iemand uit een mail binnenkomt en vult naam, e-mail en
+telefoon vooraf in uit de querystring.
+
+Nog open: `FORM_ENDPOINT` bovenin `build_v2.py` is leeg, dus het formulier
+verstuurt nog niets. Zodra de GoHighLevel-koppeling bekend is, die invullen,
+net als `CONV_URL` wanneer de pagina in GHL staat.

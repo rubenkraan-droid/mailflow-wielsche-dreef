@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Landgoed De Wielsche Dreef | Uw vragen, per onderwerp</title>
+<meta name="description" content="Tien onderwerpen over Landgoed De Wielsche Dreef: beschikbaarheid, eigen gebruik en verhuur, kosten, park, aankoopproces, service, duurzaamheid, eigendom en fase 2.">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+ :root{
+   --green:#004d46; --green-dark:#003b36; --accent:#c45346;
+   --accent-hover:#a63f34; --card:#f0ebe3; --text:#374151;
+   --line:#dcd5ca; --quote-bg:#eef4f3;
+ }
+ *{ box-sizing:border-box; }
+ body{ margin:0; background:#ffffff; color:var(--text);
+   font-family:'Inter',Arial,sans-serif; font-size:17px; line-height:28px; }
+ h1,h2,h3{ font-family:'Playfair Display',Georgia,serif; color:var(--green); font-weight:600; }
+ a{ color:var(--green); }
+ .wrap{ max-width:760px; margin:0 auto; padding:0 20px; }
+
+ header.hero{ background:var(--green) url('https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/header-bg.jpg') center top / cover no-repeat;
+   color:#fff; padding:34px 0 46px 0; }
+ header.hero h1{ color:#fff; font-size:34px; line-height:44px; margin:22px 0 14px 0; }
+ header.hero p{ color:rgba(255,255,255,0.86); margin:0; max-width:620px; }
+ .brandbar{ display:flex; align-items:center; gap:16px; }
+ .brandbar img{ width:92px; height:auto; display:block; }
+ .brandbar span{ font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
+   color:rgba(255,255,255,0.62); border-left:1px solid rgba(255,255,255,0.25);
+   padding-left:16px; line-height:16px; }
+ .stripe{ display:flex; height:10px; }
+
+ nav.themes{ background:#f7f4ef; border-bottom:1px solid var(--line); padding:18px 0; }
+ nav.themes ul{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px; }
+ nav.themes a{ display:block; text-decoration:none; font-size:14px; line-height:20px;
+   padding:7px 14px; border:1px solid var(--line); border-radius:999px;
+   background:#fff; color:var(--green); }
+ nav.themes a:hover{ border-color:var(--green); }
+
+ section.theme{ border-bottom:1px solid var(--line); padding:44px 0 38px 0; scroll-margin-top:16px; }
+ section.theme:last-of-type{ border-bottom:0; }
+ .nr{ font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
+   color:#8a9a95; font-weight:700; margin-bottom:10px; }
+ section.theme h2{ font-size:27px; line-height:36px; margin:0 0 16px 0; }
+ section.theme h3{ font-size:18px; line-height:26px; margin:26px 0 6px 0; }
+ section.theme p{ margin:0 0 16px 0; }
+ section.theme ul{ margin:0 0 16px 0; padding-left:22px; }
+ section.theme li{ margin:0 0 8px 0; }
+ blockquote{ margin:4px 0 18px 0; padding:18px 22px; background:var(--quote-bg);
+   border-left:4px solid var(--green); font-style:italic; color:#1a1a1a; }
+
+ .toggle{ display:inline-block; margin-top:12px; border:0; cursor:pointer;
+   background:var(--accent); color:#fff; font-family:'Inter',Arial,sans-serif;
+   font-size:16px; font-weight:700; line-height:24px; padding:15px 28px;
+   border-radius:4px; text-align:left; }
+ .toggle:hover{ background:var(--accent-hover); }
+ .panel{ display:none; margin-top:20px; background:var(--card);
+   border-radius:6px; padding:24px; }
+ .panel.open{ display:block; }
+ .panel p.intro{ margin:0 0 18px 0; font-size:16px; line-height:25px; }
+ .row{ display:flex; gap:14px; flex-wrap:wrap; }
+ .row > div{ flex:1 1 220px; }
+ label{ display:block; font-size:13px; font-weight:600; color:var(--green);
+   margin:0 0 5px 0; }
+ input,textarea{ width:100%; font-family:'Inter',Arial,sans-serif; font-size:16px;
+   padding:11px 13px; border:1px solid var(--line); border-radius:4px;
+   background:#fff; color:var(--text); margin-bottom:14px; }
+ textarea{ min-height:96px; resize:vertical; }
+ input:focus,textarea:focus{ outline:2px solid var(--green); outline-offset:-2px; }
+ button.send{ border:0; cursor:pointer; background:var(--green); color:#fff;
+   font-family:'Inter',Arial,sans-serif; font-size:16px; font-weight:700;
+   padding:14px 30px; border-radius:4px; }
+ button.send:hover{ background:var(--green-dark); }
+ .small{ font-size:13px; line-height:20px; color:#6d7b78; margin:12px 0 0 0; }
+ .done{ display:none; background:#eef4f3; border-left:4px solid var(--green);
+   padding:18px 22px; margin-top:16px; }
+ .done.open{ display:block; }
+
+ .willem{ background:#f7f4ef; border:1px solid var(--line); border-radius:6px;
+   padding:22px 24px; margin:40px 0; display:flex; gap:20px; align-items:center;
+   flex-wrap:wrap; }
+ .willem div{ flex:1 1 280px; }
+ .willem p{ margin:0 0 4px 0; }
+ .willem .naam{ font-weight:700; color:var(--green); }
+
+ footer{ background:var(--green-dark); color:rgba(255,255,255,0.6);
+   font-size:13px; line-height:21px; padding:32px 0; margin-top:10px; }
+ footer a{ color:rgba(255,255,255,0.75); }
+ footer .disc{ font-size:11px; line-height:17px; color:rgba(255,255,255,0.45);
+   margin-top:14px; }
+
+ @media (max-width:620px){
+   body{ font-size:16px; line-height:26px; }
+   header.hero h1{ font-size:27px; line-height:36px; }
+   section.theme h2{ font-size:23px; line-height:31px; }
+   .toggle{ width:100%; }
+ }
+</style>
+</head>
+<body>
+
+<header class="hero">
+ <div class="wrap">
+  <div class="brandbar">
+   <img src="https://dewielschedreef.nl/wp-content/uploads/2024/09/Logo-wit.svg" alt="Landgoed De Wielsche Dreef">
+   <span>Exclusief Vakantievastgoed &middot; Betuwe &middot; Nederrijn</span>
+  </div>
+  <h1>Waar wilt u meer over weten?</h1>
+  <p>Hieronder staan de onderwerpen die bij een eigen villa op De Wielsche Dreef het vaakst terugkomen. Kies wat voor u nu speelt en laat weten wat u wilt bespreken. U legt daarmee niets vast.</p>
+ </div>
+</header>
+<div class="stripe"><i style="flex:14.6; background:#f1dbb6;"></i><i style="flex:15.7; background:#d6a057;"></i><i style="flex:15.7; background:#c45346;"></i><i style="flex:14.6; background:#44afb7;"></i><i style="flex:15.7; background:#00534d;"></i><i style="flex:14.7; background:#232b6b;"></i><i style="flex:9.0; background:#d3ebe7;"></i></div>
+
+<nav class="themes">
+ <div class="wrap"><ul><li><a href="#beschikbare-woningen">Beschikbare woningen</a></li><li><a href="#eigen-gebruik-verhuur">Eigen gebruik &amp; verhuur</a></li><li><a href="#werkelijke-kosten">Werkelijke kosten</a></li><li><a href="#park-omgeving">Park &amp; omgeving</a></li><li><a href="#aankoopproces">Aankoopproces</a></li><li><a href="#persoonlijke-match">Persoonlijke match</a></li><li><a href="#privileges">Privileges</a></li><li><a href="#duurzaamheid">Duurzaamheid</a></li><li><a href="#waarde-kwaliteit">Waarde en waardevastheid</a></li><li><a href="#fase-2">Fase 2</a></li></ul></div>
+</nav>
+
+<main class="wrap">
+<section class="theme" id="beschikbare-woningen">
+  <div class="nr">Onderwerp 1 &middot; Beschikbare woningen</div>
+  <h2>Een villa &eacute;n een plek die bij u passen.</h2>
+  <p>Misschien ziet u uzelf al op De Wielsche Dreef verblijven. Om samen te ontspannen, met familie samen te komen of vrije dagen af te wisselen met verhuur. Uw plannen helpen om gericht naar een woningtype en ligging te kijken.</p>
+  <h3>Van samen weg tot ruimte voor de hele familie</h3>
+  <p>In fase 1 zijn verschillende woningtypen voorzien voor 2 tot 12 personen, met de uitrustingsniveaus comfort, luxe en extra luxe. Er zijn ook bijzondere wellnessvarianten. De woningen liggen op royale percelen aan of nabij de aangelegde natuurvennen. Elk woningtype is vooraf aan een perceel gekoppeld.</p>
+  <h3>Wat we met u bekijken</h3>
+  <ul><li>Het woningtype en de indeling die passen bij uw gezelschap.</li><li>De ligging, het uitzicht en de ruimte rondom de villa.</li><li>De actuele beschikbaarheid en bijbehorende prijsinformatie.</li></ul>
+  <p>We verkopen wekelijks woningen, dus het aanbod verandert mee. Willem bespreekt daarom de actuele mogelijkheden met u, in plaats van u op basis van een eerder overzicht te laten kiezen. U bent ook welkom om de plek samen te komen ervaren.</p>
+  <button class="toggle" type="button" data-thema="beschikbare-woningen" aria-expanded="false" aria-controls="form-beschikbare-woningen">Ik wil graag meer weten over de actuele beschikbaarheid</button>
+  <div class="panel" id="form-beschikbare-woningen">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Beschikbare woningen">
+    <div class="row">
+     <div><label for="form-beschikbare-woningen-vn">Voornaam</label><input id="form-beschikbare-woningen-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-beschikbare-woningen-an">Achternaam</label><input id="form-beschikbare-woningen-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-beschikbare-woningen-em">E-mailadres</label><input id="form-beschikbare-woningen-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-beschikbare-woningen-tel">Telefoonnummer</label><input id="form-beschikbare-woningen-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-beschikbare-woningen-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-beschikbare-woningen-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="eigen-gebruik-verhuur">
+  <div class="nr">Onderwerp 2 &middot; Eigen gebruik &amp; verhuur</div>
+  <h2>Uw eigen vakanties, met duidelijke keuzes over verhuur.</h2>
+  <p>Een vaste plek voor uw vrije dagen kan samengaan met verhuur in andere periodes. U kunt ook kiezen voor uitsluitend recreatief eigen gebruik. Wat past bij de manier waarop u samen van de villa wilt genieten?</p>
+  <h3>Eigen gebruik bij verhuur</h3>
+  <p>Bij verhuur kunt u maximaal 90 dagen per jaar blokkeren voor eigen gebruik via de eigenarensite, volgens de reserveringsvoorwaarden. Tijdig reserveren is belangrijk. Na de reserveringsdeadline is eigen gebruik afhankelijk van bestaande boekingen, opties en andere reserveringsafspraken. Eigen gebruik be&iuml;nvloedt het rendement en kan kosten met zich meebrengen.</p>
+  <h3>Verhuur via Landal</h3>
+  <p>U sluit een verhuurbemiddelingsovereenkomst met Landal, dat het exclusieve verhuurrecht op het park heeft. Landal verzorgt onder meer de verhuurbemiddeling en promotie en ontvangt daarvoor een provisie. Woningen van hetzelfde type worden in een verhuurpool ondergebracht. De opbrengsten worden na aftrek van kosten over de deelnemende woningen verdeeld.</p>
+  <h3>Wat betekent participatierendement?</h3>
+  <p>Het verwachte rendement uit deelname aan het verhuurconcept, in verhouding tot uw investering en op basis van de toepasselijke opbrengsten en kosten. Een prognose is geen garantie. Zij ziet op de volledige operationele verhuur over meerdere jaren, niet automatisch op het eerste jaar.</p>
+  <p>Liever alleen zelf gebruiken? Ook dat kan recreatief, zonder verhuur. Permanente bewoning is niet toegestaan. Willem bespreekt graag uw gewenste periodes, gebruik en financi&euml;le aandachtspunten.</p>
+  <button class="toggle" type="button" data-thema="eigen-gebruik-verhuur" aria-expanded="false" aria-controls="form-eigen-gebruik-verhuur">Ik wil graag meer weten over eigen gebruik, verhuur en rendement</button>
+  <div class="panel" id="form-eigen-gebruik-verhuur">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Eigen gebruik en verhuur">
+    <div class="row">
+     <div><label for="form-eigen-gebruik-verhuur-vn">Voornaam</label><input id="form-eigen-gebruik-verhuur-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-eigen-gebruik-verhuur-an">Achternaam</label><input id="form-eigen-gebruik-verhuur-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-eigen-gebruik-verhuur-em">E-mailadres</label><input id="form-eigen-gebruik-verhuur-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-eigen-gebruik-verhuur-tel">Telefoonnummer</label><input id="form-eigen-gebruik-verhuur-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-eigen-gebruik-verhuur-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-eigen-gebruik-verhuur-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="werkelijke-kosten">
+  <div class="nr">Onderwerp 3 &middot; Werkelijke kosten</div>
+  <h2>Het hele plaatje telt, niet alleen de aankoopprijs.</h2>
+  <p>U wilt weten waar u aan begint. Daarom kijken we met u naar de investering &eacute;n de kosten die later terugkomen. Zo kunt u samen beoordelen of de villa past bij uw plannen.</p>
+  <h3>Wat hoort bij de aankoop?</h3>
+  <p>De koopsommen zijn exclusief btw en vrij op naam. De notaris- en kadasterkosten van de overdracht komen voor rekening van de verkopende partij. Dat betekent niet dat alle mogelijke bijkomende kosten zijn inbegrepen. Tuin, terras en parkeerplaats worden door de ontwikkelaar aangelegd en zijn inbegrepen. Voor verhuur is een compleet inventarispakket nodig dat voldoet aan de eisen van Landal.</p>
+  <h3>Welke kosten keren terug?</h3>
+  <ul><li>De parkbijdrage, ook bij uitsluitend recreatief eigen gebruik.</li><li>Onderhoud en reserveringen voor groter onderhoud.</li><li>Energie, verzekeringen en gemeentelijke en waterschapslasten.</li><li>Bij verhuur: onder meer schoonmaak en dienstverlening.</li></ul>
+  <h3>Kosten en gebruik horen bij elkaar</h3>
+  <p>Uw manier van gebruiken be&iuml;nvloedt de kosten en de eventuele verhuuropbrengsten. Een verwacht participatierendement is geen gegarandeerde opbrengst. Willem licht het kostenoverzicht van de villa die u overweegt graag toe. Uw eigen adviseur kan beoordelen hoe de aankoop financieel en fiscaal in uw situatie past.</p>
+  <button class="toggle" type="button" data-thema="werkelijke-kosten" aria-expanded="false" aria-controls="form-werkelijke-kosten">Ik wil graag meer weten over de kosten</button>
+  <div class="panel" id="form-werkelijke-kosten">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Werkelijke kosten">
+    <div class="row">
+     <div><label for="form-werkelijke-kosten-vn">Voornaam</label><input id="form-werkelijke-kosten-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-werkelijke-kosten-an">Achternaam</label><input id="form-werkelijke-kosten-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-werkelijke-kosten-em">E-mailadres</label><input id="form-werkelijke-kosten-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-werkelijke-kosten-tel">Telefoonnummer</label><input id="form-werkelijke-kosten-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-werkelijke-kosten-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-werkelijke-kosten-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="park-omgeving">
+  <div class="nr">Onderwerp 4 &middot; Park &amp; omgeving</div>
+  <h2>Een eigen plek in het landschap van de Betuwe.</h2>
+  <p>Bij Eck en Wiel, achter de dijk van de Nederrijn, komen boomgaarden, water en rivierlandschap samen. Een omgeving om samen op pad te gaan, maar ook om bewust niets te plannen.</p>
+  <h3>Rust bij de villa, ruimte om eropuit te gaan</h3>
+  <p>In de Betuwe kunt u wandelen en fietsen langs boomgaarden en uiterwaarden. Aan de overkant van de rivier liggen onder meer Amerongen en de Utrechtse Heuvelrug. Bestaande bomen en karakteristieke watergangen blijven op het landgoed zoveel mogelijk behouden, en waterpartijen versterken het groene karakter.</p>
+  <h3>Eigenaren over hun plek aan het water</h3>
+  <blockquote>&ldquo;We kijken zo uit over het water. Vanmorgen deden we de gordijnen open en zwom er een meerkoet met kleintjes voorbij. Dat is toch een cadeautje? Zo begin je je dag.&rdquo;</blockquote>
+  <p>Zo beschrijven de eigenaren van een vierpersoonswoning aan het water hun uitzicht. Het is hun persoonlijke ervaring. Welke ligging bij u past, ontdekt u het beste zelf.</p>
+  <h3>Een landgoed in ontwikkeling</h3>
+  <p>De Wielsche Dreef wordt in fasen gerealiseerd. Receptie, fietsverhuur en parkshop maken deel uit van de ontwikkeling, net als voorzieningen in latere fasen. Niet alles is automatisch al in gebruik. Tijdens een gesprek of bezoek licht Willem de actuele parksituatie en de ontwikkelfasen toe.</p>
+  <button class="toggle" type="button" data-thema="park-omgeving" aria-expanded="false" aria-controls="form-park-omgeving">Ik wil graag meer weten over het park en de ontwikkelfasen</button>
+  <div class="panel" id="form-park-omgeving">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Park en omgeving">
+    <div class="row">
+     <div><label for="form-park-omgeving-vn">Voornaam</label><input id="form-park-omgeving-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-park-omgeving-an">Achternaam</label><input id="form-park-omgeving-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-park-omgeving-em">E-mailadres</label><input id="form-park-omgeving-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-park-omgeving-tel">Telefoonnummer</label><input id="form-park-omgeving-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-park-omgeving-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-park-omgeving-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="aankoopproces">
+  <div class="nr">Onderwerp 5 &middot; Aankoopproces</div>
+  <h2>Van eerste kennismaking tot sleuteloverdracht.</h2>
+  <p>Een vakantievilla kopen doet u stap voor stap. U begint met ontdekken of de plek bij uw wensen past. De precieze planning volgt het aanbod en de gemaakte afspraken.</p>
+  <h3>1. Kennismaken en samen komen kijken</h3>
+  <p>U vertelt wat u zoekt en stelt uw vragen. Tijdens een bezoek bekijkt u het landgoed en, waar mogelijk, een villa. Neem gerust uw partner mee. U hoeft nog geen aankoopbeslissing te nemen.</p>
+  <h3>2. Een voorstel en kostenspecificatie bekijken</h3>
+  <p>U bespreekt de prijs, de inbegrepen onderdelen, keuzemogelijkheden, bijkomende kosten en voorwaarden. Mogelijkheden in uitvoering of inrichting hangen af van de villa en de gemaakte afspraken.</p>
+  <h3>3. Uw financiele mogelijkheden beoordelen</h3>
+  <p>U bekijkt hoe de aankoop bij uw situatie past en welke financiering eventueel nodig is. Financi&euml;le en fiscale vragen bespreekt u met uw eigen adviseur.</p>
+  <h3>4. De afspraken en overdracht voorbereiden</h3>
+  <p>De koopafspraken worden schriftelijk vastgelegd. Daarna wordt de juridische levering met de notaris voorbereid volgens de gemaakte afspraken.</p>
+  <h3>5. De oplevering en het gebruik voorbereiden</h3>
+  <p>Bij de oplevering worden de villa en eventuele aandachtspunten besproken. Eigen gebruik en eventuele verhuur volgen de afgesproken planning en voorwaarden.</p>
+  <p>Wilt u eerst iets bespreken, of wilt u een bezoek plannen? Willem helpt u graag verder met de stap die nu bij u past.</p>
+  <button class="toggle" type="button" data-thema="aankoopproces" aria-expanded="false" aria-controls="form-aankoopproces">Ik wil een kennismaking of parkbezoek plannen</button>
+  <div class="panel" id="form-aankoopproces">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Aankoopproces">
+    <div class="row">
+     <div><label for="form-aankoopproces-vn">Voornaam</label><input id="form-aankoopproces-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-aankoopproces-an">Achternaam</label><input id="form-aankoopproces-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-aankoopproces-em">E-mailadres</label><input id="form-aankoopproces-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-aankoopproces-tel">Telefoonnummer</label><input id="form-aankoopproces-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-aankoopproces-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-aankoopproces-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="persoonlijke-match">
+  <div class="nr">Onderwerp 6 &middot; Persoonlijke match</div>
+  <h2>Wat wilt u dat uw villa u beiden brengt?</h2>
+  <p>U hoeft niet met precies dezelfde wensen te beginnen. Misschien kijkt de een vooral naar rust en tijd met familie, en de ander naar kosten, gebruik en beheer. Een passende keuze brengt die vragen bij elkaar.</p>
+  <h3>Uw wensen als vertrekpunt</h3>
+  <ul><li>Met wie wilt u er verblijven en hoeveel ruimte zoekt u?</li><li>Welke periodes wilt u zelf gebruiken?</li><li>Welke ligging en welk comfort spreken u aan?</li><li>Wilt u verhuren, en wat verwacht u van de dienstverlening?</li><li>Wat wilt u over investering, kosten en voorwaarden weten?</li></ul>
+  <h3>Zelf gebruiken, verhuren of combineren</h3>
+  <p>Bij eigen gebruik zijn onder meer uw gezelschap, favoriete periodes en gewenste indeling belangrijk. Bij verhuur komen de reserveringsvoorwaarden, de rol van Landal en de invloed op kosten en rendement erbij. U kunt ook kiezen voor uitsluitend recreatief eigen gebruik. Permanent wonen is niet toegestaan.</p>
+  <h3>Ook twijfel is een goed begin</h3>
+  <p>De eigenaren van een vierpersoonswoning aan het water hadden eerst vragen over hun mogelijkheden. Zij besloten het uit te zoeken. Hun keuze zegt niets over uw eigen situatie, maar laat wel zien dat u niet alle antwoorden hoeft te hebben voordat u contact opneemt.</p>
+  <p>Willem bespreekt graag uw wensen en openstaande vragen. Een aanvraag is geen aankoopbeslissing. U krijgt informatie om samen verder te kunnen afwegen.</p>
+  <button class="toggle" type="button" data-thema="persoonlijke-match" aria-expanded="false" aria-controls="form-persoonlijke-match">Ik wil graag onze wensen of een vraag bespreken</button>
+  <div class="panel" id="form-persoonlijke-match">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Persoonlijke match">
+    <div class="row">
+     <div><label for="form-persoonlijke-match-vn">Voornaam</label><input id="form-persoonlijke-match-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-persoonlijke-match-an">Achternaam</label><input id="form-persoonlijke-match-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-persoonlijke-match-em">E-mailadres</label><input id="form-persoonlijke-match-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-persoonlijke-match-tel">Telefoonnummer</label><input id="form-persoonlijke-match-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-persoonlijke-match-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-persoonlijke-match-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="privileges">
+  <div class="nr">Onderwerp 7 &middot; Privileges</div>
+  <h2>Meer genieten begint bij weten wat er geregeld is.</h2>
+  <p>Een eigen villa hoeft niet te betekenen dat u alle praktische werkzaamheden zelf organiseert. Tegelijk wilt u weten wat u uit handen geeft, welke afspraken gelden en wat u zelf blijft regelen.</p>
+  <h3>Verhuur via Landal</h3>
+  <p>Als u verhuurt, verzorgt Landal de verhuurbemiddeling en promotie volgens de overeengekomen voorwaarden. Dat neemt werkzaamheden uit handen. Daar horen ook afspraken en kosten bij.</p>
+  <h3>Gezamenlijk beheer en onderhoud</h3>
+  <p>Als eigenaar bent u automatisch lid van de Vereniging van Eigenaars. Die behartigt de gezamenlijke belangen en sluit voor het beheer een overeenkomst met Landal. Ook het onderhoud aan de buitenzijde van de woning, het terras en de tuin wordt via de VvE georganiseerd.</p>
+  <h3>Wat wilt u vooraf helder hebben?</h3>
+  <ul><li>Welke taken worden via Landal en de VvE georganiseerd?</li><li>Welke bijdragen, kosten en reserveringen horen daarbij?</li><li>Welke verantwoordelijkheden en besluiten blijven bij u als eigenaar?</li></ul>
+  <p>Dienstverlening betekent niet dat alles kosteloos of onbeperkt inbegrepen is. Willem neemt de verdeling en de afspraken graag met u door. Zo wordt duidelijk wat het eigenaarschap praktisch van u vraagt en wat u kunt uitbesteden.</p>
+  <button class="toggle" type="button" data-thema="privileges" aria-expanded="false" aria-controls="form-privileges">Ik wil graag meer weten over service en beheer</button>
+  <div class="panel" id="form-privileges">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Privileges">
+    <div class="row">
+     <div><label for="form-privileges-vn">Voornaam</label><input id="form-privileges-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-privileges-an">Achternaam</label><input id="form-privileges-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-privileges-em">E-mailadres</label><input id="form-privileges-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-privileges-tel">Telefoonnummer</label><input id="form-privileges-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-privileges-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-privileges-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="duurzaamheid">
+  <div class="nr">Onderwerp 8 &middot; Duurzaamheid</div>
+  <h2>Comfort, met aandacht voor uitvoering en omgeving.</h2>
+  <p>De uitstraling van een villa ziet u meteen. Maar een fijne eigen plek moet ook praktisch bij u passen. Daarom loont het om te kijken naar de bouwkundige uitvoering, de installaties en het onderhoud.</p>
+  <h3>Wat zit er achter het comfort?</h3>
+  <p>De villa&rsquo;s zijn gasloos en worden uitgevoerd met triple glas, een warmtepomp en zonnepanelen. Dat zijn relevante onderdelen bij uw afweging over comfort en energiegebruik. De uiteindelijke energiekosten hangen onder meer af van het woningtype, het gebruik en de tarieven. Lage vaste lasten of een hoger nettorendement zijn daarmee niet gegarandeerd.</p>
+  <h3>Wat vindt u belangrijk?</h3>
+  <ul><li>Een prettig binnenklimaat in verschillende seizoenen.</li><li>Inzicht in de technische uitvoering en de installaties.</li><li>Onderhoud en energiegebruik passend bij uw gebruik.</li></ul>
+  <h3>De groene omgeving hoort erbij</h3>
+  <p>Bestaande bomen en karakteristieke watergangen blijven waar mogelijk behouden, aangevuld met waterpartijen. Ook het beheer en onderhoud van het groen maken deel uit van de organisatie van het landgoed.</p>
+  <p>Wilt u weten wat dit betekent voor de villa die u overweegt? Willem bespreekt graag de uitvoering en de beschikbare specificaties. Zo kunt u uw keuze baseren op concrete kenmerken, niet alleen op de uitstraling.</p>
+  <button class="toggle" type="button" data-thema="duurzaamheid" aria-expanded="false" aria-controls="form-duurzaamheid">Ik wil graag meer weten over uitvoering en duurzaamheid</button>
+  <div class="panel" id="form-duurzaamheid">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Duurzaamheid">
+    <div class="row">
+     <div><label for="form-duurzaamheid-vn">Voornaam</label><input id="form-duurzaamheid-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-duurzaamheid-an">Achternaam</label><input id="form-duurzaamheid-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-duurzaamheid-em">E-mailadres</label><input id="form-duurzaamheid-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-duurzaamheid-tel">Telefoonnummer</label><input id="form-duurzaamheid-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-duurzaamheid-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-duurzaamheid-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="waarde-kwaliteit">
+  <div class="nr">Onderwerp 9 &middot; Waarde en waardevastheid</div>
+  <h2>Begrijpen wat u koopt, verder kijken dan vandaag.</h2>
+  <p>Een keuze voor een eigen vakantievilla gaat over de plek &eacute;n over de afspraken die erbij horen. Wat wordt uw priv&eacute;gedeelte? Wat deelt u? En hoe blijft het landgoed verzorgd?</p>
+  <h3>Uw appartementsrecht</h3>
+  <p>Een appartementsrecht geeft het recht op uitsluitend gebruik van uw priv&eacute;gedeelte: de recreatiewoning met bijbehorende tuin, terras en parkeerplaats(en). Daarnaast zijn er gebruiksrechten en mede-eigendom in de gemeenschappelijke delen volgens de splitsingsstukken.</p>
+  <h3>Samen verantwoordelijk voor het landgoed</h3>
+  <p>Iedere eigenaar wordt automatisch lid van de VvE. Via die vereniging worden gezamenlijke belangen, bijdragen en onderhoud georganiseerd, zoals voor de wegen, het groen, de waterpartijen en de gemeenschappelijke voorzieningen. Ook reserveringen voor toekomstig onderhoud zijn belangrijk.</p>
+  <h3>Wat maakt voor u het verschil?</h3>
+  <blockquote>&ldquo;Ik vond het park er eigenlijk heel erg uitspringen.&rdquo;</blockquote>
+  <p>Een echtpaar dat eerst andere parken bekeek, koos hier vanwege de uitstraling van de villa&rsquo;s. Dat is hun persoonlijke ervaring, geen uitspraak over toekomstige waarde. Een aantrekkelijke ligging, bouwkwaliteit of verzorgd onderhoud garandeert geen latere verkoopprijs. Willem licht de eigendomsstructuur en de onderhoudsafspraken graag toe, zodat u ook die kant van uw aankoop kunt beoordelen.</p>
+  <button class="toggle" type="button" data-thema="waarde-kwaliteit" aria-expanded="false" aria-controls="form-waarde-kwaliteit">Ik wil graag meer weten over eigendom en kwaliteit</button>
+  <div class="panel" id="form-waarde-kwaliteit">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Waarde en waardevastheid">
+    <div class="row">
+     <div><label for="form-waarde-kwaliteit-vn">Voornaam</label><input id="form-waarde-kwaliteit-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-waarde-kwaliteit-an">Achternaam</label><input id="form-waarde-kwaliteit-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-waarde-kwaliteit-em">E-mailadres</label><input id="form-waarde-kwaliteit-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-waarde-kwaliteit-tel">Telefoonnummer</label><input id="form-waarde-kwaliteit-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-waarde-kwaliteit-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-waarde-kwaliteit-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+<section class="theme" id="fase-2">
+  <div class="nr">Onderwerp 10 &middot; Fase 2</div>
+  <h2>Past een volgende fase beter bij uw plannen?</h2>
+  <p>Misschien zoekt u een andere ligging. Misschien past een later aankoopmoment beter bij u. U kunt De Wielsche Dreef interessant vinden zonder dat de keuze nu al vaststaat.</p>
+  <h3>Het landgoed groeit in fasen</h3>
+  <p>De Wielsche Dreef is opgezet als een landgoed met circa 245 recreatiewoningen, verdeeld over vijf fasen. Een volgende fase kan aansluiten op een andere voorkeur of een later moment. De mogelijkheden hangen af van de ontwikkeling en de verkoopstatus.</p>
+  <h3>Vertel wat u zoekt</h3>
+  <ul><li>Uw voorkeur voor woninggrootte, type en ligging.</li><li>Uw plannen voor eigen gebruik en eventuele verhuur.</li><li>Het moment waarop u een aankoop wilt overwegen.</li></ul>
+  <h3>Samen vooruitkijken</h3>
+  <p>Willem bespreekt graag uw wensen en de stand van zaken rond fase 2. Zo kunt u gericht beoordelen of een volgende fase bij uw plannen past, of dat de huidige mogelijkheden toch beter aansluiten.</p>
+  <p>Een informatieaanvraag is geen reservering en geeft geen voorrang of garantie op beschikbaarheid. Het is een eerste stap om duidelijk te krijgen waar u samen verder naar wilt kijken.</p>
+  <button class="toggle" type="button" data-thema="fase-2" aria-expanded="false" aria-controls="form-fase-2">Ik wil graag meer weten over fase 2</button>
+  <div class="panel" id="form-fase-2">
+   <form class="aanvraag">
+    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+    <input type="hidden" name="onderwerp" value="Fase 2">
+    <div class="row">
+     <div><label for="form-fase-2-vn">Voornaam</label><input id="form-fase-2-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
+     <div><label for="form-fase-2-an">Achternaam</label><input id="form-fase-2-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="row">
+     <div><label for="form-fase-2-em">E-mailadres</label><input id="form-fase-2-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
+     <div><label for="form-fase-2-tel">Telefoonnummer</label><input id="form-fase-2-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
+    </div>
+    <label for="form-fase-2-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
+    <textarea id="form-fase-2-vr" name="vraag"></textarea>
+    <button class="send" type="submit">Versturen</button>
+    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
+   </form>
+   <div class="done"></div>
+  </div>
+</section>
+
+
+ <div class="willem">
+  <div>
+   <p class="naam">Liever direct contact met Willem?</p>
+   <p>Willem van de Griend, uw persoonlijke Landgoed-adviseur</p>
+   <p><a href="tel:0853032844">085 - 303 28 44</a> &middot; <a href="mailto:willem@recravas.nl">willem@recravas.nl</a></p>
+  </div>
+ </div>
+</main>
+
+<footer>
+ <div class="wrap">
+  <p style="margin:0;">Landgoed De Wielsche Dreef &middot; Kalverlandseweg 3, 4024 BT Eck en Wiel<br>
+  Recravas &middot; verhuur verzorgd door Landal</p>
+  <p class="disc">Deze e-mail is algemene informatie en bevat geen aanbod, rendements- of belastingtoezegging. Aan de inhoud kunnen geen rechten worden ontleend. Specifieke cijfers, voorwaarden en risico&rsquo;s worden uitsluitend in een persoonlijk gesprek toegelicht. Deze informatie is geen fiscaal of beleggingsadvies; laat uw eigen situatie toetsen door een fiscalist of adviseur.</p>
+ </div>
+</footer>
+
+<script>
+(function(){
+  var ENDPOINT = "";
+
+  function qs(){
+    var o = {}, s = window.location.search.replace(/^\?/, "");
+    s.split("&").forEach(function(p){
+      if(!p) return;
+      var i = p.indexOf("="), k = i < 0 ? p : p.slice(0, i);
+      var v = i < 0 ? "" : decodeURIComponent(p.slice(i + 1).replace(/\+/g, " "));
+      o[k] = v;
+    });
+    return o;
+  }
+  var q = qs();
+
+  // De mails geven naam, e-mail en telefoon mee. Lege of niet-ingevulde
+  // merge-tags (%FIRSTNAME% blijft staan als het veld leeg is) negeren we.
+  function clean(v){
+    if(!v) return "";
+    if(v.charAt(0) === "%" || v.indexOf("{{") === 0) return "";
+    return v;
+  }
+  var pre = {
+    voornaam: clean(q.first_name),
+    achternaam: clean(q.last_name),
+    email: clean(q.email),
+    telefoon: clean(q.phone)
+  };
+  Object.keys(pre).forEach(function(k){
+    if(!pre[k]) return;
+    document.querySelectorAll('[data-field="' + k + '"]').forEach(function(el){
+      el.value = pre[k];
+    });
+  });
+
+  document.querySelectorAll(".toggle").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var panel = document.getElementById(btn.getAttribute("aria-controls"));
+      var open = panel.classList.toggle("open");
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      if(open){
+        var f = panel.querySelector("input:not([type=hidden])");
+        if(f && !f.value) f.focus({ preventScroll: true });
+      }
+    });
+  });
+
+  document.querySelectorAll("form.aanvraag").forEach(function(form){
+    form.addEventListener("submit", function(ev){
+      ev.preventDefault();
+      var data = {};
+      new FormData(form).forEach(function(v, k){ data[k] = v; });
+      data.pagina = window.location.href;
+      var done = form.parentNode.querySelector(".done");
+      if(!ENDPOINT){
+        done.innerHTML = "<strong>Voorbeeldversie.</strong> Het formulier is nog niet " +
+          "gekoppeld, dus er is niets verstuurd. Zodra de koppeling staat, komt deze " +
+          "aanvraag binnen bij Willem.";
+        done.classList.add("open");
+        return;
+      }
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      }).then(function(){
+        form.style.display = "none";
+        done.innerHTML = "<strong>Dank u wel.</strong> Uw bericht staat genoteerd. " +
+          "Willem neemt binnen een werkdag contact met u op.";
+        done.classList.add("open");
+      }).catch(function(){
+        done.innerHTML = "Het versturen lukte niet. Belt u gerust naar 085 - 303 28 44 " +
+          "of mail naar willem@recravas.nl.";
+        done.classList.add("open");
+      });
+    });
+  });
+
+  // Komt iemand uit een mail, dan staat het thema al open.
+  var doel = q.thema || window.location.hash.replace(/^#/, "");
+  if(doel){
+    var btn = document.querySelector('.toggle[data-thema="' + doel + '"]');
+    if(btn) btn.click();
+    var sec = document.getElementById(doel);
+    if(sec) setTimeout(function(){ sec.scrollIntoView({ behavior: "smooth", block: "start" }); }, 80);
+  }
+})();
+</script>
+</body></html>
