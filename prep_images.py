@@ -295,9 +295,30 @@ def webbeelden():
         print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
 
 
+# --- teamportretten ----------------------------------------------------
+#
+# De vijf portretten op de merkgroene achtergrond, zoals aangeleverd: vierkant
+# en zonder uitsnede. De originelen in bron/ zijn 4000x4000 PNG van 7 tot 11 MB,
+# veel te zwaar voor een pagina of een mail. Hier gaan ze naar 1000x1000 JPEG.
+TEAM = ["Andr\u00e9", "Ruben", "Sem", "Walter", "Willem"]
+TEAM_ZIJ = 1000
+
+
+def teamportretten():
+    for naam in TEAM:
+        im = Image.open(OUT / "bron" / (naam + ".png")).convert("RGB")
+        im = im.resize((TEAM_ZIJ, TEAM_ZIJ), Image.LANCZOS)
+        # Bestandsnaam zonder accenten, zodat de URL overal werkt.
+        kaal = naam.replace("\u00e9", "e").lower()
+        f = OUT / ("team-%s.jpg" % kaal)
+        im.save(f, "JPEG", quality=86, optimize=True, progressive=True)
+        print("%-24s %6d KB" % (f.name, f.stat().st_size // 1024))
+
+
 if __name__ == "__main__":
     main()
     portretten()
     thumbs()
     videostills()
     webbeelden()
+    teamportretten()
