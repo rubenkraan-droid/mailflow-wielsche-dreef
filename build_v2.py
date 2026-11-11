@@ -236,7 +236,7 @@ MAILS = [
   title='Een eigen villa, zonder alles zelf te organiseren',
   preheader='Wie regelt de verhuur, het groen en het gezamenlijke onderhoud?',
   h1='Geen tweede agenda vol beheertaken',
-  body=(P + 'Als ondernemer bent u gewend verantwoordelijkheid te dragen. Uw vrije plek moet daar niet ongemerkt een tweede takenlijst aan toevoegen. Daarom is het belangrijk om vooraf te weten wat er wordt geregeld en wat bij u blijft liggen.</p>\n'
+  body=(P + 'Een eigen villa moet u ontspanning opleveren, geen extra werk. Daarom is het belangrijk om vooraf te weten wat er wordt geregeld en wat bij u blijft liggen.</p>\n'
    + P + 'Op De Wielsche Dreef zijn verhuur en gezamenlijk beheer georganiseerd:</p>\n'
    + bullets([
        'Bij verhuur verzorgt Landal de exclusieve verhuurbemiddeling en promotie.',
