@@ -210,6 +210,20 @@ Aankoopproces, waar het bezoek wordt ingepland. De pagina opent het juiste
 uitklapformulier zodra iemand uit een mail binnenkomt en vult naam, e-mail en
 telefoon vooraf in uit de querystring.
 
-Nog open: `FORM_ENDPOINT` bovenin `build_v2.py` is leeg, dus het formulier
-verstuurt nog niets. Zodra de GoHighLevel-koppeling bekend is, die invullen,
-net als `CONV_URL` wanneer de pagina in GHL staat.
+De tien uitklappanelen bevatten sinds 13 november 2026 het HighLevel-formulier
+`WD - Gesprek - Mail` (`gO63rpRMVuuC5mc2uFXc`), hetzelfde formulier als op de
+videopagina. De constante staat als `GHL_FORM` bovenin `build_v2.py`.
+
+De iframe krijgt pas een `src` bij het eerste openklappen; tien formulieren
+tegelijk laden zou de pagina onnodig zwaar maken. Mee naar HighLevel gaan:
+voornaam, achternaam, e-mail en telefoon uit de mail, de utm-parameters en
+`onderwerp=<thema>`.
+
+`utm_content` komt binnen via het bestaande verborgen veld met Query Key
+`utm_content`. Voor `onderwerp` bestaat nog geen verborgen veld in het
+formulier; wie wil zien uit welk thema een aanvraag komt, moet dat veld in
+HighLevel nog toevoegen met Query Key `onderwerp`.
+
+Nog open: `CONV_URL` wijst naar GitHub Pages. Dat werkt, maar als de pagina
+naar GHL verhuist moet die constante mee en moeten de vijftien mails opnieuw
+worden gegenereerd.
