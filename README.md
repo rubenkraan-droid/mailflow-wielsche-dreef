@@ -220,9 +220,10 @@ voornaam, achternaam, e-mail en telefoon uit de mail, de utm-parameters en
 `onderwerp=<thema>`.
 
 `utm_content` komt binnen via het bestaande verborgen veld met Query Key
-`utm_content`. Voor `onderwerp` bestaat nog geen verborgen veld in het
-formulier; wie wil zien uit welk thema een aanvraag komt, moet dat veld in
-HighLevel nog toevoegen met Query Key `onderwerp`.
+`utm_content`. Voor het thema is op 13 november 2026 het contactveld
+`mailflow_onderwerp` (`contact.mailflow_onderwerp`) aangemaakt en als verborgen
+veld aan het formulier toegevoegd met Query Key `onderwerp`. In HighLevel staat
+bij een aanvraag dus welk thema iemand aanklikte, bijvoorbeeld "Fase 2".
 
 Nog open: `CONV_URL` wijst naar GitHub Pages. Dat werkt, maar als de pagina
 naar GHL verhuist moet die constante mee en moeten de vijftien mails opnieuw
