@@ -32,7 +32,10 @@ CONV_URL = "https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/v2/conver
 
 # Waar het uitklapformulier zijn inzending naartoe stuurt. Leeg betekent
 # preview: het formulier toont dan een melding in plaats van te versturen.
-FORM_ENDPOINT = ""
+# Het formulier dat al in HighLevel staat voor deze mailflow. Hetzelfde
+# formulier dat de videopagina gebruikt, dus aanvragen komen op de
+# vertrouwde plek binnen.
+GHL_FORM = "gO63rpRMVuuC5mc2uFXc"      # "WD - Gesprek - Mail"
 
 
 # ---------------------------------------------------------------- mail-helpers
@@ -621,6 +624,8 @@ PAGE = """<!DOCTYPE html>
    font-family:'Inter',Arial,sans-serif; font-size:16px; font-weight:700;
    padding:14px 30px; border-radius:4px; }
  button.send:hover{ background:var(--green-dark); }
+ .ghlform{ width:100%; min-height:670px; border:0; display:block;
+   background:var(--card); border-radius:4px; }
  .small{ font-size:13px; line-height:20px; color:#53625f; margin:12px 0 0 0; }
  .optioneel{ font-weight:400; color:#53625f; }
  .toggle:focus-visible, button.send:focus-visible, nav.themes a:focus-visible,
@@ -695,8 +700,6 @@ PAGE = """<!DOCTYPE html>
 
 <script>
 (function(){
-  var ENDPOINT = "[[FORM_ENDPOINT]]";
-
   // Zonder JavaScript staan alle panelen open. Deze klasse klapt ze dicht,
   // zodat de pagina ook werkt als het script niet draait.
   document.documentElement.className += " js";
@@ -726,8 +729,9 @@ PAGE = """<!DOCTYPE html>
     return plusIsSpatie ? v.replace(/\+/g, " ") : v;
   }
 
+  var pre = { voornaam: "", achternaam: "", email: "", telefoon: "" };
   try {
-    var pre = {
+    pre = {
       voornaam: clean(q.first_name, true),
       achternaam: clean(q.last_name, true),
       email: clean(q.email, false),
@@ -756,110 +760,64 @@ PAGE = """<!DOCTYPE html>
       var panel = document.getElementById(btn.getAttribute("aria-controls"));
       var open = panel.classList.toggle("open");
       btn.setAttribute("aria-expanded", open ? "true" : "false");
-      if(open){
-        var f = panel.querySelector("input:not([type=hidden])");
-        if(f && !f.value) f.focus({ preventScroll: true });
-      }
+      if(open) laad(panel);
     });
   });
 
-  document.querySelectorAll("form.aanvraag").forEach(function(form){
-    form.addEventListener("submit", function(ev){
-      ev.preventDefault();
-      var data = {};
-      new FormData(form).forEach(function(v, k){ data[k] = v; });
-      // Alleen het pad en de meetparameters, niet de persoonsgegevens die
-      // eventueel nog in de URL staan.
-      data.pagina = window.location.pathname + window.location.hash;
-      var done = form.parentNode.querySelector(".done");
-      function toon(html, verbergFormulier){
-        done.innerHTML = html;
-        done.classList.add("open");
-        if(verbergFormulier) form.style.display = "none";
-        done.setAttribute("tabindex", "-1");
-        done.focus({ preventScroll: true });
-        done.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-      if(!ENDPOINT){
-        toon("<strong>Voorbeeldversie.</strong> Het formulier is nog niet " +
-             "gekoppeld, dus er is niets verstuurd. Zodra de koppeling staat, " +
-             "komt deze aanvraag binnen bij Willem.", false);
-        return;
-      }
-      fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      }).then(function(){
-        toon("<strong>Dank u wel.</strong> Uw bericht staat genoteerd. " +
-             "Willem neemt binnen een werkdag contact met u op.", true);
-      }).catch(function(){
-        toon("Het versturen lukte niet. Belt u gerust naar [[PHONE]] " +
-             "of mail naar [[EMAIL]].", false);
-      });
+  // Het HighLevel-formulier laadt pas bij de eerste keer openklappen, met
+  // de gegevens uit de mail erin en het onderwerp van dit thema erbij.
+  function laad(panel){
+    var f = panel.querySelector("iframe.ghlform");
+    if(!f || f.getAttribute("src")) return;
+    var par = [];
+    function zet(k, v){ if(v) par.push(k + "=" + encodeURIComponent(v)); }
+    zet("first_name", pre.voornaam);
+    zet("last_name", pre.achternaam);
+    zet("email", pre.email);
+    zet("phone", pre.telefoon);
+    zet("onderwerp", f.getAttribute("data-onderwerp"));
+    // De utm-parameters staan nog in de adresbalk en horen mee, zodat een
+    // aanvraag in HighLevel terug te voeren is op de mail waar hij uit komt.
+    new URL(window.location.href).searchParams.forEach(function(v, k){
+      if(k.indexOf("utm_") === 0) zet(k, v);
     });
-  });
+    f.id = "inline-[[GHL_FORM]]-" + f.getAttribute("data-thema");
+    f.setAttribute("data-layout", "{'id':'INLINE'}");
+    f.setAttribute("data-form-id", "[[GHL_FORM]]");
+    f.setAttribute("data-layout-iframe-id", f.id);
+    f.setAttribute("data-height", "670");
+    f.setAttribute("src",
+      "https://api.leadconnectorhq.com/widget/form/[[GHL_FORM]]" +
+      (par.length ? "?" + par.join("&") : ""));
+  }
 
-  // Komt iemand uit een mail, dan staat het thema al open. Een onderwerp is
-  // lang, dus een regel onder de kop vertelt dat het formulier klaarstaat.
-  try {
-    var doel = q.thema || window.location.hash.replace(/^#/, "");
-    if(doel){
-      var btn = document.querySelector('.toggle[data-thema="' + doel + '"]');
-      var sec = document.getElementById(doel);
-      if(btn && btn.getAttribute("aria-expanded") !== "true") btn.click();
-      if(sec && btn){
-        var kop = sec.querySelector("h2");
-        if(kop){
-          var wijzer = document.createElement("p");
-          wijzer.className = "wijzer";
-          var a = document.createElement("a");
-          a.href = "#" + btn.getAttribute("aria-controls");
-          a.textContent = "Uw formulier staat klaar onderaan dit onderwerp";
-          wijzer.appendChild(a);
-          kop.parentNode.insertBefore(wijzer, kop.nextSibling);
-        }
-      }
-      if(sec) setTimeout(function(){
-        sec.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 80);
-    }
-  } catch(e){ }
 })();
 </script>
+<!-- Laat het HighLevel-formulier in de iframe meegroeien met zijn inhoud. -->
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 </body></html>"""
 
 
 def form_html(t):
-    """Het uitklapformulier onder een thema."""
+    """Het uitklappaneel onder een thema, met het HighLevel-formulier erin.
+
+    De iframe krijgt pas een src als het paneel voor het eerst opengaat. Tien
+    formulieren tegelijk laden zou de pagina onnodig zwaar maken, en de
+    bezoeker ziet er toch maar een.
+    """
     pid = "form-" + t["anchor"]
+    onderwerp = t["naam"].replace("&amp;", "en")
     return (
      '  <button class="toggle" type="button" data-thema="' + t["anchor"] + '" '
      'aria-expanded="false" aria-controls="' + pid + '">' + t["knop"] + '</button>\n'
      '  <div class="panel" id="' + pid + '">\n'
-     '   <form class="aanvraag">\n'
-     '    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. '
+     '   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. '
      'Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>\n'
-     '    <input type="hidden" name="onderwerp" value="' + t["naam"].replace("&amp;", "en") + '">\n'
-     '    <div class="row">\n'
-     '     <div><label for="' + pid + '-vn">Voornaam</label>'
-     '<input id="' + pid + '-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>\n'
-     '     <div><label for="' + pid + '-an">Achternaam</label>'
-     '<input id="' + pid + '-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>\n'
-     '    </div>\n'
-     '    <div class="row">\n'
-     '     <div><label for="' + pid + '-em">E-mailadres</label>'
-     '<input id="' + pid + '-em" name="email" data-field="email" type="email" autocomplete="email" required></div>\n'
-     '     <div><label for="' + pid + '-tel">Telefoonnummer</label>'
-     '<input id="' + pid + '-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>\n'
-     '    </div>\n'
-     '    <label for="' + pid + '-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>\n'
-     '    <textarea id="' + pid + '-vr" name="vraag"></textarea>\n'
-     '    <button class="send" type="submit">Versturen</button>\n'
-     '    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. '
+     '   <iframe class="ghlform" data-onderwerp="' + onderwerp + '" '
+     'data-thema="' + t["anchor"] + '" '
+     'title="Aanvraag over ' + onderwerp + '" scrolling="no"></iframe>\n'
+     '   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. '
      'U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>\n'
-     '   </form>\n'
-     '   <div class="done"></div>\n'
      '  </div>\n')
 
 
@@ -911,7 +869,7 @@ def build_page():
         "PARTNER_LINE": BRAND["partner_line"],
         "DISCLAIMER": BRAND["disclaimer"].replace(
             "Deze e-mail is algemene informatie", "Deze informatie is algemeen van aard"),
-        "FORM_ENDPOINT": FORM_ENDPOINT,
+        "GHL_FORM": GHL_FORM,
         "CDN_BANNER": bm._CDN.replace("hero-", "banner-"),
     }
     for k, v in repl.items():

@@ -90,6 +90,8 @@
    font-family:'Inter',Arial,sans-serif; font-size:16px; font-weight:700;
    padding:14px 30px; border-radius:4px; }
  button.send:hover{ background:var(--green-dark); }
+ .ghlform{ width:100%; min-height:670px; border:0; display:block;
+   background:var(--card); border-radius:4px; }
  .small{ font-size:13px; line-height:20px; color:#53625f; margin:12px 0 0 0; }
  .optioneel{ font-weight:400; color:#53625f; }
  .toggle:focus-visible, button.send:focus-visible, nav.themes a:focus-visible,
@@ -155,23 +157,9 @@
   <p>We verkopen wekelijks woningen, dus het aanbod verandert mee. Willem bespreekt daarom de actuele mogelijkheden met u, in plaats van u op basis van een eerder overzicht te laten kiezen. U bent ook welkom om de plek samen te komen ervaren.</p>
   <button class="toggle" type="button" data-thema="beschikbare-woningen" aria-expanded="false" aria-controls="form-beschikbare-woningen">Ik wil graag meer weten over de actuele beschikbaarheid</button>
   <div class="panel" id="form-beschikbare-woningen">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Beschikbare woningen">
-    <div class="row">
-     <div><label for="form-beschikbare-woningen-vn">Voornaam</label><input id="form-beschikbare-woningen-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-beschikbare-woningen-an">Achternaam</label><input id="form-beschikbare-woningen-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-beschikbare-woningen-em">E-mailadres</label><input id="form-beschikbare-woningen-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-beschikbare-woningen-tel">Telefoonnummer</label><input id="form-beschikbare-woningen-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-beschikbare-woningen-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-beschikbare-woningen-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Beschikbare woningen" data-thema="beschikbare-woningen" title="Aanvraag over Beschikbare woningen" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="eigen-gebruik-verhuur">
@@ -188,23 +176,9 @@
   <p>Liever alleen zelf gebruiken? Ook dat kan recreatief, zonder verhuur. Permanente bewoning is niet toegestaan. Willem bespreekt graag uw gewenste periodes, gebruik en financi&euml;le aandachtspunten.</p>
   <button class="toggle" type="button" data-thema="eigen-gebruik-verhuur" aria-expanded="false" aria-controls="form-eigen-gebruik-verhuur">Ik wil graag meer weten over eigen gebruik, verhuur en rendement</button>
   <div class="panel" id="form-eigen-gebruik-verhuur">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Eigen gebruik en verhuur">
-    <div class="row">
-     <div><label for="form-eigen-gebruik-verhuur-vn">Voornaam</label><input id="form-eigen-gebruik-verhuur-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-eigen-gebruik-verhuur-an">Achternaam</label><input id="form-eigen-gebruik-verhuur-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-eigen-gebruik-verhuur-em">E-mailadres</label><input id="form-eigen-gebruik-verhuur-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-eigen-gebruik-verhuur-tel">Telefoonnummer</label><input id="form-eigen-gebruik-verhuur-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-eigen-gebruik-verhuur-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-eigen-gebruik-verhuur-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Eigen gebruik en verhuur" data-thema="eigen-gebruik-verhuur" title="Aanvraag over Eigen gebruik en verhuur" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="werkelijke-kosten">
@@ -220,23 +194,9 @@
   <p>Uw manier van gebruik be&iuml;nvloedt de kosten en de eventuele verhuuropbrengsten. Een verwacht participatierendement is geen gegarandeerde opbrengst. Willem licht het kostenoverzicht van de villa die u overweegt graag toe. Uw eigen adviseur kan beoordelen hoe de aankoop financieel en fiscaal in uw situatie past.</p>
   <button class="toggle" type="button" data-thema="werkelijke-kosten" aria-expanded="false" aria-controls="form-werkelijke-kosten">Ik wil graag meer weten over de kosten</button>
   <div class="panel" id="form-werkelijke-kosten">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Werkelijke kosten">
-    <div class="row">
-     <div><label for="form-werkelijke-kosten-vn">Voornaam</label><input id="form-werkelijke-kosten-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-werkelijke-kosten-an">Achternaam</label><input id="form-werkelijke-kosten-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-werkelijke-kosten-em">E-mailadres</label><input id="form-werkelijke-kosten-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-werkelijke-kosten-tel">Telefoonnummer</label><input id="form-werkelijke-kosten-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-werkelijke-kosten-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-werkelijke-kosten-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Werkelijke kosten" data-thema="werkelijke-kosten" title="Aanvraag over Werkelijke kosten" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="park-omgeving">
@@ -253,23 +213,9 @@
   <p>De Wielsche Dreef wordt in fasen gerealiseerd. Receptie, fietsverhuur en parkshop maken deel uit van de ontwikkeling, net als voorzieningen in latere fasen. Niet alles is automatisch al in gebruik. Tijdens een gesprek of bezoek licht Willem de actuele parksituatie en de ontwikkelfasen toe.</p>
   <button class="toggle" type="button" data-thema="park-omgeving" aria-expanded="false" aria-controls="form-park-omgeving">Ik wil graag meer weten over het park en de ontwikkelfasen</button>
   <div class="panel" id="form-park-omgeving">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Park en omgeving">
-    <div class="row">
-     <div><label for="form-park-omgeving-vn">Voornaam</label><input id="form-park-omgeving-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-park-omgeving-an">Achternaam</label><input id="form-park-omgeving-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-park-omgeving-em">E-mailadres</label><input id="form-park-omgeving-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-park-omgeving-tel">Telefoonnummer</label><input id="form-park-omgeving-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-park-omgeving-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-park-omgeving-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Park en omgeving" data-thema="park-omgeving" title="Aanvraag over Park en omgeving" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="aankoopproces">
@@ -290,23 +236,9 @@
   <p>Wilt u eerst iets bespreken, of wilt u een bezoek plannen? Willem helpt u graag verder met de stap die nu bij u past.</p>
   <button class="toggle" type="button" data-thema="aankoopproces" aria-expanded="false" aria-controls="form-aankoopproces">Ik wil een kennismaking of parkbezoek plannen</button>
   <div class="panel" id="form-aankoopproces">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Aankoopproces">
-    <div class="row">
-     <div><label for="form-aankoopproces-vn">Voornaam</label><input id="form-aankoopproces-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-aankoopproces-an">Achternaam</label><input id="form-aankoopproces-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-aankoopproces-em">E-mailadres</label><input id="form-aankoopproces-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-aankoopproces-tel">Telefoonnummer</label><input id="form-aankoopproces-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-aankoopproces-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-aankoopproces-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Aankoopproces" data-thema="aankoopproces" title="Aanvraag over Aankoopproces" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="persoonlijke-match">
@@ -323,23 +255,9 @@
   <p>Willem bespreekt graag uw wensen en openstaande vragen. Een aanvraag is geen aankoopbeslissing. U krijgt informatie om samen verder te kunnen afwegen.</p>
   <button class="toggle" type="button" data-thema="persoonlijke-match" aria-expanded="false" aria-controls="form-persoonlijke-match">Ik wil graag onze wensen of een vraag bespreken</button>
   <div class="panel" id="form-persoonlijke-match">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Persoonlijke match">
-    <div class="row">
-     <div><label for="form-persoonlijke-match-vn">Voornaam</label><input id="form-persoonlijke-match-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-persoonlijke-match-an">Achternaam</label><input id="form-persoonlijke-match-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-persoonlijke-match-em">E-mailadres</label><input id="form-persoonlijke-match-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-persoonlijke-match-tel">Telefoonnummer</label><input id="form-persoonlijke-match-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-persoonlijke-match-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-persoonlijke-match-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Persoonlijke match" data-thema="persoonlijke-match" title="Aanvraag over Persoonlijke match" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="privileges">
@@ -356,23 +274,9 @@
   <p>Dienstverlening betekent niet dat alles kosteloos of onbeperkt inbegrepen is. Willem neemt de verdeling en de afspraken graag met u door. Zo wordt duidelijk wat het eigenaarschap praktisch van u vraagt en wat u kunt uitbesteden.</p>
   <button class="toggle" type="button" data-thema="privileges" aria-expanded="false" aria-controls="form-privileges">Ik wil graag meer weten over service en beheer</button>
   <div class="panel" id="form-privileges">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Privileges">
-    <div class="row">
-     <div><label for="form-privileges-vn">Voornaam</label><input id="form-privileges-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-privileges-an">Achternaam</label><input id="form-privileges-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-privileges-em">E-mailadres</label><input id="form-privileges-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-privileges-tel">Telefoonnummer</label><input id="form-privileges-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-privileges-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-privileges-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Privileges" data-thema="privileges" title="Aanvraag over Privileges" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="duurzaamheid">
@@ -389,23 +293,9 @@
   <p>Wilt u weten wat dit betekent voor de villa die u overweegt? Willem bespreekt graag de uitvoering en de beschikbare specificaties. Zo kunt u uw keuze baseren op concrete kenmerken, niet alleen op de uitstraling.</p>
   <button class="toggle" type="button" data-thema="duurzaamheid" aria-expanded="false" aria-controls="form-duurzaamheid">Ik wil graag meer weten over uitvoering en duurzaamheid</button>
   <div class="panel" id="form-duurzaamheid">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Duurzaamheid">
-    <div class="row">
-     <div><label for="form-duurzaamheid-vn">Voornaam</label><input id="form-duurzaamheid-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-duurzaamheid-an">Achternaam</label><input id="form-duurzaamheid-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-duurzaamheid-em">E-mailadres</label><input id="form-duurzaamheid-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-duurzaamheid-tel">Telefoonnummer</label><input id="form-duurzaamheid-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-duurzaamheid-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-duurzaamheid-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Duurzaamheid" data-thema="duurzaamheid" title="Aanvraag over Duurzaamheid" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="waarde-kwaliteit">
@@ -423,23 +313,9 @@
   <p>Dat is hun persoonlijke ervaring, geen uitspraak over toekomstige waarde. Een aantrekkelijke ligging, bouwkwaliteit of verzorgd onderhoud garandeert geen latere verkoopprijs. Willem licht de eigendomsstructuur en de onderhoudsafspraken graag toe, zodat u ook die kant van uw aankoop kunt beoordelen.</p>
   <button class="toggle" type="button" data-thema="waarde-kwaliteit" aria-expanded="false" aria-controls="form-waarde-kwaliteit">Ik wil graag meer weten over eigendom en kwaliteit</button>
   <div class="panel" id="form-waarde-kwaliteit">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Waarde en waardevastheid">
-    <div class="row">
-     <div><label for="form-waarde-kwaliteit-vn">Voornaam</label><input id="form-waarde-kwaliteit-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-waarde-kwaliteit-an">Achternaam</label><input id="form-waarde-kwaliteit-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-waarde-kwaliteit-em">E-mailadres</label><input id="form-waarde-kwaliteit-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-waarde-kwaliteit-tel">Telefoonnummer</label><input id="form-waarde-kwaliteit-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-waarde-kwaliteit-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-waarde-kwaliteit-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Waarde en waardevastheid" data-thema="waarde-kwaliteit" title="Aanvraag over Waarde en waardevastheid" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 <section class="theme" id="fase-2">
@@ -456,23 +332,9 @@
   <p>Een informatieaanvraag is geen reservering en geeft geen voorrang of garantie op beschikbaarheid. Het is een eerste stap om duidelijk te krijgen waar u samen verder naar wilt kijken.</p>
   <button class="toggle" type="button" data-thema="fase-2" aria-expanded="false" aria-controls="form-fase-2">Ik wil graag meer weten over fase 2</button>
   <div class="panel" id="form-fase-2">
-   <form class="aanvraag">
-    <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
-    <input type="hidden" name="onderwerp" value="Fase 2">
-    <div class="row">
-     <div><label for="form-fase-2-vn">Voornaam</label><input id="form-fase-2-vn" name="voornaam" data-field="voornaam" type="text" autocomplete="given-name" required></div>
-     <div><label for="form-fase-2-an">Achternaam</label><input id="form-fase-2-an" name="achternaam" data-field="achternaam" type="text" autocomplete="family-name"></div>
-    </div>
-    <div class="row">
-     <div><label for="form-fase-2-em">E-mailadres</label><input id="form-fase-2-em" name="email" data-field="email" type="email" autocomplete="email" required></div>
-     <div><label for="form-fase-2-tel">Telefoonnummer</label><input id="form-fase-2-tel" name="telefoon" data-field="telefoon" type="tel" autocomplete="tel"></div>
-    </div>
-    <label for="form-fase-2-vr">Uw vraag of opmerking <span style="font-weight:400; color:#6d7b78;">(optioneel)</span></label>
-    <textarea id="form-fase-2-vr" name="vraag"></textarea>
-    <button class="send" type="submit">Versturen</button>
-    <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
-   </form>
-   <div class="done"></div>
+   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>
+   <iframe class="ghlform" data-onderwerp="Fase 2" data-thema="fase-2" title="Aanvraag over Fase 2" scrolling="no"></iframe>
+   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>
   </div>
 </section>
 
@@ -496,8 +358,6 @@
 
 <script>
 (function(){
-  var ENDPOINT = "";
-
   // Zonder JavaScript staan alle panelen open. Deze klasse klapt ze dicht,
   // zodat de pagina ook werkt als het script niet draait.
   document.documentElement.className += " js";
@@ -527,8 +387,9 @@
     return plusIsSpatie ? v.replace(/\+/g, " ") : v;
   }
 
+  var pre = { voornaam: "", achternaam: "", email: "", telefoon: "" };
   try {
-    var pre = {
+    pre = {
       voornaam: clean(q.first_name, true),
       achternaam: clean(q.last_name, true),
       email: clean(q.email, false),
@@ -557,75 +418,39 @@
       var panel = document.getElementById(btn.getAttribute("aria-controls"));
       var open = panel.classList.toggle("open");
       btn.setAttribute("aria-expanded", open ? "true" : "false");
-      if(open){
-        var f = panel.querySelector("input:not([type=hidden])");
-        if(f && !f.value) f.focus({ preventScroll: true });
-      }
+      if(open) laad(panel);
     });
   });
 
-  document.querySelectorAll("form.aanvraag").forEach(function(form){
-    form.addEventListener("submit", function(ev){
-      ev.preventDefault();
-      var data = {};
-      new FormData(form).forEach(function(v, k){ data[k] = v; });
-      // Alleen het pad en de meetparameters, niet de persoonsgegevens die
-      // eventueel nog in de URL staan.
-      data.pagina = window.location.pathname + window.location.hash;
-      var done = form.parentNode.querySelector(".done");
-      function toon(html, verbergFormulier){
-        done.innerHTML = html;
-        done.classList.add("open");
-        if(verbergFormulier) form.style.display = "none";
-        done.setAttribute("tabindex", "-1");
-        done.focus({ preventScroll: true });
-        done.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-      if(!ENDPOINT){
-        toon("<strong>Voorbeeldversie.</strong> Het formulier is nog niet " +
-             "gekoppeld, dus er is niets verstuurd. Zodra de koppeling staat, " +
-             "komt deze aanvraag binnen bij Willem.", false);
-        return;
-      }
-      fetch(ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      }).then(function(){
-        toon("<strong>Dank u wel.</strong> Uw bericht staat genoteerd. " +
-             "Willem neemt binnen een werkdag contact met u op.", true);
-      }).catch(function(){
-        toon("Het versturen lukte niet. Belt u gerust naar 085 - 303 28 44 " +
-             "of mail naar willem@recravas.nl.", false);
-      });
+  // Het HighLevel-formulier laadt pas bij de eerste keer openklappen, met
+  // de gegevens uit de mail erin en het onderwerp van dit thema erbij.
+  function laad(panel){
+    var f = panel.querySelector("iframe.ghlform");
+    if(!f || f.getAttribute("src")) return;
+    var par = [];
+    function zet(k, v){ if(v) par.push(k + "=" + encodeURIComponent(v)); }
+    zet("first_name", pre.voornaam);
+    zet("last_name", pre.achternaam);
+    zet("email", pre.email);
+    zet("phone", pre.telefoon);
+    zet("onderwerp", f.getAttribute("data-onderwerp"));
+    // De utm-parameters staan nog in de adresbalk en horen mee, zodat een
+    // aanvraag in HighLevel terug te voeren is op de mail waar hij uit komt.
+    new URL(window.location.href).searchParams.forEach(function(v, k){
+      if(k.indexOf("utm_") === 0) zet(k, v);
     });
-  });
+    f.id = "inline-gO63rpRMVuuC5mc2uFXc-" + f.getAttribute("data-thema");
+    f.setAttribute("data-layout", "{'id':'INLINE'}");
+    f.setAttribute("data-form-id", "gO63rpRMVuuC5mc2uFXc");
+    f.setAttribute("data-layout-iframe-id", f.id);
+    f.setAttribute("data-height", "670");
+    f.setAttribute("src",
+      "https://api.leadconnectorhq.com/widget/form/gO63rpRMVuuC5mc2uFXc" +
+      (par.length ? "?" + par.join("&") : ""));
+  }
 
-  // Komt iemand uit een mail, dan staat het thema al open. Een onderwerp is
-  // lang, dus een regel onder de kop vertelt dat het formulier klaarstaat.
-  try {
-    var doel = q.thema || window.location.hash.replace(/^#/, "");
-    if(doel){
-      var btn = document.querySelector('.toggle[data-thema="' + doel + '"]');
-      var sec = document.getElementById(doel);
-      if(btn && btn.getAttribute("aria-expanded") !== "true") btn.click();
-      if(sec && btn){
-        var kop = sec.querySelector("h2");
-        if(kop){
-          var wijzer = document.createElement("p");
-          wijzer.className = "wijzer";
-          var a = document.createElement("a");
-          a.href = "#" + btn.getAttribute("aria-controls");
-          a.textContent = "Uw formulier staat klaar onderaan dit onderwerp";
-          wijzer.appendChild(a);
-          kop.parentNode.insertBefore(wijzer, kop.nextSibling);
-        }
-      }
-      if(sec) setTimeout(function(){
-        sec.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 80);
-    }
-  } catch(e){ }
 })();
 </script>
+<!-- Laat het HighLevel-formulier in de iframe meegroeien met zijn inhoud. -->
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>
 </body></html>
