@@ -37,6 +37,28 @@ CONV_URL = "https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/v2/conver
 # vertrouwde plek binnen.
 GHL_FORM = "gO63rpRMVuuC5mc2uFXc"      # "WD - Gesprek - Mail"
 
+# Het persoonlijke aanspreekpunt in de mails en op de pagina. Stond eerst op
+# Willem; sinds de herziening van 20 november 2026 is dat Andre.
+# NOG AANLEVEREN: de achternaam en het e-mailadres van Andre. Zolang die
+# ontbreken staat alleen de voornaam in de ondertekening en wijst het
+# contactblok naar het algemene telefoonnummer.
+# Het e-book uit punt 5 van de herziening. Zolang er geen pdf en geen
+# HighLevel-formulier voor is, blijft het blok uit: een knop die gegevens
+# ophaalt en niets terugstuurt is erger dan geen knop. Vul hier het form-id in
+# zodra beide er zijn, dan verschijnt het blok, de route in het welkom en de
+# verwijzing in de wegwijzer vanzelf.
+EBOOK_FORM = ""
+
+EBOOK_WEGWIJZER = (' of <a href="#ebook">het e-book aanvragen</a>') if EBOOK_FORM else ""
+
+ADVISEUR = dict(
+    naam="Andr&eacute;",
+    rol="uw persoonlijke Landgoed-adviseur",
+    portret="team-andre.jpg",
+    belofte=("Ik denk graag met u mee over het woningtype, de ligging, "
+             "uw gebruikswensen en de kosten."),
+)
+
 
 # ---------------------------------------------------------------- mail-helpers
 
@@ -77,20 +99,18 @@ def bezoekregel(variant):
 SIGN = ('   <table role="presentation" cellpadding="0" cellspacing="0" '
         'style="margin:4px 0 0 0;"><tr>'
         '<td class="pcol" width="92" valign="top" style="width:92px; padding:0 18px 10px 0;">'
-        '<img src="' + bm._CDN.replace("hero-", "portret-") + 'willem.jpg" '
-        'alt="Willem van de Griend" width="92" height="92" '
+        '<img src="' + bm._CDN.replace("hero-", "portret-") + 'andre.jpg" '
+        'alt="' + ADVISEUR["naam"] + ', Landgoed-adviseur" width="92" height="92" '
         'style="width:92px; max-width:92px; height:auto; display:block; '
         'border-radius:46px; background-color:#dfe7e5; color:' + BRAND["text"] + '; '
         "font-family:'Inter',Arial,sans-serif; font-size:12px;\"></td>"
         '<td class="pcol" valign="top" style="font-family:\'Inter\',Arial,sans-serif; '
         'font-size:16px; line-height:26px; color:' + BRAND["text"] + ';">'
         'Met vriendelijke groet,<br>'
-        '<strong>Willem van de Griend</strong><br>'
+        '<strong>' + ADVISEUR["naam"] + '</strong><br>'
         + BRAND["name"] + ' | ' + BRAND["contact_party"] + '<br>'
         '<a href="' + BRAND["phone_href"] + '" style="color:' + BRAND["primary"] + ';">'
-        + BRAND["phone"] + '</a> | '
-        '<a href="' + BRAND["email_href"] + '" style="color:' + BRAND["primary"] + ';">'
-        + BRAND["email"] + '</a>'
+        + BRAND["phone"] + '</a>'
         '</td></tr></table>\n')
 
 quote = bm.quote
@@ -103,7 +123,7 @@ subhead = bm.subhead
 
 MAILS = [
  dict(n=1, hero="villa_avond", kicker="Beschikbare woningen",
-  anchor="#beschikbare-woningen", link="Vraag de actuele beschikbaarheid aan",
+  anchor="#beschikbare-woningen", link="Bespreek de actuele beschikbaarheid",
   title='Welke villa past bij uw plannen?',
   preheader='Welkom op De Wielsche Dreef. Ontdek de woningtypen en de beschikbare plekken.',
   h1='Een eigen plek die bij u beiden past',
@@ -329,7 +349,7 @@ MAILS = [
 THEMES = [
  dict(nr=1, anchor="beschikbare-woningen", foto=("villa_avond", "Recreatievilla in de avondzon met gasten op het terras"), naam="Beschikbare woningen",
   lead="Een villa &eacute;n een plek die bij u passen.",
-  knop="Ik wil graag meer weten over de actuele beschikbaarheid",
+  knop="Bespreek de actuele beschikbaarheid",
   blocks=[
    ('p', 'Misschien ziet u uzelf al op De Wielsche Dreef verblijven. Om samen te ontspannen, met familie bij elkaar te komen of vrije dagen af te wisselen met verhuur. Uw plannen helpen om gericht naar een woningtype en ligging te kijken.'),
    ('h3', 'Van samen weg tot ruimte voor de hele familie'),
@@ -338,7 +358,7 @@ THEMES = [
    ('ul', ['Het woningtype en de indeling die passen bij uw gezelschap.',
            'De ligging, het uitzicht en de ruimte rondom de villa.',
            'De actuele beschikbaarheid en bijbehorende prijsinformatie.']),
-   ('p', 'We verkopen wekelijks woningen, dus het aanbod verandert mee. Willem bespreekt daarom de actuele mogelijkheden met u, in plaats van u op basis van een eerder overzicht te laten kiezen. U bent ook welkom om de plek samen te komen ervaren.'),
+   ('p', 'We verkopen wekelijks woningen, dus het aanbod verandert mee. Andr&eacute; bespreekt daarom de actuele mogelijkheden met u, in plaats van u op basis van een eerder overzicht te laten kiezen. U bent ook welkom om de plek samen te komen ervaren.'),
   ]),
 
  dict(nr=2, anchor="eigen-gebruik-verhuur", foto=("terras", "Terras met ligbedden bij een villa"), naam="Eigen gebruik &amp; verhuur",
@@ -352,23 +372,32 @@ THEMES = [
    ('p', 'U sluit een verhuurbemiddelingsovereenkomst met Landal, dat het exclusieve verhuurrecht op het park heeft. Landal verzorgt onder meer de verhuurbemiddeling en promotie en ontvangt daarvoor een provisie. Woningen van hetzelfde type worden in een verhuurpool ondergebracht. De opbrengsten worden na aftrek van kosten over de deelnemende woningen verdeeld.'),
    ('h3', 'Wat betekent participatierendement?'),
    ('p', 'Het verwachte rendement uit deelname aan het verhuurconcept, in verhouding tot uw investering en op basis van de toepasselijke opbrengsten en kosten. Een prognose is geen garantie. Zo&rsquo;n prognose gaat over de volledige operationele verhuur over meerdere jaren, niet automatisch over het eerste jaar.'),
-   ('p', 'Liever alleen zelf gebruiken? Ook dat kan recreatief, zonder verhuur. Permanente bewoning is niet toegestaan. Willem bespreekt graag uw gewenste periodes, gebruik en financi&euml;le aandachtspunten.'),
+   ('p', 'Liever alleen zelf gebruiken? Ook dat kan recreatief, zonder verhuur. Permanente bewoning is niet toegestaan. Andr&eacute; bespreekt graag uw gewenste periodes, gebruik en financi&euml;le aandachtspunten.'),
   ]),
 
  dict(nr=3, anchor="werkelijke-kosten", foto=("keuken", "Keuken en eethoek in een villa"), naam="Werkelijke kosten",
   lead="Het hele plaatje telt, niet alleen de aankoopprijs.",
-  knop="Ik wil graag meer weten over de kosten",
+  knop="Bespreek de kosten voor uw situatie",
   blocks=[
-   ('p', 'U wilt weten waar u aan begint. Daarom kijken we met u naar de investering &eacute;n de kosten die later terugkomen. Zo kunt u samen beoordelen of de villa past bij uw plannen.'),
-   ('h3', 'Wat hoort bij de aankoop?'),
-   ('p', 'De koopsommen zijn exclusief btw en vrij op naam. De notaris- en kadasterkosten van de overdracht komen voor rekening van de verkopende partij. Dat betekent niet dat alle mogelijke bijkomende kosten zijn inbegrepen. Tuin, terras en parkeerplaats worden door de ontwikkelaar aangelegd en zijn inbegrepen. Voor verhuur is een compleet inventarispakket nodig dat voldoet aan de eisen van Landal.'),
-   ('h3', 'Welke kosten keren terug?'),
-   ('ul', ['De parkbijdrage, ook bij uitsluitend recreatief eigen gebruik.',
-           'Onderhoud en reserveringen voor groter onderhoud.',
-           'Energie, verzekeringen en gemeentelijke en waterschapslasten.',
-           'Bij verhuur: onder meer schoonmaak en dienstverlening.']),
+   ('p', 'U wilt weten waar u aan begint. Hieronder staat eerst wat bij de aankoop hoort, daarna wat jaarlijks terugkomt.'),
+   ('h3', 'Kosten bij aankoop'),
+   ('ul', ['De koopsommen zijn exclusief btw en vrij op naam.',
+           'De notaris- en kadasterkosten van de overdracht zijn voor de verkopende partij.',
+           'Tuin, terras en parkeerplaats legt de ontwikkelaar aan en zijn inbegrepen.',
+           'Voor verhuur is een compleet inventarispakket nodig dat voldoet aan de eisen van Landal.']),
+   ('p', 'Vrij op naam betekent niet dat alle mogelijke bijkomende kosten zijn inbegrepen. Welke posten in uw situatie spelen, hangt af van het woningtype en van uw keuze rond verhuur.'),
+   ('h3', 'Terugkerende kosten'),
+   ('p', 'Deze kosten komen jaarlijks terug, ook als u de villa alleen zelf gebruikt.'),
+   ('ul', ['<strong>Parkbijdrage.</strong> De VvE stelt die jaarlijks vast op basis van een exploitatiebegroting van Landal GreenParks. Hieronder vallen de exploitatie en het onderhoud van de gemeenschappelijke voorzieningen, personeelskosten en het groenonderhoud, plus een bedrag voor het gebruik van de centrale voorzieningen zoals het binnenzwembad en de indoor speeltuin.',
+           '<strong>Klein onderhoud.</strong> Het jaarlijks collectief onderhoud en kleine reparaties aan de inventaris en de woning. De VvE stuurt dat aan.',
+           '<strong>Reservering groot onderhoud.</strong> Elke VvE reserveert jaarlijks voor gevels, daken en gemeenschappelijke voorzieningen, op basis van het meerjaren onderhoudsplan. Waar dat plan er nog niet is, geldt 0,5% van de herbouwwaarde.',
+           '<strong>Energie.</strong> De kosten voor elektra en water zijn een schatting op basis van de exploitatiebegroting van Landal GreenParks.',
+           '<strong>Verzekeringen.</strong> Een collectieve opstal- en inboedelverzekering waar u gebruik van kunt maken, via de VvE in rekening gebracht.',
+           '<strong>Gemeentelijke lasten.</strong> Onroerendezaakbelasting (gemeente Buren, naar de WOZ-waarde), rioolheffing en de heffingen van het waterschap.']),
+   ('h3', 'Alleen bij verhuur'),
+   ('p', 'Verhuurt u de villa, dan komen daar diensten bij die via Landal lopen: sleutelafgifte, linnenverhuur, de wissel- en grote schoonmaak, het servicepakket en gebruikersschade die niet op de huurder te verhalen is. Die route houdt de kwaliteit van het park en de verhuur op niveau.'),
    ('h3', 'Kosten en gebruik horen bij elkaar'),
-   ('p', 'Uw manier van gebruik be&iuml;nvloedt de kosten en de eventuele verhuuropbrengsten. Een verwacht participatierendement is geen gegarandeerde opbrengst. Willem licht het kostenoverzicht van de villa die u overweegt graag toe. Uw eigen adviseur kan beoordelen hoe de aankoop financieel en fiscaal in uw situatie past.'),
+   ('p', 'Uw manier van gebruik be&iuml;nvloedt de kosten en de eventuele verhuuropbrengsten. Een verwacht participatierendement is geen gegarandeerde opbrengst. Andr&eacute; licht het kostenoverzicht van de villa die u overweegt graag toe. Uw eigen adviseur kan beoordelen hoe de aankoop financieel en fiscaal in uw situatie past.'),
   ]),
 
  dict(nr=4, anchor="park-omgeving", foto=("betuwe", "De Betuwe aan de Nederrijn vanuit de lucht"), naam="Park &amp; omgeving",
@@ -382,7 +411,7 @@ THEMES = [
    ('quote-portret', 'We kijken zo uit over het water. Vanmorgen deden we de gordijnen open en zwom er een meerkoet met kleintjes voorbij. Dat is toch een cadeautje? Zo begin je je dag.'),
    ('p', 'Zo beschrijven de eigenaren van een vierpersoonswoning aan het water hun uitzicht. Het is hun persoonlijke ervaring. Welke ligging bij u past, ontdekt u het beste zelf.'),
    ('h3', 'Een landgoed in ontwikkeling'),
-   ('p', 'De Wielsche Dreef wordt in fasen gerealiseerd. Receptie, fietsverhuur en parkshop maken deel uit van de ontwikkeling, net als voorzieningen in latere fasen. Niet alles is automatisch al in gebruik. Tijdens een gesprek of bezoek licht Willem de actuele parksituatie en de ontwikkelfasen toe.'),
+   ('p', 'De Wielsche Dreef wordt in fasen gerealiseerd. Receptie, fietsverhuur en parkshop maken deel uit van de ontwikkeling, net als voorzieningen in latere fasen. Niet alles is automatisch al in gebruik. Tijdens een gesprek of bezoek licht Andr&eacute; de actuele parksituatie en de ontwikkelfasen toe.'),
   ]),
 
  dict(nr=5, anchor="aankoopproces", foto=("villa_parasol", "Villa met terras en parasol"), naam="Aankoopproces",
@@ -400,7 +429,7 @@ THEMES = [
    ('p', 'De koopafspraken worden schriftelijk vastgelegd. Daarna wordt de juridische levering met de notaris voorbereid volgens de gemaakte afspraken.'),
    ('h3', '5. De oplevering en het gebruik voorbereiden'),
    ('p', 'Bij de oplevering worden de villa en eventuele aandachtspunten besproken. Eigen gebruik en eventuele verhuur volgen de afgesproken planning en voorwaarden.'),
-   ('p', 'Wilt u eerst iets bespreken, of wilt u een bezoek plannen? Willem helpt u graag verder met de stap die nu bij u past.'),
+   ('p', 'Wilt u eerst iets bespreken, of wilt u een bezoek plannen? Andr&eacute; helpt u graag verder met de stap die nu bij u past.'),
   ]),
 
  dict(nr=6, anchor="persoonlijke-match", foto=("woonkamer", "Woonkamer van een villa op het Landgoed"), naam="Persoonlijke match",
@@ -418,7 +447,7 @@ THEMES = [
    ('p', 'Bij eigen gebruik zijn onder meer uw gezelschap, favoriete periodes en gewenste indeling belangrijk. Bij verhuur komen de reserveringsvoorwaarden, de rol van Landal en de invloed op kosten en rendement erbij. U kunt ook kiezen voor uitsluitend recreatief eigen gebruik. Permanent wonen is niet toegestaan.'),
    ('h3', 'Ook twijfel is een goed begin'),
    ('p', 'De eigenaren van een vierpersoonswoning aan het water hadden eerst vragen over hun mogelijkheden. Zij besloten het uit te zoeken. Hun keuze zegt niets over uw eigen situatie, maar laat wel zien dat u niet alle antwoorden hoeft te hebben voordat u contact opneemt.'),
-   ('p', 'Willem bespreekt graag uw wensen en openstaande vragen. Een aanvraag is geen aankoopbeslissing. U krijgt informatie om samen verder te kunnen afwegen.'),
+   ('p', 'Andr&eacute; bespreekt graag uw wensen en openstaande vragen. Een aanvraag is geen aankoopbeslissing. U krijgt informatie om samen verder te kunnen afwegen.'),
   ]),
 
  dict(nr=7, anchor="privileges", foto=("villa_riet", "Villa aan de waterkant met rietoevers"), naam="Privileges",
@@ -434,7 +463,7 @@ THEMES = [
    ('ul', ['Welke taken worden via Landal en de VvE georganiseerd?',
            'Welke bijdragen, kosten en reserveringen horen daarbij?',
            'Welke verantwoordelijkheden en besluiten blijven bij u als eigenaar?']),
-   ('p', 'Dienstverlening betekent niet dat alles kosteloos of onbeperkt inbegrepen is. Willem neemt de verdeling en de afspraken graag met u door. Zo wordt duidelijk wat het eigenaarschap praktisch van u vraagt en wat u kunt uitbesteden.'),
+   ('p', 'Dienstverlening betekent niet dat alles kosteloos of onbeperkt inbegrepen is. Andr&eacute; neemt de verdeling en de afspraken graag met u door. Zo wordt duidelijk wat het eigenaarschap praktisch van u vraagt en wat u kunt uitbesteden.'),
   ]),
 
  dict(nr=8, anchor="duurzaamheid", foto=("slaapkamer", "Slaapkamer in een villa"), naam="Duurzaamheid",
@@ -450,7 +479,7 @@ THEMES = [
            'Onderhoud en energiegebruik passend bij uw gebruik.']),
    ('h3', 'De groene omgeving hoort erbij'),
    ('p', 'Bestaande bomen en karakteristieke watergangen blijven waar mogelijk behouden, aangevuld met waterpartijen. Ook het beheer en het onderhoud van het groen maken deel uit van de organisatie van het landgoed.'),
-   ('p', 'Wilt u weten wat dit betekent voor de villa die u overweegt? Willem bespreekt graag de uitvoering en de beschikbare specificaties. Zo kunt u uw keuze baseren op concrete kenmerken, niet alleen op de uitstraling.'),
+   ('p', 'Wilt u weten wat dit betekent voor de villa die u overweegt? Andr&eacute; bespreekt graag de uitvoering en de beschikbare specificaties. Zo kunt u uw keuze baseren op concrete kenmerken, niet alleen op de uitstraling.'),
   ]),
 
  dict(nr=9, anchor="waarde-kwaliteit", foto=("villa_water", "Recreatievilla aan het water op het Landgoed"), naam="Waarde en waardevastheid",
@@ -465,7 +494,7 @@ THEMES = [
    ('h3', 'Wat maakt voor u het verschil?'),
    ('p', 'Een echtpaar dat eerst andere parken bekeek, koos hier vanwege de uitstraling van de villa&rsquo;s. Een van hen zei:'),
    ('quote', 'Ik vond het park er eigenlijk heel erg uitspringen.'),
-   ('p', 'Dat is hun persoonlijke ervaring, geen uitspraak over toekomstige waarde. Een aantrekkelijke ligging, bouwkwaliteit of verzorgd onderhoud garandeert geen latere verkoopprijs. Willem licht de eigendomsstructuur en de onderhoudsafspraken graag toe, zodat u ook die kant van uw aankoop kunt beoordelen.'),
+   ('p', 'Dat is hun persoonlijke ervaring, geen uitspraak over toekomstige waarde. Een aantrekkelijke ligging, bouwkwaliteit of verzorgd onderhoud garandeert geen latere verkoopprijs. Andr&eacute; licht de eigendomsstructuur en de onderhoudsafspraken graag toe, zodat u ook die kant van uw aankoop kunt beoordelen.'),
   ]),
 
  dict(nr=10, anchor="fase-2", foto=("park_vanuit_lucht", "Het Landgoed vanuit de lucht"), naam="Fase 2",
@@ -480,7 +509,7 @@ THEMES = [
            'Uw plannen voor eigen gebruik en eventuele verhuur.',
            'Het moment waarop u een aankoop wilt overwegen.']),
    ('h3', 'Samen vooruitkijken'),
-   ('p', 'Willem bespreekt graag uw wensen en de stand van zaken rond fase 2. Zo kunt u gericht beoordelen of een volgende fase bij uw plannen past, of dat de huidige mogelijkheden toch beter aansluiten.'),
+   ('p', 'Andr&eacute; bespreekt graag uw wensen en de stand van zaken rond fase 2. Zo kunt u gericht beoordelen of een volgende fase bij uw plannen past, of dat de huidige mogelijkheden toch beter aansluiten.'),
    ('p', 'Een informatieaanvraag is geen reservering en geeft geen voorrang of garantie op beschikbaarheid. Het is een eerste stap om duidelijk te krijgen waar u samen verder naar wilt kijken.'),
   ]),
 ]
@@ -563,7 +592,6 @@ PAGE = """<!DOCTYPE html>
  .brandbar span{ font-size:10px; letter-spacing:0.16em; text-transform:uppercase;
    color:rgba(255,255,255,0.62); border-left:1px solid rgba(255,255,255,0.25);
    padding-left:16px; line-height:16px; }
- .stripe{ display:flex; height:10px; }
 
  nav.themes{ background:#f7f4ef; border-bottom:1px solid var(--line); padding:14px 0;
    position:sticky; top:0; z-index:20; }
@@ -573,13 +601,6 @@ PAGE = """<!DOCTYPE html>
    background:#fff; color:var(--green); }
  nav.themes a:hover{ border-color:var(--green); }
 
- section.theme{ border-bottom:1px solid var(--line); padding:44px 0 38px 0;
-   /* ruimte voor de meegaande navigatiebalk */
-   scroll-margin-top:84px; }
- section.theme:last-of-type{ border-bottom:0; }
- .nr{ font-size:11px; letter-spacing:0.2em; text-transform:uppercase;
-   color:#566b67; font-weight:700; margin-bottom:10px; }
- section.theme h2{ font-size:27px; line-height:36px; margin:0 0 16px 0; }
  section.theme h3{ font-size:18px; line-height:26px; margin:26px 0 6px 0; }
  section.theme p{ margin:0 0 16px 0; max-width:62ch; }
  section.theme ul{ max-width:62ch; }
@@ -637,7 +658,9 @@ PAGE = """<!DOCTYPE html>
 
  .willem{ background:#f7f4ef; border:1px solid var(--line); border-radius:6px;
    padding:22px 24px; margin:40px 0; display:flex; gap:20px; align-items:center;
-   flex-wrap:wrap; }
+   flex-wrap:wrap; scroll-margin-top:84px; }
+ .willem img.adv{ width:108px; height:108px; border-radius:54px; display:block;
+   flex:0 0 auto; background:var(--quote-bg); }
  .willem div{ flex:1 1 280px; }
  .willem p{ margin:0 0 4px 0; }
  .willem .naam{ font-weight:700; color:var(--green); }
@@ -648,10 +671,64 @@ PAGE = """<!DOCTYPE html>
  footer .disc{ font-size:11px; line-height:17px; color:rgba(255,255,255,0.45);
    margin-top:14px; }
 
+
+ /* --- welkom ------------------------------------------------------------ */
+ .welkom{ padding:40px 0 10px 0; }
+ .welkom-in{ display:flex; gap:28px; align-items:flex-start; }
+ .welkom img.adv{ width:132px; height:132px; border-radius:66px; display:block;
+   flex:0 0 auto; background:var(--quote-bg); }
+ .welkom p{ margin:0 0 16px 0; max-width:62ch; }
+ .routes{ display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 0 0; }
+ .routes a{ display:inline-block; text-decoration:none; font-size:15px;
+   font-weight:600; line-height:22px; padding:11px 20px; border-radius:4px; }
+ .routes a.hoofd{ background:var(--accent); color:#fff; }
+ .routes a.hoofd:hover{ background:var(--accent-hover); }
+ .routes a.rand{ border:1px solid var(--line); color:var(--green); background:#fff; }
+ .routes a.rand:hover{ border-color:var(--green); }
+ @media (max-width:620px){
+   .welkom-in{ flex-direction:column; gap:18px; }
+   .welkom img.adv{ width:96px; height:96px; border-radius:48px; }
+ }
+
+ /* --- onderwerpen als accordeon ----------------------------------------- */
+ .lijstkop{ font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
+   color:#566b67; font-weight:700; margin:38px 0 6px 0; }
+ section.theme{ border-top:1px solid var(--line); scroll-margin-top:84px; }
+ section.theme:last-of-type{ border-bottom:1px solid var(--line); }
+ section.theme > h2{ margin:0; }\n .kop{ display:block; width:100%; text-align:left; border:0; background:none;
+   cursor:pointer; padding:22px 44px 22px 0; position:relative;
+   font-family:'Playfair Display',Georgia,serif; }
+ .kop .naam{ display:block; font-size:25px; line-height:33px; color:var(--green);
+   font-weight:600; }
+ .kop .sub{ display:block; font-family:'Inter',Arial,sans-serif; font-size:16px;
+   line-height:25px; color:#53625f; font-weight:400; margin-top:4px; }
+ .kop:hover .naam{ color:var(--accent); }
+ .kop::after{ content:""; position:absolute; right:8px; top:34px; width:11px;
+   height:11px; border-right:2px solid var(--green); border-bottom:2px solid var(--green);
+   transform:rotate(45deg); transition:transform .18s ease; }
+ .kop[aria-expanded="true"]::after{ transform:rotate(-135deg); }
+ .inhoud{ padding:0 0 34px 0; }
+ /* Zonder JavaScript staat alles open; de klasse .js klapt het dicht. */
+ .js .inhoud{ display:none; }
+ .js .inhoud.open{ display:block; }
+ .wegwijzer{ display:none; background:var(--quote-bg); border-left:4px solid var(--green);
+   padding:16px 20px; margin:0 0 24px 0; font-size:16px; line-height:25px; }
+ .wegwijzer.open{ display:block; }
+ .terug{ margin:26px 0 0 0; }
+ .terug button{ border:0; background:none; padding:0; cursor:pointer; color:var(--green);
+   font-family:'Inter',Arial,sans-serif; font-size:15px; font-weight:600;
+   text-decoration:underline; }
+
+ /* --- e-book ------------------------------------------------------------ */
+ .ebook{ background:var(--card); border-radius:6px; padding:26px 28px; margin:38px 0; }
+ .ebook h2{ font-size:23px; line-height:31px; margin:0 0 10px 0; }
+ .ebook p{ margin:0 0 18px 0; max-width:62ch; }
+
  @media (max-width:620px){
    body{ font-size:16px; line-height:26px; }
    header.hero h1{ font-size:27px; line-height:36px; }
-   section.theme h2{ font-size:23px; line-height:31px; }
+   .kop .naam{ font-size:21px; line-height:29px; }
+   .kop{ padding:18px 36px 18px 0; }
    .toggle{ max-width:none; }
    .banner img{ max-height:210px; }
    nav.themes{ position:static; }
@@ -668,24 +745,38 @@ PAGE = """<!DOCTYPE html>
    <span>[[TAGLINE_PLAIN]]</span>
   </div>
   <h1>Waar wilt u meer over weten?</h1>
-  <p>Hieronder staan de onderwerpen die bij een eigen villa op De Wielsche Dreef het vaakst terugkomen. Kies wat voor u nu speelt en laat weten wat u wilt bespreken. U legt daarmee niets vast.</p>
  </div>
 </header>
 <div class="banner"><img src="[[CDN_BANNER]]park_overzicht.jpg" alt="Recreatievilla&rsquo;s aan het water op Landgoed De Wielsche Dreef" width="1600" height="667"></div>
-<div class="stripe">[[STRIPE_CELLS]]</div>
 
-<nav class="themes" aria-label="Onderwerpen">
+<section class="welkom">
+ <div class="wrap welkom-in">
+  <img class="adv" src="[[CDN_TEAM]]andre.jpg" alt="[[ADV_NAAM]], [[ADV_ROL]]" width="132" height="132">
+  <div>
+   <p>Wat fijn dat u zich verdiept in een eigen villa op De Wielsche Dreef. Wij helpen u graag verder. Op deze pagina vindt u de informatie bij elkaar: van beschikbare woningen en eigen gebruik tot verhuur en kosten.</p>
+   <p>Kies hieronder het onderwerp dat bij uw plannen past. Wilt u even overleggen? Dan kunt u aangeven hoe en wanneer u contact wilt.[[EBOOK_WELKOM]]</p>
+   <div class="routes">
+    <a class="hoofd" href="#onderwerpen">Bekijk de onderwerpen</a>
+    <a class="rand" href="#contact">Neem contact op met [[ADV_NAAM]]</a>[[EBOOK_ROUTE]]
+   </div>
+  </div>
+ </div>
+</section>
+
+<nav class="themes" id="onderwerpen" aria-label="Onderwerpen">
  <div class="wrap"><ul>[[NAV]]</ul></div>
 </nav>
 
 <main class="wrap">
+ <p class="lijstkop">De onderwerpen</p>
 [[SECTIONS]]
-
- <div class="willem">
+[[EBOOK_BLOK]]
+ <div class="willem" id="contact">
+  <img class="adv" src="[[CDN_TEAM]]andre.jpg" alt="[[ADV_NAAM]], [[ADV_ROL]]" width="108" height="108">
   <div>
-   <p class="naam">Liever direct contact met Willem?</p>
-   <p>Willem van de Griend, uw persoonlijke Landgoed-adviseur</p>
-   <p><a href="[[PHONE_HREF]]">[[PHONE]]</a> &middot; <a href="[[EMAIL_HREF]]">[[EMAIL]]</a></p>
+   <p class="naam">Liever direct contact met [[ADV_NAAM]]?</p>
+   <p>[[ADV_BELOFTE]]</p>
+   <p><a href="[[PHONE_HREF]]">[[PHONE]]</a></p>
   </div>
  </div>
 </main>
@@ -755,12 +846,75 @@ PAGE = """<!DOCTYPE html>
     }
   } catch(e){ }
 
+  // Een onderwerp tegelijk. Openklappen sluit het vorige, zodat de bezoeker
+  // nooit tegen tien uitgeklapte onderwerpen aankijkt.
+  var koppen = [].slice.call(document.querySelectorAll(".kop"));
+
+  function sluitAlles(behalve){
+    koppen.forEach(function(k){
+      if(k === behalve) return;
+      k.setAttribute("aria-expanded", "false");
+      document.getElementById(k.getAttribute("aria-controls")).classList.remove("open");
+    });
+  }
+
+  function open(kop, scroll, uitMail){
+    sluitAlles(kop);
+    var inh = document.getElementById(kop.getAttribute("aria-controls"));
+    kop.setAttribute("aria-expanded", "true");
+    inh.classList.add("open");
+    var w = inh.querySelector(".wegwijzer");
+    // De wegwijzer is er voor wie uit een mail binnenkomt en de uitleg
+    // bovenaan de pagina dus niet heeft gezien.
+    if(w && uitMail) w.classList.add("open");
+    if(scroll) kop.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  koppen.forEach(function(kop){
+    kop.addEventListener("click", function(){
+      if(kop.getAttribute("aria-expanded") === "true"){
+        kop.setAttribute("aria-expanded", "false");
+        document.getElementById(kop.getAttribute("aria-controls")).classList.remove("open");
+        return;
+      }
+      open(kop, true, false);
+    });
+  });
+
+  // De chips bovenaan openen het onderwerp waar ze naartoe wijzen.
+  document.querySelectorAll("nav.themes a").forEach(function(a){
+    a.addEventListener("click", function(ev){
+      var sec = document.querySelector(a.getAttribute("href"));
+      if(!sec) return;
+      ev.preventDefault();
+      open(sec.querySelector(".kop"), true, false);
+    });
+  });
+
+  document.querySelectorAll(".terug button").forEach(function(b){
+    b.addEventListener("click", function(){
+      sluitAlles(null);
+      document.getElementById("onderwerpen").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // Binnenkomen vanuit een mail: meteen het juiste onderwerp open, met de
+  // wegwijzer erboven.
+  (function(){
+    var h = window.location.hash;
+    if(!h || h.length < 2) return;
+    var sec = document.getElementById(h.slice(1));
+    if(sec && sec.classList.contains("theme")){
+      open(sec.querySelector(".kop"), true, true);
+    }
+  })();
+
   document.querySelectorAll(".toggle").forEach(function(btn){
     btn.addEventListener("click", function(){
       var panel = document.getElementById(btn.getAttribute("aria-controls"));
-      var open = panel.classList.toggle("open");
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      if(open) laad(panel);
+      var aan = panel.classList.toggle("open");
+      btn.setAttribute("aria-expanded", aan ? "true" : "false");
+      if(aan) laad(panel);
     });
   });
 
@@ -799,61 +953,92 @@ PAGE = """<!DOCTYPE html>
 
 
 def form_html(t):
-    """Het uitklappaneel onder een thema, met het HighLevel-formulier erin.
+    """Het contactblok onder een onderwerp, met het HighLevel-formulier erin.
 
-    De iframe krijgt pas een src als het paneel voor het eerst opengaat. Tien
+    De iframe krijgt pas een src als het blok voor het eerst opengaat. Tien
     formulieren tegelijk laden zou de pagina onnodig zwaar maken, en de
     bezoeker ziet er toch maar een.
     """
     pid = "form-" + t["anchor"]
     onderwerp = t["naam"].replace("&amp;", "en")
     return (
-     '  <button class="toggle" type="button" data-thema="' + t["anchor"] + '" '
+     '   <button class="toggle" type="button" data-thema="' + t["anchor"] + '" '
      'aria-expanded="false" aria-controls="' + pid + '">' + t["knop"] + '</button>\n'
-     '  <div class="panel" id="' + pid + '">\n'
-     '   <p class="intro">Laat uw gegevens achter, dan neemt Willem contact met u op. '
-     'Telefonisch, online of op locatie, op het moment dat u uitkomt.</p>\n'
-     '   <iframe class="ghlform" data-onderwerp="' + onderwerp + '" '
+     '   <div class="panel" id="' + pid + '">\n'
+     '    <p class="intro">Laat uw gegevens achter en kies hoe u contact met '
+     + ADVISEUR["naam"] + ' wilt. Geef ook aan welk moment uw voorkeur heeft.</p>\n'
+     '    <iframe class="ghlform" data-onderwerp="' + onderwerp + '" '
      'data-thema="' + t["anchor"] + '" '
-     'title="Aanvraag over ' + onderwerp + '" scrolling="no"></iframe>\n'
-     '   <p class="small">Een aanvraag is geen aankoopbeslissing en geen reservering. '
-     'U ontvangt informatie en bepaalt daarna zelf of u verder wilt kijken.</p>\n'
-     '  </div>\n')
+     'title="Contactverzoek over ' + onderwerp + '" scrolling="no"></iframe>\n'
+     '    <p class="small">Uw gegevens gebruiken wij alleen om contact met u op te nemen '
+     'over uw vraag.</p>\n'
+     '   </div>\n')
 
 
 def section_html(t):
+    """Een onderwerp als uitklapbaar blok: de naam is de kop, de sfeerregel
+    staat eronder als ondertitel."""
+    pid = "inh-" + t["anchor"]
+    plat = t["naam"].replace("&amp;", "en")
     out = ['<section class="theme" id="' + t["anchor"] + '">\n',
-           '  <div class="nr">Onderwerp ' + str(t["nr"]) + ' &middot; ' + t["naam"] + '</div>\n',
-           '  <h2>' + t["lead"] + '</h2>\n']
+           '  <h2><button class="kop" type="button" aria-expanded="false" '
+           'aria-controls="' + pid + '">'
+           '<span class="naam">' + t["naam"] + '</span>'
+           '<span class="sub">' + t["lead"] + '</span></button></h2>\n',
+           '  <div class="inhoud" id="' + pid + '">\n',
+           '   <p class="wegwijzer">Welkom, hieronder leest u meer over '
+           + plat.lower() + '. U kunt ook <a href="#onderwerpen">de andere onderwerpen '
+           'bekijken</a> of <a href="#contact">contact met ' + ADVISEUR["naam"]
+           + ' opnemen</a>' + EBOOK_WEGWIJZER + '.</p>\n']
     if t.get("foto"):
         naam, alt = t["foto"]
-        out.append('  <div class="shot"><img src="'
+        out.append('   <div class="shot"><img src="'
                    + bm._CDN.replace("hero-", "web-") + naam + '.jpg" '
                    'alt="' + alt + '" width="1600" height="788" loading="lazy"></div>\n')
     for kind, val in t["blocks"]:
         if kind == 'p':
-            out.append('  <p>' + val + '</p>\n')
+            out.append('   <p>' + val + '</p>\n')
         elif kind == 'h3':
-            out.append('  <h3>' + val + '</h3>\n')
+            out.append('   <h3>' + val + '</h3>\n')
         elif kind == 'ul':
-            out.append('  <ul>' + "".join('<li>' + i + '</li>' for i in val) + '</ul>\n')
+            out.append('   <ul>' + "".join('<li>' + i + '</li>' for i in val) + '</ul>\n')
         elif kind == 'quote':
-            out.append('  <blockquote>&ldquo;' + val + '&rdquo;</blockquote>\n')
+            out.append('   <blockquote>&ldquo;' + val + '&rdquo;</blockquote>\n')
         elif kind == 'quote-portret':
-            out.append('  <div class="met-portret">'
+            out.append('   <div class="met-portret">'
                        '<img src="' + bm._CDN.replace("hero-", "portret-") + 'eigenaren.jpg" '
                        'alt="Eigenaren op Landgoed De Wielsche Dreef" width="360" height="360" loading="lazy">'
                        '<span class="tekst">&ldquo;' + val + '&rdquo;</span></div>\n')
     out.append(form_html(t))
+    out.append('   <p class="terug"><button type="button">Bekijk alle onderwerpen</button></p>\n')
+    out.append('  </div>\n')
     out.append('</section>\n')
     return "".join(out)
+
+
+def ebook_blok():
+    """Het blok onder het onderwerpenoverzicht waarin iemand alles in een keer
+    kan opvragen. Leeg zolang EBOOK_FORM niet is ingevuld."""
+    if not EBOOK_FORM:
+        return ""
+    return (
+     ' <div class="ebook" id="ebook">\n'
+     '  <h2>Alles rustig nalezen of samen bespreken?</h2>\n'
+     '  <p>Ontvang alle informatie over een eigen villa op De Wielsche Dreef '
+     'overzichtelijk in een e-book. Handig om te bewaren en te delen met uw '
+     'partner of anderen.</p>\n'
+     '  <button class="toggle" type="button" aria-expanded="false" '
+     'aria-controls="form-ebook">Ontvang het e-book</button>\n'
+     '  <div class="panel" id="form-ebook">\n'
+     '   <iframe class="ghlform" data-onderwerp="E-book" data-thema="ebook" '
+     'data-form="' + EBOOK_FORM + '" title="Aanvraag e-book" scrolling="no"></iframe>\n'
+     '  </div>\n'
+     ' </div>\n')
 
 
 def build_page():
     nav = "".join('<li><a href="#' + t["anchor"] + '">' + t["naam"] + '</a></li>'
                   for t in THEMES)
-    cells = "".join('<i style="flex:%s; background:%s;"></i>' % (pct, col)
-                    for col, pct in bm.STRIPE)
     html = PAGE
     repl = {
         "PRIMARY": BRAND["primary"], "FOOTER_BG": BRAND["footer_bg"],
@@ -862,7 +1047,15 @@ def build_page():
         "BG_IMG": BRAND["bg_img"], "LOGO": BRAND["logo"],
         "BRAND_NAME": BRAND["name"],
         "TAGLINE_PLAIN": BRAND["tagline"].replace("<br>", " &middot; "),
-        "STRIPE_CELLS": cells, "NAV": nav,
+        "NAV": nav,
+        "CDN_TEAM": bm._CDN.replace("hero-", "team-"),
+        "ADV_NAAM": ADVISEUR["naam"], "ADV_ROL": ADVISEUR["rol"],
+        "ADV_BELOFTE": ADVISEUR["belofte"],
+        "EBOOK_WELKOM": (" Liever alles rustig nalezen of met iemand delen? "
+                         "Vraag dan ons e-book aan.") if EBOOK_FORM else "",
+        "EBOOK_ROUTE": ('\n    <a class="rand" href="#ebook">Ontvang het e-book</a>'
+                        if EBOOK_FORM else ""),
+        "EBOOK_BLOK": ebook_blok(),
         "SECTIONS": "".join(section_html(t) for t in THEMES),
         "PHONE": BRAND["phone"], "PHONE_HREF": BRAND["phone_href"],
         "EMAIL": BRAND["email"], "EMAIL_HREF": BRAND["email_href"],

@@ -40,6 +40,8 @@ PORTRETTEN = {
     "eigenaren": ("bron/eigenaren.jpg", 0.0),
     # Willem staat onder de ondertekening van elke mail in de tweede flow.
     "willem": ("bron/Willem.png", 0.0),
+    # Andre is sinds 20 november 2026 het aanspreekpunt in de tweede flow.
+    "andre": ("bron/Andr\u00e9.png", 0.0),
 }
 
 # Kleine vierkante beelden naast de bestemmingen in de afspraak-sequence.
@@ -221,6 +223,7 @@ def _vierkant(path, ypos, side_out):
 # naam -> (breedte van de uitsnede 0..1, midden horizontaal, midden verticaal)
 PORTRET_UITSNEDE = {
     "willem": (0.58, 0.50, 0.46),
+    "andre": (0.58, 0.50, 0.46),
 }
 
 
