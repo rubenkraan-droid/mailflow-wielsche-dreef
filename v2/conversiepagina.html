@@ -127,6 +127,17 @@
    .welkom img.adv{ width:96px; height:96px; border-radius:48px; }
  }
 
+ /* --- video -------------------------------------------------------------- */
+ .video{ margin:24px 0 0 0; max-width:640px; }
+ .video button{ display:block; width:100%; padding:0; border:0; background:none;
+   cursor:pointer; }
+ .video img, .video video, .video iframe{ width:100%; height:auto; display:block;
+   border-radius:6px; }
+ .video iframe{ aspect-ratio:16/9; border:0; }
+ .video video{ background:#123330; }
+ .videobij{ font-size:14px; line-height:21px; color:#53625f; margin:8px 0 0 0; }
+ section.theme .video{ margin:4px 0 22px 0; }
+
  /* --- onderwerpen als accordeon ----------------------------------------- */
  .lijstkop{ font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
    color:#566b67; font-weight:700; margin:38px 0 6px 0; }
@@ -197,6 +208,12 @@
     <a class="hoofd" href="#onderwerpen">Bekijk de onderwerpen</a>
     <a class="rand" href="#contact">Neem contact op met Andr&eacute;</a>
    </div>
+   <div class="video" data-yt="xaGfeiwXQO0">
+    <button type="button" aria-label="Bekijk de video met Andr&eacute;">
+     <img src="https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/video-andre.jpg" alt="Andr&eacute; op Landgoed De Wielsche Dreef" width="1136" height="639" loading="lazy">
+    </button>
+   </div>
+   <p class="videobij">Andr&eacute; neemt u in deze video mee over het landgoed.</p>
   </div>
  </div>
 </section>
@@ -281,6 +298,8 @@
    <h3>Eigenaren over hun plek aan het water</h3>
    <div class="met-portret"><img src="https://rubenkraan-droid.github.io/mailflow-wielsche-dreef/portret-eigenaren.jpg" alt="Eigenaren op Landgoed De Wielsche Dreef" width="360" height="360" loading="lazy"><span class="tekst">&ldquo;We kijken zo uit over het water. Vanmorgen deden we de gordijnen open en zwom er een meerkoet met kleintjes voorbij. Dat is toch een cadeautje? Zo begin je je dag.&rdquo;</span></div>
    <p>Zo beschrijven de eigenaren van een vierpersoonswoning aan het water hun uitzicht. Het is hun persoonlijke ervaring. Welke ligging bij u past, ontdekt u het beste zelf.</p>
+   <div class="video"><video controls preload="none" playsinline poster="https://assets.cdn.filesafe.space/ogbyRxgEx1wtnWdZeDwe/media/6aeb0cc9dfd4785f0849b0b0.jpg" width="1136" height="639"><source src="https://assets.cdn.filesafe.space/ogbyRxgEx1wtnWdZeDwe/media/6aeb0cb934f57914737b572c.mp4" type="video/mp4">Uw browser kan deze video niet afspelen.</video></div>
+   <p class="videobij">Eigenaren vertellen over hun keuze voor De Wielsche Dreef.</p>
    <h3>Een landgoed in ontwikkeling</h3>
    <p>De Wielsche Dreef wordt in fasen gerealiseerd. Receptie, fietsverhuur en parkshop maken deel uit van de ontwikkeling, net als voorzieningen in latere fasen. Niet alles is automatisch al in gebruik. Tijdens een gesprek of bezoek licht Andr&eacute; de actuele parksituatie en de ontwikkelfasen toe.</p>
    <button class="toggle" type="button" data-thema="park-omgeving" aria-expanded="false" aria-controls="form-park-omgeving">Ik wil graag meer weten over het park en de ontwikkelfasen</button>
@@ -555,6 +574,21 @@
     b.addEventListener("click", function(){
       sluitAlles(null);
       document.getElementById("onderwerpen").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  // De video van Andre staat op YouTube. Pas als iemand op afspelen klikt
+  // wordt YouTube geladen, en dan via het domein zonder cookies.
+  document.querySelectorAll(".video[data-yt] button").forEach(function(b){
+    b.addEventListener("click", function(){
+      var houder = b.parentNode;
+      var f = document.createElement("iframe");
+      f.setAttribute("src", "https://www.youtube-nocookie.com/embed/"
+        + houder.getAttribute("data-yt") + "?autoplay=1&rel=0");
+      f.setAttribute("title", "Video van Andr&eacute; over Landgoed De Wielsche Dreef");
+      f.setAttribute("allow", "accelerometer; autoplay; encrypted-media; picture-in-picture");
+      f.setAttribute("allowfullscreen", "");
+      houder.replaceChild(f, b);
     });
   });
 

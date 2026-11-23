@@ -47,6 +47,18 @@ GHL_FORM = "gO63rpRMVuuC5mc2uFXc"      # "WD - Gesprek - Mail"
 # ophaalt en niets terugstuurt is erger dan geen knop. Vul hier het form-id in
 # zodra beide er zijn, dan verschijnt het blok, de route in het welkom en de
 # verwijzing in de wegwijzer vanzelf.
+# De video van Andre staat op het YouTube-kanaal van De Wielsche Dreef:
+# "Jouw eigen stukje Betuwe". De pagina haalt pas iets bij YouTube op als
+# iemand op afspelen klikt; tot die tijd staat er een zelf gehost beeld.
+ANDRE_YT = "xaGfeiwXQO0"
+
+# De video van de eigenaren, dezelfde die op de videopagina staat. Die ligt op
+# de HighLevel-CDN en wordt rechtstreeks afgespeeld, dus zonder derde partij.
+KLANT_VIDEO = ("https://assets.cdn.filesafe.space/ogbyRxgEx1wtnWdZeDwe/media/"
+               "6aeb0cb934f57914737b572c.mp4")
+KLANT_POSTER = ("https://assets.cdn.filesafe.space/ogbyRxgEx1wtnWdZeDwe/media/"
+                "6aeb0cc9dfd4785f0849b0b0.jpg")
+
 EBOOK_FORM = ""
 
 EBOOK_WEGWIJZER = (' of <a href="#ebook">het e-book aanvragen</a>') if EBOOK_FORM else ""
@@ -401,6 +413,7 @@ THEMES = [
    ('h3', 'Eigenaren over hun plek aan het water'),
    ('quote-portret', 'We kijken zo uit over het water. Vanmorgen deden we de gordijnen open en zwom er een meerkoet met kleintjes voorbij. Dat is toch een cadeautje? Zo begin je je dag.'),
    ('p', 'Zo beschrijven de eigenaren van een vierpersoonswoning aan het water hun uitzicht. Het is hun persoonlijke ervaring. Welke ligging bij u past, ontdekt u het beste zelf.'),
+   ('video', 'Eigenaren vertellen over hun keuze voor De Wielsche Dreef.'),
    ('h3', 'Een landgoed in ontwikkeling'),
    ('p', 'De Wielsche Dreef wordt in fasen gerealiseerd. Receptie, fietsverhuur en parkshop maken deel uit van de ontwikkeling, net als voorzieningen in latere fasen. Niet alles is automatisch al in gebruik. Tijdens een gesprek of bezoek licht Andr&eacute; de actuele parksituatie en de ontwikkelfasen toe.'),
   ]),
@@ -681,6 +694,17 @@ PAGE = """<!DOCTYPE html>
    .welkom img.adv{ width:96px; height:96px; border-radius:48px; }
  }
 
+ /* --- video -------------------------------------------------------------- */
+ .video{ margin:24px 0 0 0; max-width:640px; }
+ .video button{ display:block; width:100%; padding:0; border:0; background:none;
+   cursor:pointer; }
+ .video img, .video video, .video iframe{ width:100%; height:auto; display:block;
+   border-radius:6px; }
+ .video iframe{ aspect-ratio:16/9; border:0; }
+ .video video{ background:#123330; }
+ .videobij{ font-size:14px; line-height:21px; color:#53625f; margin:8px 0 0 0; }
+ section.theme .video{ margin:4px 0 22px 0; }
+
  /* --- onderwerpen als accordeon ----------------------------------------- */
  .lijstkop{ font-size:13px; letter-spacing:0.14em; text-transform:uppercase;
    color:#566b67; font-weight:700; margin:38px 0 6px 0; }
@@ -750,6 +774,12 @@ PAGE = """<!DOCTYPE html>
     <a class="hoofd" href="#onderwerpen">Bekijk de onderwerpen</a>
     <a class="rand" href="#contact">Neem contact op met [[ADV_NAAM]]</a>[[EBOOK_ROUTE]]
    </div>
+   <div class="video" data-yt="[[ANDRE_YT]]">
+    <button type="button" aria-label="Bekijk de video met [[ADV_NAAM]]">
+     <img src="[[CDN_VIDEO]]andre.jpg" alt="[[ADV_NAAM]] op Landgoed De Wielsche Dreef" width="1136" height="639" loading="lazy">
+    </button>
+   </div>
+   <p class="videobij">[[ADV_NAAM]] neemt u in deze video mee over het landgoed.</p>
   </div>
  </div>
 </section>
@@ -889,6 +919,21 @@ PAGE = """<!DOCTYPE html>
     });
   });
 
+  // De video van Andre staat op YouTube. Pas als iemand op afspelen klikt
+  // wordt YouTube geladen, en dan via het domein zonder cookies.
+  document.querySelectorAll(".video[data-yt] button").forEach(function(b){
+    b.addEventListener("click", function(){
+      var houder = b.parentNode;
+      var f = document.createElement("iframe");
+      f.setAttribute("src", "https://www.youtube-nocookie.com/embed/"
+        + houder.getAttribute("data-yt") + "?autoplay=1&rel=0");
+      f.setAttribute("title", "Video van [[ADV_NAAM]] over Landgoed De Wielsche Dreef");
+      f.setAttribute("allow", "accelerometer; autoplay; encrypted-media; picture-in-picture");
+      f.setAttribute("allowfullscreen", "");
+      houder.replaceChild(f, b);
+    });
+  });
+
   // Binnenkomen vanuit een mail: meteen het juiste onderwerp open, met de
   // wegwijzer erboven.
   (function(){
@@ -995,6 +1040,14 @@ def section_html(t):
             out.append('   <ul>' + "".join('<li>' + i + '</li>' for i in val) + '</ul>\n')
         elif kind == 'quote':
             out.append('   <blockquote>&ldquo;' + val + '&rdquo;</blockquote>\n')
+        elif kind == 'video':
+            out.append('   <div class="video"><video controls preload="none" '
+                       'playsinline poster="' + KLANT_POSTER + '" '
+                       'width="1136" height="639">'
+                       '<source src="' + KLANT_VIDEO + '" type="video/mp4">'
+                       'Uw browser kan deze video niet afspelen.'
+                       '</video></div>\n'
+                       '   <p class="videobij">' + val + '</p>\n')
         elif kind == 'quote-portret':
             out.append('   <div class="met-portret">'
                        '<img src="' + bm._CDN.replace("hero-", "portret-") + 'eigenaren.jpg" '
@@ -1042,6 +1095,8 @@ def build_page():
         "CDN_TEAM": bm._CDN.replace("hero-", "team-"),
         "ADV_NAAM": ADVISEUR["naam"], "ADV_ROL": ADVISEUR["rol"],
         "ADV_BELOFTE": ADVISEUR["belofte"],
+        "ANDRE_YT": ANDRE_YT,
+        "CDN_VIDEO": bm._CDN.replace("hero-", "video-"),
         "EBOOK_WELKOM": (" Liever alles rustig nalezen of met iemand delen? "
                          "Vraag dan ons e-book aan.") if EBOOK_FORM else "",
         "EBOOK_ROUTE": ('\n    <a class="rand" href="#ebook">Ontvang het e-book</a>'

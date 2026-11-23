@@ -28,6 +28,14 @@ LABEL_FONT = "/System/Library/Fonts/Supplemental/Arial Bold.ttf"
 
 # naam -> (bron, verticale crop-positie 0..1, label linksonder of "")
 VIDEO_STILLS = {
+    # Het openingsbeeld van de YouTube-video van Andre op de conversiepagina.
+    # Zelf gehost, zodat de pagina niets bij YouTube ophaalt zolang niemand op
+    # afspelen klikt.
+    "andre": (
+        "https://img.youtube.com/vi/xaGfeiwXQO0/maxresdefault.jpg",
+        0.5,
+        "Bekijk de video",
+    ),
     "eigenaren": (
         "https://assets.cdn.filesafe.space/ogbyRxgEx1wtnWdZeDwe/media/6aeb0cc9dfd4785f0849b0b0.jpg",
         0.5,
